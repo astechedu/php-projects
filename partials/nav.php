@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="http://localhost">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
@@ -18,6 +18,11 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#"><?php if(isset($_SESSION['user'])){ echo $_SESSION['user']; } ?></a>
+        </li>
+
         <li class="nav-item">
           <a class="nav-link" href="http://localhost/auth/logout.php">Logout</a>
         </li>

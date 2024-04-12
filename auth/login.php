@@ -8,10 +8,8 @@ if(isset($_SESSION['user_id'])) {
     header('Location: pages/dashboard.php');
 } 
 
-//echo password_hash('password3',PASSWORD_DEFAULT);
-
-//$rootDir = $_SERVER['DOCUMENT_ROOT'];
-$rootDir = "http://localhost";
+//Set Base Url
+$baseUrl = "http://localhost";
 
 include 'database/connection.php';
 
@@ -23,6 +21,9 @@ function login($username, $password, $pdo) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);  
     if ($user && password_verify($password,$user['password'])) {
    
+        $_SESSION['user'] = $user['username'];
+        $_SESSION['password'] = $user['password'];
+
         // Password is correct, user exists
         return  $user['id'];
     } else {
@@ -45,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Start session and set session variables
         //session_start();
         $_SESSION['user_id'] = $userId;
-        
+
         // Redirect to dashboard or any other page after successful login
         
         header('Location: pages/dashboard.php');
@@ -55,55 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $loginError = "Invalid username or password.";
     }
 }
-
-
-
-
-
-//Original Script
-/*
-// Function to validate user credentials
-function login($username, $password, $pdo) {
-   
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$username]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC); 
-    if ($user && password_verify($password, $user['password'])) {
-    
-        // Password is correct, user exists
-        //return $user['id'];
-    } else {
-          echo "Invalid username or password.";
-        // Username or password is incorrect
-        //return false;   
-    }
-}
-
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get username and password from form
-         $username = $_POST['username'];
-         $password = $_POST['password'];
-
-    // Validate user credentials
-        $userId = login($username, $password, $conn);
-
-    if ($userId) {
-        // Start session and set session variables
-        session_start();
-        $_SESSION['user_id'] = $userId;
-        
-        // Redirect to dashboard or any other page after successful login
-        
-        header('Location:'.$rootDir.'/testing.php');
-        exit();
-    } else {
-        // Display error message if login fails        
-         $loginError = "Invalid username or password.";
-    }
-}
-
-*/
 
 ?>
 <div class="container">
