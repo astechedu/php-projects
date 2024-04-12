@@ -1,0 +1,27 @@
+password_verify():
+
+      UseCases: 
+               password_verify($enteredpassword, $databasePassword)
+
+password_hash():
+
+      UseCases: 
+               password_hash('password1',PASSWORD_DEFAULT)
+
+
+
+
+Session: 
+
+// Start the session
+session_start();
+
+// Check if a session ID exists
+if (session_id()) {
+    echo "Session ID: " . session_id();
+} else {
+    echo "No session ID found. Session may not be started.";
+}
+
+
+
