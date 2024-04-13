@@ -64,3 +64,4 @@ $result = fetchUsers($conn, $searchUserName = null);
       </tbody>
    </table>
 </div>
+
