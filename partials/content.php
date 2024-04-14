@@ -4,14 +4,17 @@
  include $_SERVER['DOCUMENT_ROOT'].'/curl/fetchall.php';
 
 
-
 ?>
 
+<!-- Alert Message -->
 <div class="alert alert-secondary" role="alert">
-  
 </div>
 
+<!-- Register Form -->
+<?php include $_SERVER['DOCUMENT_ROOT'].'/pages/register.php'; ?>  
 
+
+<div class="col-lg-8">
 <table class="table">
   <thead class="table-dark">
     <tr>
@@ -40,13 +43,14 @@
 
   </tbody>
 </table>
-
+</div>
 
 
 <script>
 
 $(function(){
 
+//1. Delete User: Sending Ajax Request to Curl with Id
 	const deleteUser = $('.delete');
 
 	$url = 'http://localhost/curl/delete.php';
@@ -69,6 +73,8 @@ $(function(){
 	});
 });
 
+
+
   // Function to remove alert after a specified time
   function removeAlert() {
     // Select the alert element
@@ -86,7 +92,16 @@ $(function(){
   //$(document).ready(function() {
     //removeAlert();
   //});
- '<?php fetchAll() ?>'
+
+
+//2. Create User 
+
+
+
+
+
+
+
 </script>
 
 <style>
