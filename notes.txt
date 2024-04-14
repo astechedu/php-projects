@@ -1,0 +1,733 @@
+Search Keys:            
+             curl fetch data, 
+             Initialize cURL session, 
+             PHP PDO Connection,
+             Users Table Schema, 
+             PHP Mysql PDO DELETE,              
+             CURL Request to delete record in php,
+             PHP PDO MYSQL Fetch ONLY On Column (One Field), 
+             PHP PDO MYSQL UPDATE Request, 
+             PHP PDO MYSQL Create(insert Users), 
+             PHP PDO MYSQL Create(ADD User) CURL Request, 
+             Hashing Passwords, 
+             PHP MYSQL PDO CURL DELETE Request,
+
+Send Ajax Request to CURL, send the cURL response back to the AJAX request,
+
+
+Calling php function in JS, 
+
+
+
+CSS: 
+
+alert, 
+
+--------------------------------------------------------------------------------------------------
+
+In PHP, to list the contents of a directory, you can use the scandir() function or glob() function. Here's how you can do it:
+
+
+//Using scandir():
+
+$path = '/path/to/directory';
+$files = scandir($path);
+
+foreach ($files as $file) {
+    echo $file . "<br>";
+}
+
+
+//Using glob():
+
+$path = '/path/to/directory/*';
+$files = glob($path);
+
+foreach ($files as $file) {
+    echo $file . "<br>";
+}
+-----------------------------------------------------------
+
+//You can find the current directory path
+
+$path = $_SERVER['DOCUMENT_ROOT'];
+echo $path;
+
+//Include a file relative to the root directory
+$path = $_SERVER['DOCUMENT_ROOT'] . '/your/directory/path';
+echo $path;
+
+------------------------------------------------------------
+
+
+--> Hashing Passwords:
+
+*password_hash(): 
+
+// Plain text password
+$password = 'user_password';
+
+// Hash the password
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+// Store $hashedPassword in your database
+echo "Hashed Password: $hashedPassword";
+
+
+*password_verify():
+
+// Password entered by the user
+$userInputPassword = 'user_password';
+
+// Hashed password retrieved from the database
+$hashedPasswordFromDB = '$2y$10$8PrfY4yW.Mz4qXawG3u/HOxTT16ZSKXm9DfnCtHxblNp3LUzpmW7m';
+
+// Verify the password
+if (password_verify($userInputPassword, $hashedPasswordFromDB)) {
+    echo "Password is correct!";
+} else {
+    echo "Password is incorrect!";
+}
+
+---------------------------------------------------------------
+
+CSS: 
+
+>> alert:
+
+<div class="alert alert-secondary" role="alert">
+  This is a secondary alert message.
+</div>
+
+
+
+----------------------------------------------------------------
+
+>> Users Table Schema: 
+
+    CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
+
+
+    INSERT INTO users (username, email, password) VALUES
+    ('user1', 'user1@example.com', 'password1'),
+    ('user2', 'user2@example.com', 'password2'),
+    ('user3', 'user3@example.com', 'password3'),
+    ('user4', 'user4@example.com', 'password4'),
+    ('user5', 'user5@example.com', 'password5'),
+    ('user6', 'user6@example.com', 'password6'),
+    ('user7', 'user7@example.com', 'password7'),
+    ('user8', 'user8@example.com', 'password8'),
+    ('user9', 'user9@example.com', 'password9'),
+    ('user10', 'user10@example.com', 'password10');
+
+---------------------------------------------------------------
+
+>> PHP PDO MYSQL Fetch ONLY On Column (One Field): 
+
+<?php
+// Database connection parameters
+$host = 'localhost';
+$dbname = 'github';
+$username = 'root';
+$password = '';
+
+try {
+    // Connect to the database
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    
+    // Set PDO to throw exceptions on error
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Prepare SQL query
+    $stmt = $pdo->prepare("SELECT * FROM users");
+
+    // Execute the query
+    $stmt->execute();
+
+    // Fetch dates
+    $dates = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+
+    // Output dates
+    foreach ($dates as $date) {
+        echo $date . "<br>"; 
+    }
+} catch (PDOException $e) {
+    // Handle errors
+    echo "Error: " . $e->getMessage();
+}
+
+?>
+
+
+---------------------------------------------------------------
+
+
+*---> Curl Fetch Data <---*
+
+<?php
+// Initialize cURL session
+$ch = curl_init();
+
+// Set the URL of the API endpoint you want to fetch data from
+$url = "https://api.example.com/data";
+
+// Set cURL options
+curl_setopt($ch, CURLOPT_URL, $url); // Set the URL
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disables SSL certificate verification (for demo purposes)
+
+// Execute cURL session
+$response = curl_exec($ch);
+
+// Check for errors
+if(curl_error($ch)) {
+    echo 'Error: ' . curl_error($ch);
+}
+
+// Close cURL session
+curl_close($ch);
+
+// If response is received successfully, you can process the data
+if ($response) {
+    // Convert JSON response to PHP array or object
+    $data = json_decode($response);
+
+    // Process the data as needed
+    // For example, print the data
+    var_dump($data);
+} else {
+    // Handle failed request
+    echo "Failed to fetch data from API.";
+}
+?>
+
+
+
+//OR
+
+<?php
+// Initialize cURL session
+$ch = curl_init();
+
+// Set the URL to fetch
+curl_setopt($ch, CURLOPT_URL, 'http://example.com/data');
+
+// Set options if needed, e.g., user agent, headers, etc.
+// curl_setopt($ch, CURLOPT_USERAGENT, 'Your User Agent');
+
+// Set to return the transfer as a string
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// Execute the request
+$response = curl_exec($ch);
+
+// Check for errors
+if($response === false) {
+    echo 'cURL error: ' . curl_error($ch);
+} else {
+    // Output the fetched data
+    echo $response;
+}
+
+// Close cURL session
+curl_close($ch);
+?>
+
+---------------------------------------------------------------
+
+
+PHP PDO Connection: Fetch All 
+
+
+<?php
+// Database connection settings
+$host = 'localhost';
+$dbname = 'your_database_name';
+$username = 'your_username';
+$password = 'your_password';
+
+try {
+    // Establish database connection using PDO
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+
+    // Set PDO to throw exceptions on errors
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Prepare SQL statement
+    $statement = $pdo->prepare("SELECT * FROM your_table");
+
+    // Execute the query
+    $statement->execute();
+
+    // Fetch all rows as an associative array
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    // Output the fetched data
+    foreach ($results as $row) {
+        echo "ID: " . $row['id'] . ", Name: " . $row['name'] . "<br>";
+        // Adjust the keys according to your table structure
+    }
+} catch (PDOException $e) {
+    // Handle database connection errors
+    echo "Error: " . $e->getMessage();
+}
+
+// Close the connection
+$pdo = null;
+?>
+
+
+
+
+----------------------------------------------------------------
+
+
+PHP Mysql PDO DELETE: 
+
+<?php
+// Database connection settings
+$host = 'localhost';
+$dbname = 'your_database_name';
+$username = 'your_username';
+$password = 'your_password';
+
+try {
+    // Establish database connection using PDO
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+
+    // Set PDO to throw exceptions on errors
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Define the ID of the record you want to delete
+    $idToDelete = 1; // Change this to the ID you want to delete
+
+    // Prepare the DELETE statement
+    $deleteStatement = $pdo->prepare("DELETE FROM users WHERE id = :id");
+
+    // Bind the ID parameter
+    $deleteStatement->bindParam(':id', $idToDelete, PDO::PARAM_INT);
+
+    // Execute the DELETE statement
+    $deleteStatement->execute();
+
+    // Check if any rows were affected
+    $rowCount = $deleteStatement->rowCount();
+    if ($rowCount > 0) {
+        echo "Record deleted successfully.";
+    } else {
+        echo "No records found to delete.";
+    }
+} catch (PDOException $e) {
+    // Handle database connection errors
+    echo "Error: " . $e->getMessage();
+}
+
+// Close the connection
+$pdo = null;
+?>
+
+
+-----------------------------------------------------------------------
+
+>> CURL Request to delete record in php:
+
+<?php
+// Check if the request method is DELETE
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    // Get the ID of the record to delete from the request body
+    $requestData = json_decode(file_get_contents('php://input'), true);
+    $idToDelete = isset($requestData['id']) ? $requestData['id'] : null;
+
+    // Validate the ID (you should perform more thorough validation in a real application)
+    if ($idToDelete !== null && is_numeric($idToDelete)) {
+        // Connect to your database and execute the DELETE query using PDO
+        $host = 'localhost';
+        $dbname = 'your_database_name';
+        $username = 'your_username';
+        $password = 'your_password';
+
+        try {
+            // Establish database connection using PDO
+            $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+
+            // Set PDO to throw exceptions on errors
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Prepare the DELETE statement
+            $deleteStatement = $pdo->prepare("DELETE FROM users WHERE id = :id");
+
+            // Bind the ID parameter
+            $deleteStatement->bindParam(':id', $idToDelete, PDO::PARAM_INT);
+
+            // Execute the DELETE statement
+            $deleteStatement->execute();
+
+            // Check if any rows were affected
+            $rowCount = $deleteStatement->rowCount();
+            if ($rowCount > 0) {
+                http_response_code(200); // OK
+                echo json_encode(array("message" => "Record deleted successfully."));
+            } else {
+                http_response_code(404); // Not Found
+                echo json_encode(array("message" => "No records found to delete."));
+            }
+        } catch (PDOException $e) {
+            // Handle database connection errors
+            http_response_code(500); // Internal Server Error
+            echo json_encode(array("message" => "Database error: " . $e->getMessage()));
+        }
+
+        // Close the connection
+        $pdo = null;
+    } else {
+        // ID not provided or invalid
+        http_response_code(400); // Bad Request
+        echo json_encode(array("message" => "Invalid or missing ID parameter."));
+    }
+} else {
+    // Method not allowed
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(array("message" => "Method not allowed."));
+}
+?>
+
+
+
+--> Now, to send a DELETE request to this script using cURL
+
+
+<?php
+$deleteData = array('id' => 1); // Specify the ID of the record to delete
+$deleteDataJson = json_encode($deleteData);
+
+$ch = curl_init('http://yourdomain.com/delete_user.php');
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+curl_setopt($ch, CURLOPT_POSTFIELDS, $deleteDataJson);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'Content-Length: ' . strlen($deleteDataJson)
+));
+
+$response = curl_exec($ch);
+$httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+curl_close($ch);
+
+echo "HTTP Status: $httpStatus\n";
+echo "Response: $response\n";
+?>
+
+
+
+-----------------------------------------------------------------------
+
+>>  PHP PDO MYSQL UPDATE Request:
+
+<?php
+// URL of the API endpoint you want to send the PUT request to
+$url = 'http://example.com/api/resource';
+
+// Data to be sent in the request body
+$data = array(
+    'key1' => 'value1',
+    'key2' => 'value2'
+);
+
+// Initialize cURL session
+$curl = curl_init($url);
+
+// Set cURL options
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); // Return response as a string instead of outputting it
+curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT'); // Set the request method to PUT
+curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data)); // Set the request body
+curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/x-www-form-urlencoded', // Set the content type of the request body
+    // Add any additional headers here if needed
+));
+
+// Execute cURL request and get the response
+$response = curl_exec($curl);
+
+// Check for errors
+if ($response === false) {
+    $error = curl_error($curl);
+    echo "cURL Error: $error";
+} else {
+    // Handle successful response
+    echo "Response: $response";
+}
+
+// Close cURL session
+curl_close($curl);
+?>
+
+
+------------------------------------------------------------------------
+
+
+>>> PHP PDO MYSQL Create(insert Users) 
+
+<?php
+// Database connection parameters
+$host = 'localhost';
+$dbname = 'your_database';
+$username = 'your_username';
+$password = 'your_password';
+
+try {
+    // Connect to the database
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    
+    // Set PDO to throw exceptions on error
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Prepare SQL insert statement
+    $stmt = $pdo->prepare("INSERT INTO your_table (column1, column2) VALUES (:value1, :value2)");
+
+    // Bind parameters
+    $stmt->bindParam(':value1', $value1);
+    $stmt->bindParam(':value2', $value2);
+
+    // Set the values of parameters
+    $value1 = 'value_for_column1';
+    $value2 = 'value_for_column2';
+
+    // Execute the statement
+    $stmt->execute();
+
+    echo "Data inserted successfully!";
+} catch (PDOException $e) {
+    // Handle errors
+    echo "Error: " . $e->getMessage();
+}
+
+?>
+
+-------------------------------------------------------------------------
+
+
+>>  PHP PDO MYSQL Create(ADD User) CURL Request: 
+
+<?php
+// URL of the API endpoint where data insertion is handled
+$url = 'http://example.com/api/insert_data';
+
+// Data to be sent in the request body
+$data = array(
+    'column1' => 'value1',
+    'column2' => 'value2'
+);
+
+// Initialize cURL session
+$curl = curl_init($url);
+
+// Set cURL options
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); // Return response as a string instead of outputting it
+curl_setopt($curl, CURLOPT_POST, true); // Set the request method to POST
+curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data)); // Set the request body
+curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/x-www-form-urlencoded', // Set the content type of the request body
+    // Add any additional headers here if needed
+));
+
+// Execute cURL request and get the response
+$response = curl_exec($curl);
+
+// Check for errors
+if ($response === false) {
+    $error = curl_error($curl);
+    echo "cURL Error: $error";
+} else {
+    // Handle successful response
+    echo "Response: $response";
+}
+
+// Close cURL session
+curl_close($curl);
+?>
+
+
+-------------------------------------------------------------------------
+
+
+  // Check if data is sent via POST request and if the data is not null
+
+<?php
+// Database connection parameters
+$host = 'localhost';
+$dbname = 'your_database';
+$username = 'your_username';
+$password = 'your_password';
+
+try {
+    // Connect to the database
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Check if data is sent via POST request and if the data is not null
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+        // Retrieve data from POST request
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        // Check if the required keys exist in the data array
+        if (isset($data['id'], $data['value1'], $data['value2'])) {
+            // Prepare SQL update statement
+            $stmt = $pdo->prepare("UPDATE your_table SET column1 = :value1, column2 = :value2 WHERE id = :id");
+
+            // Bind parameters
+            $stmt->bindParam(':value1', $data['value1']);
+            $stmt->bindParam(':value2', $data['value2']);
+            $stmt->bindParam(':id', $data['id']);
+
+            // Execute the statement
+            $stmt->execute();
+
+            echo "Data updated successfully!";
+        } else {
+            echo "Invalid data received!";
+        }
+    } else {
+        echo "Invalid request method or empty data!";
+    }
+} catch (PDOException $e) {
+    // Handle errors
+    echo "Error: " . $e->getMessage();
+}
+?>
+
+
+----------------------------------------------------------------------------
+
+
+>> PHP MYSQL PDO CURL DELETE Request:
+
+
+<?php
+// URL of the resource you want to delete
+$url = 'https://example.com/api/resource';
+
+// Initialize cURL session
+$ch = curl_init($url);
+
+// Set cURL options for DELETE request
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// Execute cURL request
+$response = curl_exec($ch);
+
+// Check for errors
+if ($response === false) {
+    echo 'cURL Error: ' . curl_error($ch);
+}
+
+// Close cURL session
+curl_close($ch);
+
+// Handle response
+echo $response;
+?>
+
+-------------------------------------------------------------------
+
+
+
+Send Ajax Request to CURL, 
+send the cURL response back to the AJAX request:
+
+
+To send a cURL request in PHP when a button is clicked, you can use JavaScript to trigger an AJAX request to a PHP script that handles the cURL request. Here's how you can do it:
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Send cURL Request</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<button id="sendRequest">Send cURL Request</button>
+
+<script>
+$(document).ready(function(){
+    $('#sendRequest').click(function(){
+        $.ajax({
+            url: 'handle_curl_request.php',
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+                // Handle response if needed
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                // Handle error if needed
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
+
+
+
+<?php
+
+// Your cURL request code goes here
+// For example:
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://api.example.com/data',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+
+echo $response; // This will send the cURL response back to the AJAX request
+?>
+
+
+---------------------------------------------------------------------------------
+
+>> Calling php function in JS
+
+
+
+    // Get the button element by its id
+    const deleteUser = document.querySelectorAll(".delete");
+    //Delete record by clicking on button      
+    deleteUser.forEach(function(eachButton){
+        // Add an event listener to the button for the click event
+        eachButton.addEventListener('click', function(e) {
+           const id = eachButton.getAttribute('data-id')  
+           console.log(id)
+           '<?php deleteUser(); ?>'
+        }); 
+    })  
+    
+---------------------------------------------------------------------------------
+
