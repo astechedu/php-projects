@@ -1,6 +1,7 @@
 <?php
 include 'api/fetch.php';
 $fetchAll = fetchAll();
+
 ?>
 
 
@@ -34,7 +35,7 @@ $fetchAll = fetchAll();
 
   const deleteUser = $('#delete')
   //console.log(deleteUser.attr('data-id'))
-  const deleteUrl = "http://localhost/api/fetch.php"
+  const deleteUrl = "<?= $baseUrl ?>/api/fetch.php"
 
   $(function(){
 
@@ -42,7 +43,7 @@ $fetchAll = fetchAll();
 
     function fetchAll(){
         //console.log(deleteUser.attr('data-id'))
-         const fetchUrl = "http://localhost/api/fetch.php"
+         const fetchUrl = "<?= $baseUrl ?>/api/fetch.php"
 
 		$.ajax({
 		  url: fetchUrl,
@@ -73,7 +74,7 @@ $fetchAll = fetchAll();
 
 	function updateUsers(){
         //console.log(deleteUser.attr('data-id'))
-        const updateUrl = "http://localhost/api/update.php"
+        const updateUrl = "<?= $baseUrl ?>/api/update.php"
 
 		$.ajax({
 		  url: updateUrl,
