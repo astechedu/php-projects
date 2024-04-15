@@ -17,6 +17,8 @@ Send Ajax Request to CURL, send the cURL response back to the AJAX request,
 
 Calling php function in JS, 
 
+Working Code,
+
 
 
 CSS: 
@@ -730,4 +732,568 @@ echo $response; // This will send the cURL response back to the AJAX request
     })  
     
 ---------------------------------------------------------------------------------
+
+
+----> Working Code <----
+
+
+Javascript: 
+
+
+
+<script>
+
+$(function(){
+
+//1. Delete User: Sending Ajax Request to Curl with Id
+    const deleteUser = $('.delete');
+
+    $deleteUrl = 'http://localhost/curl/delete.php';
+
+    deleteUser.on('click', function(e){
+    e.preventDefault()
+
+        $.ajax({
+          url: $deleteUrl,
+          type: "POST", 
+          data: {       
+           id: this.id,      
+          },
+          success: function(response) {
+            // Handle successful response
+            //console.log("hi");            
+            $('.alert').html(response);
+            $(".alert").css('display','block');
+            removeAlert();
+          }
+        });    
+    });
+
+
+//2. Create User: Sending Request to Curl/create.php
+  const createUser = $('#addUser')
+  const uname = $('#username').val()
+  const uemail = $('#email').val()
+  const upass = $('#password').val()
+
+  $createUrl = 'http://localhost/curl/create.php';
+
+  $(document).on('click','#addUser', function(e){
+     e.preventDefault()
+
+      $.ajax({
+        url: $createUrl,
+        type: "POST", 
+        data: { username: uname, email:uemail, password: upass},
+        cache: false,
+        success: function(response) {
+          // Handle successful response
+          //console.log("hi");          
+          $('.alert').html(response);
+          $(".alert").css('display','block');
+          removeAlert();          
+        }
+      });    
+  });
+
+
+//3. Update User: Sending Ajax Request to curl/update.php
+  //const updateUser = $('#update');
+  //const updateUser = $('#updateUser')
+  const updateUser = $('#username').val()
+  const updateEmail = $('#email').val()
+  const updatePass = $('#password').val()
+  const updateId = $('.update').attr('id')
+
+  $updateUrl = 'http://localhost/curl/update.php';
+
+  $(document).on('click','.update', function(e){
+     e.preventDefault()
+
+      $.ajax({
+        url: $updateUrl,
+        type: "POST", 
+        data: { id:this.id, username:updateUser, email:updateEmail, password:updatePass},
+        cache: false,
+        success: function(response) {
+          // Handle successful response
+          //console.log("hi");          
+          $('.alert').html(response);
+          $(".alert").css('display','block');
+          removeAlert();          
+        }
+      });    
+  });
+
+  
+  // Function to remove alert after a specified time
+  function removeAlert() {
+    // Select the alert element
+    var $alert = $(".alert");
+
+    // Set timeout to remove the alert after 2 seconds
+    setTimeout(function() {
+      //$alert.alert('close'); // Close the alert
+      $alert.css('display','none');
+    }, 2000); // 2000 milliseconds = 2 seconds
+
+  }
+
+  // Call the removeAlert function when the document is ready
+  //$(document).ready(function() {
+    //removeAlert();
+  //});
+
+//Ready Function End
+});
+
+</script>
+
+
+
+
+CURL:
+
+createUser
+
+<?php
+
+//Get from ajax request
+$username = $_POST['username']?? '';
+$email = $_POST['email']?? '';
+$password = $_POST['password']?? '';
+
+function createUser($username, $email, $password){
+
+    // URL of the API endpoint where data insertion is handled
+    $url = 'http://localhost/api/create.php';
+
+    // Data to be sent in the request body
+    $data = array(
+        'username' => $username,
+        'email' => $email,
+        'password' => $password
+    );
+
+
+    // Initialize cURL session
+    $curl = curl_init($url);
+
+    // Set cURL options
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); // Return response as a string instead of outputting it
+    curl_setopt($curl, CURLOPT_POST, true); // Set the request method to POST
+    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data)); // Set the request body
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/x-www-form-urlencoded', // Set the content type of the request body
+        // Add any additional headers here if needed
+    ));
+
+    // Execute cURL request and get the response
+    $response = curl_exec($curl);
+
+    // Check for errors
+    if ($response === false) {
+        $error = curl_error($curl);
+        echo "cURL Error: $error";
+    } else {
+        // Handle successful response
+        echo "Response: $response";
+    }
+
+    // Close cURL session
+    curl_close($curl);
+
+}
+
+//Working
+createUser($username, $email, $password);
+
+
+?>
+
+
+
+deleteUser
+
+<?php
+
+//Get from ajax request
+$id = $_POST['id']?? '';
+
+function deleteUser($id=''){
+    // URL of the resource you want to delete
+    $url = 'http://localhost/api/delete.php';
+
+    $deleteData = array('id' => $id); // Specify the ID of the record to delete
+    $deleteDataJson = json_encode($deleteData);
+
+    // Initialize cURL session
+    $ch = curl_init($url);
+
+    // Set cURL options for DELETE request
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $deleteDataJson);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute cURL request
+    $response = curl_exec($ch);
+
+    // Check for errors
+    if ($response === false) {
+        echo 'cURL Error: ' . curl_error($ch);
+    }
+
+    // Close cURL session
+    curl_close($ch);
+
+    // Handle response
+    echo $response;
+
+}
+
+//Deleting  Working 
+deleteUser($id);
+?>
+
+
+
+fetchAll
+
+
+<?php
+
+//Curl: Fetch api 
+function fetchAll(){
+    // Initialize cURL session
+    $ch = curl_init();
+
+    // Set the URL to fetch
+    curl_setopt($ch, CURLOPT_URL, 'http://localhost/api/fetch.php');
+
+    // Set options if needed, e.g., user agent, headers, etc.
+    // curl_setopt($ch, CURLOPT_USERAGENT, 'Your User Agent');
+
+    // Set to return the transfer as a string
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute the request
+    $response = curl_exec($ch);
+
+    // Check for errors
+    if($response === false) {
+        echo 'cURL error: ' . curl_error($ch);
+    } else {
+        // Output the fetched data
+        return $response;
+    }
+
+    // Close cURL session
+    curl_close($ch);    
+}
+
+//Working
+//fetchAll();
+$customers = fetchAll();
+$customers = json_decode($customers, true);
+//echo "<pre>";print_r($customers);
+?>
+
+
+updateUser
+
+
+<?php
+
+//Get from ajax request
+$username = $_POST['username']?? '';
+$email = $_POST['email']?? '';
+$password = $_POST['password']?? '';
+$id = $_POST['id']?? '';
+
+//Udate API Using Curl
+function updateUser($id, $username, $email, $password){
+    
+    // URL of the API endpoint you want to send the PUT request to
+    $url = 'http://localhost/api/update.php';
+
+    // Data to be sent in the request body
+    $data = array(
+        'username' => $username,
+        'email' => $email,
+        'password' => $password,
+        'id' => $id
+    );
+    //Convert to json 
+    $string_json = json_encode($data);
+
+    // Initialize cURL session
+    $curl = curl_init($url);
+
+    // Set cURL options
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); // Return response as a string instead of outputting it
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT'); // Set the request method to PUT
+    //curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data)); // Set the request body
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $string_json); // Set the request body   
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/x-www-form-urlencoded', // Set the content type of the request body
+        // Add any additional headers here if needed
+    ));
+
+    // Execute cURL request and get the response
+    $response = curl_exec($curl);
+
+    // Check for errors
+    if ($response === false) {
+        $error = curl_error($curl);
+        echo "cURL Error: $error";
+    } else {
+        // Handle successful response
+        echo "Response: $response";
+    }
+
+    // Close cURL session
+    curl_close($curl);
+
+}
+//Working 
+updateUser($id, $username, $email, $password);
+
+?>
+
+
+
+Database: 
+
+
+<?php
+try {
+    // Database connection parameters
+    $dsn = "mysql:host=localhost;dbname=github;charset=utf8";
+    $username = "root";
+    $password = "";
+
+    // Attempt to create a PDO instance
+    $pdo = new PDO($dsn, $username, $password);
+
+    // Set PDO error mode to exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Connection successful, do something with $pdo object
+    //echo "Connected to the database successfully";
+    
+    // For example, execute a query
+    //$stmt = $pdo->query("SELECT * FROM users");
+    //$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //var_dump($rows);
+    //echo json_encode($rows);
+
+} catch(PDOException $e) {
+    // Connection failed, handle the exception
+    echo "Connection failed: " . $e->getMessage();
+}
+?>
+
+
+
+
+<?php
+  
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+// Database connection parameters
+$host = 'localhost';
+$dbname = 'github';
+$username = 'root';
+$password = '';
+
+try {
+    // Connect to the database
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    
+    // Set PDO to throw exceptions on error
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Prepare SQL insert statement
+    $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email , :password)");
+
+    // Bind parameters
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
+
+    //Request from Ajax   
+    $username = $_POST['username']?? '';
+    $email    = $_POST['email'] ?? '';
+    $password = $_POST['password']?? '';
+    
+    // Set the values of parameters
+    $username = $username;
+    $email = $email;
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    // Execute the statement
+    $stmt->execute();
+
+    echo "Data inserted successfully!";
+} catch (PDOException $e) {
+    // Handle errors
+    echo "Error: " . $e->getMessage();
+}
+
+}else{
+    echo "Empty Fields";
+}
+
+$pdo = null;
+
+
+?>
+
+
+<?php
+// Check if the request method is DELETE
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+
+    // Database connection settings
+    $host = 'localhost';
+    $dbname = 'github';
+    $username = 'root';
+    $password = '';
+
+    try {
+        // Establish database connection using PDO
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+
+        // Set PDO to throw exceptions on errors
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $data = json_decode(file_get_contents("php://input"), true);
+
+
+        // Define the ID of the record you want to delete
+        $idToDelete = $data['id']; // Change this to the ID you want to delete
+
+        // Prepare the DELETE statement
+        $deleteStatement = $pdo->prepare("DELETE FROM users WHERE id = :id");
+
+        // Bind the ID parameter
+        $deleteStatement->bindParam(':id', $idToDelete, PDO::PARAM_INT);
+
+        // Execute the DELETE statement
+        $deleteStatement->execute();
+
+        // Check if any rows were affected
+        $rowCount = $deleteStatement->rowCount();
+        if ($rowCount > 0) {
+            echo "Record deleted successfully.";
+        } else {
+            echo "No records found to delete.";
+        }
+    } catch (PDOException $e) {
+        // Handle database connection errors
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+// Close the connection
+$pdo = null;
+
+?>
+
+
+
+<?php
+// Database connection parameters
+$host = 'localhost';
+$dbname = 'github';
+$username = 'root';
+$password = '';
+
+try {
+    // Connect to the database
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    
+    // Set PDO to throw exceptions on error
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Prepare SQL query
+    $stmt = $pdo->prepare("SELECT * FROM users");
+
+    // Execute the query
+    $stmt->execute();
+
+    // Fetch dates
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode($users);       
+
+    // Output dates
+    //foreach ($users as $user) {
+        //echo json_encode($user);        
+    //}
+} catch (PDOException $e) {
+    // Handle errors
+    echo "Error: " . $e->getMessage();
+}
+
+
+
+<?php
+// Database connection parameters
+$host = 'localhost';
+$dbname = 'github';
+$username = 'root';
+$password = '';
+
+try {
+    // Connect to the database
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    
+    // Set PDO to throw exceptions on error
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Prepare SQL query
+    $stmt = $pdo->prepare("UPDATE users SET username = :username, email = :email, password = :password WHERE id = :id");
+
+    // Bind parameters
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':id', $id);
+
+    $data = json_decode(file_get_contents("php://input"), true);
+   
+    // Set the values of parameters
+    $username =  $data['username'];                                  //'$username';
+    $email =  $data['email'];                                        //'$email';
+    $password = password_hash($data['password'], PASSWORD_DEFAULT);  //'$email';
+    $id = $data['id'];   // Example ID to update
+
+    // Execute the query
+    $stmt->execute();
+
+    // Check if any rows were affected
+    $rowCount = $stmt->rowCount();
+    if ($rowCount > 0) {
+        echo "Update successful. $rowCount row(s) updated.";
+    } else {
+        echo "No rows updated.";
+    }
+} catch (PDOException $e) {
+    // Handle errors
+    echo "Error: " . $e->getMessage();
+}
+?>
+
+
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 
