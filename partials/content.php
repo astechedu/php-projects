@@ -4,6 +4,12 @@ $fetchAll = fetchAll();
 
 ?>
 
+  <!-- Info Alert -->
+  <div class="alert alert-info" role="alert">
+    This is an info alert!
+  </div>
+</div>
+
 
   <div class="col-lg-8">
   	<table class="table table-dark">
@@ -19,7 +25,8 @@ $fetchAll = fetchAll();
   				<td><?= $customer['username'] ?></td> 
   				<td><?= $customer['email'] ?></td>
   				<td>
-  					<button id="delete" class="btn btn-danger" data-id="<?= $customer['id'] ?>">Delete</button>
+  					<button id="delete" class="delete
+            btn btn-danger" data-id="<?= $customer['id'] ?>">Delete</button>
   					<button id="update" class="btn btn-info" data-id="<?= $customer['id'] ?>">Update</button>
   					<button id="view" class="btn btn-success" data-id="<?= $customer['id'] ?>">View</button>
   				</td>
@@ -33,35 +40,42 @@ $fetchAll = fetchAll();
 
 <script>
 
-  const deleteUser = $('#delete')
-  //console.log(deleteUser.attr('data-id'))
-  const deleteUrl = "<?= $baseUrl ?>/api/fetch.php"
-
   $(function(){
 
+//Delete Request to end point
 
+  $('.delete').on('click', function(){
+        deleteUser();
+  })
 
-    function fetchAll(){
+    function deleteUser(){
+        const deleteUser = $('#delete')
+        console.log(deleteUser.attr('data-id'))
+        const deleteUrl = "http://localhost/api/delete.php"
+        //const id = $('#delete').attr('data-id')
+
         //console.log(deleteUser.attr('data-id'))
-         const fetchUrl = "<?= $baseUrl ?>/api/fetch.php"
+         //const fetchUrl = "<?= $baseUrl ?>/api/fetch.php"
 
-		$.ajax({
-		  url: fetchUrl,
-		  method: "POST", // or "POST", "PUT", etc. depending on your needs
+    		$.ajax({
+    		  url: deleteUrl,
+    		  type: "POST", // or "POST", "PUT", etc. depending on your needs
+          data: {id:id},
+    		  success: function(response) {
+    		    // handle successful response from the server
+    		    console.log(response);
+            $('.alert').css('display','block');
+            $('.alert').html(response);
 
-		  success: function(response) {
-		    // handle successful response from the server
-		    console.log(response);
-		  },
-		  error: function(xhr, status, error) {
-		    // handle errors
-		    console.error(xhr.responseText);
-		  }
-		});
-
+    		  },
+    		  error: function(xhr, status, error) {
+    		    // handle errors
+    		    console.error(xhr.responseText);
+    		  }
+    		});
     }
 
-//fetchAll()
+   
 
 
 
@@ -97,5 +111,8 @@ $fetchAll = fetchAll();
   //End of ready function
   })
 
-
 </script>
+
+<style>
+  .alert{display:none;}
+</style>
