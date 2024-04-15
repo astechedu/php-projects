@@ -9,7 +9,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/config/app.php';
 <?php include 'partials/header.php';?>
 
 <div class="container">
-	<div class="row">
+	<div class="row justify-content-center">
 		<?php include 'partials/content.php';?>
 	</div>
 </div>
