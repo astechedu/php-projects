@@ -1,16 +1,13 @@
 Search Keys:            
-             curl fetch data, 
-             Initialize cURL session, 
+             
              PHP PDO Connection,
              Users Table Schema, 
-             PHP Mysql PDO DELETE,              
-             CURL Request to delete record in php,
+             PHP Mysql PDO DELETE,         
              PHP PDO MYSQL Fetch ONLY On Column (One Field), 
              PHP PDO MYSQL UPDATE Request, 
-             PHP PDO MYSQL Create(insert Users), 
-             PHP PDO MYSQL Create(ADD User) CURL Request, 
+             PHP PDO MYSQL Create(insert Users),             
              Hashing Passwords, 
-             PHP MYSQL PDO CURL DELETE Request,
+             
 
 
 
@@ -149,77 +146,6 @@ try {
 ---------------------------------------------------------------
 
 
-*---> Curl Fetch Data <---*
-
-<?php
-// Initialize cURL session
-$ch = curl_init();
-
-// Set the URL of the API endpoint you want to fetch data from
-$url = "https://api.example.com/data";
-
-// Set cURL options
-curl_setopt($ch, CURLOPT_URL, $url); // Set the URL
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disables SSL certificate verification (for demo purposes)
-
-// Execute cURL session
-$response = curl_exec($ch);
-
-// Check for errors
-if(curl_error($ch)) {
-    echo 'Error: ' . curl_error($ch);
-}
-
-// Close cURL session
-curl_close($ch);
-
-// If response is received successfully, you can process the data
-if ($response) {
-    // Convert JSON response to PHP array or object
-    $data = json_decode($response);
-
-    // Process the data as needed
-    // For example, print the data
-    var_dump($data);
-} else {
-    // Handle failed request
-    echo "Failed to fetch data from API.";
-}
-?>
-
-
-
-//OR
-
-<?php
-// Initialize cURL session
-$ch = curl_init();
-
-// Set the URL to fetch
-curl_setopt($ch, CURLOPT_URL, 'http://example.com/data');
-
-// Set options if needed, e.g., user agent, headers, etc.
-// curl_setopt($ch, CURLOPT_USERAGENT, 'Your User Agent');
-
-// Set to return the transfer as a string
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-// Execute the request
-$response = curl_exec($ch);
-
-// Check for errors
-if($response === false) {
-    echo 'cURL error: ' . curl_error($ch);
-} else {
-    // Output the fetched data
-    echo $response;
-}
-
-// Close cURL session
-curl_close($ch);
-?>
-
 ---------------------------------------------------------------
 
 
@@ -316,7 +242,7 @@ $pdo = null;
 
 -----------------------------------------------------------------------
 
->> CURL Request to delete record in php:
+>>  delete record in php:
 
 <?php
 // Check if the request method is DELETE
@@ -378,78 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 }
 ?>
 
-
-
---> Now, to send a DELETE request to this script using cURL
-
-
-<?php
-$deleteData = array('id' => 1); // Specify the ID of the record to delete
-$deleteDataJson = json_encode($deleteData);
-
-$ch = curl_init('http://yourdomain.com/delete_user.php');
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-curl_setopt($ch, CURLOPT_POSTFIELDS, $deleteDataJson);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/json',
-    'Content-Length: ' . strlen($deleteDataJson)
-));
-
-$response = curl_exec($ch);
-$httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-curl_close($ch);
-
-echo "HTTP Status: $httpStatus\n";
-echo "Response: $response\n";
-?>
-
-
-
 -----------------------------------------------------------------------
-
->>  PHP PDO MYSQL UPDATE Request:
-
-<?php
-// URL of the API endpoint you want to send the PUT request to
-$url = 'http://example.com/api/resource';
-
-// Data to be sent in the request body
-$data = array(
-    'key1' => 'value1',
-    'key2' => 'value2'
-);
-
-// Initialize cURL session
-$curl = curl_init($url);
-
-// Set cURL options
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); // Return response as a string instead of outputting it
-curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT'); // Set the request method to PUT
-curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data)); // Set the request body
-curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/x-www-form-urlencoded', // Set the content type of the request body
-    // Add any additional headers here if needed
-));
-
-// Execute cURL request and get the response
-$response = curl_exec($curl);
-
-// Check for errors
-if ($response === false) {
-    $error = curl_error($curl);
-    echo "cURL Error: $error";
-} else {
-    // Handle successful response
-    echo "Response: $response";
-}
-
-// Close cURL session
-curl_close($curl);
-?>
-
-
 ------------------------------------------------------------------------
 
 
@@ -492,48 +347,6 @@ try {
 ?>
 
 -------------------------------------------------------------------------
-
-
->>  PHP PDO MYSQL Create(ADD User) CURL Request: 
-
-<?php
-// URL of the API endpoint where data insertion is handled
-$url = 'http://example.com/api/insert_data';
-
-// Data to be sent in the request body
-$data = array(
-    'column1' => 'value1',
-    'column2' => 'value2'
-);
-
-// Initialize cURL session
-$curl = curl_init($url);
-
-// Set cURL options
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); // Return response as a string instead of outputting it
-curl_setopt($curl, CURLOPT_POST, true); // Set the request method to POST
-curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data)); // Set the request body
-curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/x-www-form-urlencoded', // Set the content type of the request body
-    // Add any additional headers here if needed
-));
-
-// Execute cURL request and get the response
-$response = curl_exec($curl);
-
-// Check for errors
-if ($response === false) {
-    $error = curl_error($curl);
-    echo "cURL Error: $error";
-} else {
-    // Handle successful response
-    echo "Response: $response";
-}
-
-// Close cURL session
-curl_close($curl);
-?>
-
 
 -------------------------------------------------------------------------
 
@@ -586,35 +399,6 @@ try {
 
 ----------------------------------------------------------------------------
 
-
->> PHP MYSQL PDO CURL DELETE Request:
-
-
-<?php
-// URL of the resource you want to delete
-$url = 'https://example.com/api/resource';
-
-// Initialize cURL session
-$ch = curl_init($url);
-
-// Set cURL options for DELETE request
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-// Execute cURL request
-$response = curl_exec($ch);
-
-// Check for errors
-if ($response === false) {
-    echo 'cURL Error: ' . curl_error($ch);
-}
-
-// Close cURL session
-curl_close($ch);
-
-// Handle response
-echo $response;
-?>
 
 -------------------------------------------------------------------
 

@@ -8,6 +8,7 @@
   <!-- You can include Bootstrap bundle for JS -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> -->
 <script src="http://localhost/js/bootstrap533.bundle.min.js"></script>
+<script src="/site.js"></script>
 </body>
 </html>
 
