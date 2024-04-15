@@ -1,11 +1,6 @@
 <?php
-echo sizeof($_POST);
-
-if(count($_POST) < 0){
-  echo "Yes";
-}
-
-if($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['username'])){
+  
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 // Database connection parameters
 $host = 'localhost';
