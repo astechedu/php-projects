@@ -3,7 +3,6 @@
 //Curl Request To get All Data
  include $_SERVER['DOCUMENT_ROOT'].'/curl/fetchall.php';
 
-
 ?>
 
 <!-- Alert Message -->
@@ -13,8 +12,7 @@
 <!-- Register Form -->
 <?php include $_SERVER['DOCUMENT_ROOT'].'/pages/register.php'; ?>  
 
-
-<div class="col-lg-8">
+<div class="col-lg-10">
 <table class="table">
   <thead class="table-dark">
     <tr>
@@ -35,7 +33,7 @@
       <td><?= $customer['created_at'] ?></td> 
       <td>
       	<button id="<?= $customer['id'] ?>" class="delete btn btn-danger" data-id="<?= $customer['id'] ?>">Delete</button>
-      	<button id="update" class="btn btn-primary" data-id="<?= $customer['id'] ?>">Update</button>
+      	<button id="<?= $customer['id'] ?>" class="update btn btn-primary" data-id="<?= $customer['id'] ?>">Update</button>
       	<button id="view" class="btn btn-success" data-id="<?= $customer['id'] ?>">View</button>
       </td> 
     </tr>
@@ -46,6 +44,7 @@
 </div>
 
 
+
 <script>
 
 $(function(){
@@ -53,11 +52,13 @@ $(function(){
 //1. Delete User: Sending Ajax Request to Curl with Id
 	const deleteUser = $('.delete');
 
-	$url = 'http://localhost/curl/delete.php';
+	$deleteUrl = 'http://localhost/curl/delete.php';
 
-	deleteUser.on('click', function(){
+	deleteUser.on('click', function(e){
+    e.preventDefault()
+
 	    $.ajax({
-	      url: $url,
+	      url: $deleteUrl,
 	      type: "POST", 
 	      data: {       
 	       id: this.id,      
@@ -71,10 +72,65 @@ $(function(){
 	      }
 	    });    
 	});
-});
 
 
+//2. Create User: Sending Request to Curl/create.php
+  const createUser = $('#addUser')
+  const uname = $('#username').val()
+  const uemail = $('#email').val()
+  const upass = $('#password').val()
 
+  $createUrl = 'http://localhost/curl/create.php';
+
+  $(document).on('click','#addUser', function(e){
+     e.preventDefault()
+
+      $.ajax({
+        url: $createUrl,
+        type: "POST", 
+        data: { username: uname, email:uemail, password: upass},
+        cache: false,
+        success: function(response) {
+          // Handle successful response
+          //console.log("hi");          
+          $('.alert').html(response);
+          $(".alert").css('display','block');
+          removeAlert();          
+        }
+      });    
+  });
+
+
+//3. Update User: Sending Ajax Request to curl/update.php
+  //const updateUser = $('#update');
+  //const updateUser = $('#updateUser')
+  const updateUser = $('#username').val()
+  const updateEmail = $('#email').val()
+  const updatePass = $('#password').val()
+  const updateId = $('.update').attr('id')
+
+  $updateUrl = 'http://localhost/curl/update.php';
+
+  $(document).on('click','.update', function(e){
+     e.preventDefault()
+
+      $.ajax({
+        url: $updateUrl,
+        type: "POST", 
+        data: { id:this.id, username:updateUser, email:updateEmail, password:updatePass},
+        cache: false,
+        success: function(response) {
+          // Handle successful response
+          //console.log("hi");          
+          $('.alert').html(response);
+          $(".alert").css('display','block');
+          removeAlert();          
+        }
+      });    
+  });
+
+
+  
   // Function to remove alert after a specified time
   function removeAlert() {
     // Select the alert element
@@ -94,7 +150,11 @@ $(function(){
   //});
 
 
-//2. Create User 
+
+
+//Ready Function End
+});
+
 
 
 

@@ -1,4 +1,12 @@
 <?php
+echo sizeof($_POST);
+
+if(count($_POST) < 0){
+  echo "Yes";
+}
+
+if($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['username'])){
+
 // Database connection parameters
 $host = 'localhost';
 $dbname = 'github';
@@ -20,10 +28,15 @@ try {
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $password);
 
+    //Request from Ajax   
+    $username = $_POST['username']?? '';
+    $email    = $_POST['email'] ?? '';
+    $password = $_POST['password']?? '';
+    
     // Set the values of parameters
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $username = $username;
+    $email = $email;
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
     // Execute the statement
     $stmt->execute();
@@ -34,5 +47,11 @@ try {
     echo "Error: " . $e->getMessage();
 }
 
+}else{
+    echo "Empty Fields";
+}
+
 $pdo = null;
+
+
 ?>

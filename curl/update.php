@@ -1,17 +1,23 @@
 <?php
 
+//Get from ajax request
+$username = $_POST['username']?? '';
+$email = $_POST['email']?? '';
+$password = $_POST['password']?? '';
+$id = $_POST['id']?? '';
+
 //Udate API Using Curl
-function updateUser($username='', $email='', $password=''){
+function updateUser($id, $username, $email, $password){
 	
 	// URL of the API endpoint you want to send the PUT request to
 	$url = 'http://localhost/api/update.php';
 
 	// Data to be sent in the request body
 	$data = array(
-	    'username' => 'new',
-	    'email' => 'new_update@example.com',
-	    'password' => 'new123',
-	    'id' => 18
+	    'username' => $username,
+	    'email' => $email,
+	    'password' => $password,
+	    'id' => $id
 	);
     //Convert to json 
     $string_json = json_encode($data);
@@ -46,6 +52,6 @@ function updateUser($username='', $email='', $password=''){
 
 }
 //Working 
-//updateUser();
+updateUser($id, $username, $email, $password);
 
 ?>

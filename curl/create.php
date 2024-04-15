@@ -1,15 +1,20 @@
 <?php
 
-function createUser($username='', $email='', $password=''){
+//Get from ajax request
+$username = $_POST['username']?? '';
+$email = $_POST['email']?? '';
+$password = $_POST['password']?? '';
+
+function createUser($username, $email, $password){
 
 	// URL of the API endpoint where data insertion is handled
 	$url = 'http://localhost/api/create.php';
 
 	// Data to be sent in the request body
 	$data = array(
-	    'username' => 'new1',
-	    'email' => 'new1@example.com',
-	    'password' => 'new123'
+	    'username' => $username,
+	    'email' => $email,
+	    'password' => $password
 	);
 
 
@@ -43,5 +48,7 @@ function createUser($username='', $email='', $password=''){
 }
 
 //Working
-//createUser();
+createUser($username, $email, $password);
+
+
 ?>
