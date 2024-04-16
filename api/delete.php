@@ -2,6 +2,14 @@
 // Check if the request method is DELETE
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    $deleteId = $_POST['id']?? '';   
+    
+    //Calling deleteUser function
+    deleteUser($deleteId);
+}
+
+function deleteUser($deleteId){
+
     // Database connection settings
     $host = 'localhost';
     $dbname = 'github';
@@ -18,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //$data = json_decode(file_get_contents("php://input"), true);
 
         // Define the ID of the record you want to delete
-        $idToDelete =  $_POST['id']?? ''; //$data['id']; // Change this to the ID you want to delete
+        $idToDelete =  $deleteId; //$data['id']; // Change this to the ID you want to delete
 
         // Prepare the DELETE statement
         $deleteStatement = $pdo->prepare("DELETE FROM users WHERE id = :id");
@@ -40,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Handle database connection errors
         echo "Error: " . $e->getMessage();
     }
+
 }
 
 // Close the connection

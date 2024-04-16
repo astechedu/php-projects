@@ -1,6 +1,13 @@
 <?php
 
-$id = $_POST['id']?? '';
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+    $id = $_POST['id']?? '';
+
+    //Calling fetchAll() function  
+    $userView = fetchById($id);
+    echo json_encode($userView);
+}
 
 function fetchById($id){
 
@@ -38,13 +45,11 @@ function fetchById($id){
         // Handle errors
         echo "Error: " . $e->getMessage();
     }
-
-
 }
 
-$userView = fetchById($id);
 
-echo json_encode($userView);
+
+
 
 
 ?>
