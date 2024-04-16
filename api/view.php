@@ -1,6 +1,9 @@
 <?php
 
-function fetchAll(){
+$id = $_POST['id']?? '';
+
+function fetchById($id){
+
     // Database connection parameters
     $host = 'localhost';
     $dbname = 'github';
@@ -13,18 +16,20 @@ function fetchAll(){
         
         // Set PDO to throw exceptions on error
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Define the ID of the record you want to delete
+        $idToView =  $id; //$data['id']; // Change this to the ID you want to delete
 
         // Prepare SQL query
-        $stmt = $pdo->prepare("SELECT * FROM users");
-
+        $Viewstmt = $pdo->prepare("SELECT * FROM users where id = :id");
+        // Bind the ID parameter
+        $Viewstmt->bindParam(':id', $idToView, PDO::PARAM_INT);
         // Execute the query
-        $stmt->execute();
+        $Viewstmt->execute();
 
         // Fetch dates
-        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $user = $Viewstmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $users;       
-
+        return $user;       
         // Output dates
         //foreach ($users as $user) {
             //echo json_encode($user);        
@@ -33,9 +38,13 @@ function fetchAll(){
         // Handle errors
         echo "Error: " . $e->getMessage();
     }
+
+
 }
 
+$userView = fetchById($id);
 
+echo json_encode($userView);
 
 
 ?>

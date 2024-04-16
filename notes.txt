@@ -399,6 +399,160 @@ try {
 
 ----------------------------------------------------------------------------
 
+----> Working <----
 
--------------------------------------------------------------------
+Jquery: 
 
+
+$(function(){
+
+//1. Delete User: Sending Ajax Request to endpoint
+
+    const deleteUserId = $('.delete')
+    const deleteUrl = 'http://localhost/api/delete.php'
+
+    deleteUserId.on('click', function(){
+          deleteUser(this.id)
+    }) 
+     
+     function deleteUser(id){
+         const deleteId = id   
+        $.ajax({
+          url: deleteUrl,
+          type: "POST", 
+          data: {       
+          id:deleteId,      
+          },
+          cache:false,
+          success: function(response) {
+            // Handle successful response
+            //console.log("hi");            
+            $('.alert').html(response)
+            $(".alert").css('display','block')
+            //removeAlert();
+          }
+        })  
+      }
+
+
+//2. Update Request to end point
+
+  const updateUserId = $('.update')
+  const updateUrl = 'http://localhost/api/update.php'
+
+    updateUserId.on('click', function(e){
+        updateUsers(this.id);
+    })
+
+    function updateUsers(id){
+        // Get form data
+        const username = $('#username').val()
+        const email    = $('#email').val();
+        const password = $('#password').val()
+        const updateId       = id
+        const formData = {id:updateId,username:username,email:email,password:password}
+         //var formData = $('#registerForm').serialize();
+
+
+        $.ajax({
+          url: updateUrl,
+          type: "POST", // or "POST", "PUT", etc. depending on your needs
+        data: formData,
+        //cache:false,
+          success: function(response) {
+            // handle successful response from the server
+            console.log(response);
+              // Handle successful response
+              //console.log("hi");            
+              $('.alert').html(response)
+              $(".alert").css('display','block')
+              //removeAlert();        
+          },
+          error: function(xhr, status, error) {
+            // handle errors
+            console.error(xhr.responseText)
+          }
+        });
+    }
+
+
+
+//3. View User: Sending Ajax Request 
+
+    const viewUserId = $('.view');
+    const userViewUrl = 'http://localhost/api/view.php';
+
+    viewUserId.on('click', function(){
+          userView(this.id)
+    }) 
+     
+     function userView(id){
+         const viewId = id
+        
+        $.ajax({
+          url: userViewUrl,
+          type: "POST", 
+          data: {id: viewId},
+          cache:false,
+          success: function(response) {
+          var txt = ""
+          const data = JSON.parse(response)
+          $.each(data,function(i,v){
+               txt += '<tr><td>' + v.id + '</td>' + 
+                           '<td>' + v.username + '</td>' +
+                           '<td>' + v.email + '</td>' +
+               '</tr>'
+          })
+             $('#userView').html(txt)
+
+            // Handle successful response
+            //console.log("hi");            
+            //$('.alert').html(response)
+            //$(".alert").css('display','block')
+            //removeAlert();          
+          }
+        })  
+      }
+
+
+
+
+//4. Update User: Sending Ajax Request endpoint
+
+
+  $('#createUser').on('click', function(){
+        createUsers();
+  })
+
+  function createUsers(){
+        //console.log(deleteUser.attr('data-id'))
+        const createUrl = "http://localhost/api/create.php"
+        // Get form data
+        const username = $('#username').val();
+        const email = $('#email').val();
+        const password = $('#password').val();
+        //const formData = {username:username,email:email,password:password}
+         var formData = $('#registerForm').serialize();
+    $.ajax({
+      url: createUrl,
+      type: "POST", // or "POST", "PUT", etc. depending on your needs
+      data: formData,
+      success: function(response) {
+        // handle successful response from the server
+        console.log(response);
+        $('.alert').css('display','block');
+        $('.alert').html(response);
+      },
+      error: function(xhr, status, error) {
+        // handle errors
+        console.error(xhr.responseText);
+      }
+    });
+  }
+
+  //End of ready function
+  })
+
+</script>
+
+----------------------------------------------------------------------------

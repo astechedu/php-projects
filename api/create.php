@@ -21,9 +21,9 @@ try {
     $stmt->bindParam(':password', $password);
 
     // Set the values of parameters
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $username = $_POST['username']?? '';
+    $email = $_POST['email']?? '';
+    $password = password_hash($_POST['password']?? '', PASSWORD_DEFAULT);
 
     // Execute the statement
     $stmt->execute();

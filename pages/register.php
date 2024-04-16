@@ -58,7 +58,6 @@ $(function(){
         createUsers();
   })
 
-
   function createUsers(){
         //console.log(deleteUser.attr('data-id'))
         const createUrl = "http://localhost/api/create.php"
