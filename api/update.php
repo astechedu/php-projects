@@ -57,7 +57,4 @@ function updateUser($updateId,$updateUsername,$updateEmail,$updatePssword){
         echo "Error: " . $e->getMessage();
     }
 }
-
-
-
 ?>

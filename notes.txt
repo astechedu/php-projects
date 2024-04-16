@@ -145,7 +145,6 @@ try {
 
 ---------------------------------------------------------------
 
-
 ---------------------------------------------------------------
 
 
@@ -195,114 +194,158 @@ $pdo = null;
 ----------------------------------------------------------------
 
 
-PHP Mysql PDO DELETE: 
+//1. Fetch API
 
-<?php
-// Database connection settings
-$host = 'localhost';
-$dbname = 'your_database_name';
-$username = 'your_username';
-$password = 'your_password';
+function fetchAll(){
+    // Database connection parameters
+    $host = 'localhost';
+    $dbname = 'github';
+    $username = 'root';
+    $password = '';
 
-try {
-    // Establish database connection using PDO
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    try {
+        // Connect to the database
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        
+        // Set PDO to throw exceptions on error
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Set PDO to throw exceptions on errors
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Prepare SQL query
+        $stmt = $pdo->prepare("SELECT * FROM users");
 
-    // Define the ID of the record you want to delete
-    $idToDelete = 1; // Change this to the ID you want to delete
+        // Execute the query
+        $stmt->execute();
 
-    // Prepare the DELETE statement
-    $deleteStatement = $pdo->prepare("DELETE FROM users WHERE id = :id");
+        // Fetch dates
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Bind the ID parameter
-    $deleteStatement->bindParam(':id', $idToDelete, PDO::PARAM_INT);
+        return $users;       
 
-    // Execute the DELETE statement
-    $deleteStatement->execute();
-
-    // Check if any rows were affected
-    $rowCount = $deleteStatement->rowCount();
-    if ($rowCount > 0) {
-        echo "Record deleted successfully.";
-    } else {
-        echo "No records found to delete.";
+        // Output dates
+        //foreach ($users as $user) {
+            //echo json_encode($user);        
+        //}
+    } catch (PDOException $e) {
+        // Handle errors
+        echo "Error: " . $e->getMessage();
     }
-} catch (PDOException $e) {
-    // Handle database connection errors
-    echo "Error: " . $e->getMessage();
 }
 
-// Close the connection
-$pdo = null;
-?>
+----------------------------------------------------------------
+
+
+<?php
+
+//2. View API
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+    $id = $_POST['id']?? '';
+
+    //Calling fetchAll() function  
+    $userView = fetchById($id);
+    echo json_encode($userView);
+}
+
+function fetchById($id){
+
+    // Database connection parameters
+    $host = 'localhost';
+    $dbname = 'github';
+    $username = 'root';
+    $password = '';
+
+    try {
+        // Connect to the database
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        
+        // Set PDO to throw exceptions on error
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Define the ID of the record you want to delete
+        $idToView =  $id; //$data['id']; // Change this to the ID you want to delete
+
+        // Prepare SQL query
+        $Viewstmt = $pdo->prepare("SELECT * FROM users where id = :id");
+        // Bind the ID parameter
+        $Viewstmt->bindParam(':id', $idToView, PDO::PARAM_INT);
+        // Execute the query
+        $Viewstmt->execute();
+
+        // Fetch dates
+        $user = $Viewstmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $user;       
+        // Output dates
+        //foreach ($users as $user) {
+            //echo json_encode($user);        
+        //}
+    } catch (PDOException $e) {
+        // Handle errors
+        echo "Error: " . $e->getMessage();
+    }
+}
 
 
 -----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+ PHP Mysql PDO DELETE: 
 
 >>  delete record in php:
 
 <?php
-// Check if the request method is DELETE
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    // Get the ID of the record to delete from the request body
-    $requestData = json_decode(file_get_contents('php://input'), true);
-    $idToDelete = isset($requestData['id']) ? $requestData['id'] : null;
 
-    // Validate the ID (you should perform more thorough validation in a real application)
-    if ($idToDelete !== null && is_numeric($idToDelete)) {
-        // Connect to your database and execute the DELETE query using PDO
-        $host = 'localhost';
-        $dbname = 'your_database_name';
-        $username = 'your_username';
-        $password = 'your_password';
+// 3. Delete Api
 
-        try {
-            // Establish database connection using PDO
-            $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            // Set PDO to throw exceptions on errors
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            // Prepare the DELETE statement
-            $deleteStatement = $pdo->prepare("DELETE FROM users WHERE id = :id");
-
-            // Bind the ID parameter
-            $deleteStatement->bindParam(':id', $idToDelete, PDO::PARAM_INT);
-
-            // Execute the DELETE statement
-            $deleteStatement->execute();
-
-            // Check if any rows were affected
-            $rowCount = $deleteStatement->rowCount();
-            if ($rowCount > 0) {
-                http_response_code(200); // OK
-                echo json_encode(array("message" => "Record deleted successfully."));
-            } else {
-                http_response_code(404); // Not Found
-                echo json_encode(array("message" => "No records found to delete."));
-            }
-        } catch (PDOException $e) {
-            // Handle database connection errors
-            http_response_code(500); // Internal Server Error
-            echo json_encode(array("message" => "Database error: " . $e->getMessage()));
-        }
-
-        // Close the connection
-        $pdo = null;
-    } else {
-        // ID not provided or invalid
-        http_response_code(400); // Bad Request
-        echo json_encode(array("message" => "Invalid or missing ID parameter."));
-    }
-} else {
-    // Method not allowed
-    http_response_code(405); // Method Not Allowed
-    echo json_encode(array("message" => "Method not allowed."));
+    $deleteId = $_POST['id']?? '';   
+    
+    //Calling deleteUser function
+    deleteUser($deleteId);
 }
-?>
+
+function deleteUser($deleteId){
+
+    // Database connection settings
+    $host = 'localhost';
+    $dbname = 'github';
+    $username = 'root';
+    $password = '';
+
+    try {
+        // Establish database connection using PDO
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+
+        // Set PDO to throw exceptions on errors
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        //$data = json_decode(file_get_contents("php://input"), true);
+
+        // Define the ID of the record you want to delete
+        $idToDelete =  $deleteId; //$data['id']; // Change this to the ID you want to delete
+
+        // Prepare the DELETE statement
+        $deleteStatement = $pdo->prepare("DELETE FROM users WHERE id = :id");
+
+        // Bind the ID parameter
+        $deleteStatement->bindParam(':id', $idToDelete, PDO::PARAM_INT);
+
+        // Execute the DELETE statement
+        $deleteStatement->execute();
+
+        // Check if any rows were affected
+        $rowCount = $deleteStatement->rowCount();
+        if ($rowCount > 0) {
+            echo "Record deleted successfully.";
+        } else {
+            echo "No records found to delete.";
+        }
+    } catch (PDOException $e) {
+        // Handle database connection errors
+        echo "Error: " . $e->getMessage();
+    }
+
+}
 
 -----------------------------------------------------------------------
 ------------------------------------------------------------------------
@@ -311,37 +354,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 >>> PHP PDO MYSQL Create(insert Users) 
 
 <?php
-// Database connection parameters
-$host = 'localhost';
-$dbname = 'your_database';
-$username = 'your_username';
-$password = 'your_password';
 
-try {
-    // Connect to the database
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    
-    // Set PDO to throw exceptions on error
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// 4. Create API
 
-    // Prepare SQL insert statement
-    $stmt = $pdo->prepare("INSERT INTO your_table (column1, column2) VALUES (:value1, :value2)");
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    // Bind parameters
-    $stmt->bindParam(':value1', $value1);
-    $stmt->bindParam(':value2', $value2);
-
+    //$data = json_decode(file_get_contents("php://input"), true);   
     // Set the values of parameters
-    $value1 = 'value_for_column1';
-    $value2 = 'value_for_column2';
+     
+    $createUserName =  $_POST['username']?? '';  //data['username']; 
+    $createUserEmail =  $_POST['email']?? '';        //data['email'];                                
+    $createUserPass = password_hash($_POST['password']?? '', PASSWORD_DEFAULT);
+    
+    //Calling createUser function
+    createUser($createUserName,$createUserEmail,$createUserPass);
+}
 
-    // Execute the statement
-    $stmt->execute();
+function createUser($createUserName,$createUserEmail,$createUserPass){
 
-    echo "Data inserted successfully!";
-} catch (PDOException $e) {
-    // Handle errors
-    echo "Error: " . $e->getMessage();
+    // Database connection parameters
+    $host = 'localhost';
+    $dbname = 'github';
+    $username = 'root';
+    $password = '';
+
+    try {
+        // Connect to the database
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        
+        // Set PDO to throw exceptions on error
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Prepare SQL insert statement
+        $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email , :password)");
+
+        // Bind parameters
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password);
+
+        // Set the values of parameters
+        $username = $createUserName;
+        $email = $createUserEmail;
+        $password = password_hash($createUserPass, PASSWORD_DEFAULT);
+
+        // Execute the statement
+        $stmt->execute();
+
+        echo "Data inserted successfully!";
+    } catch (PDOException $e) {
+        // Handle errors
+        echo "Error: " . $e->getMessage();
+    }
 }
 
 ?>
@@ -351,51 +415,68 @@ try {
 -------------------------------------------------------------------------
 
 
-  // Check if data is sent via POST request and if the data is not null
+// Check if data is sent via POST request and if the data is not null
 
 <?php
-// Database connection parameters
-$host = 'localhost';
-$dbname = 'your_database';
-$username = 'your_username';
-$password = 'your_password';
 
-try {
-    // Connect to the database
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//5. Update Api
 
-    // Check if data is sent via POST request and if the data is not null
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
-        // Retrieve data from POST request
-        $data = json_decode(file_get_contents("php://input"), true);
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-        // Check if the required keys exist in the data array
-        if (isset($data['id'], $data['value1'], $data['value2'])) {
-            // Prepare SQL update statement
-            $stmt = $pdo->prepare("UPDATE your_table SET column1 = :value1, column2 = :value2 WHERE id = :id");
+    //$data = json_decode(file_get_contents("php://input"), true);   
+    // Set the values of parameters
+    $updateId = $_POST['id']?? '';                //$data['id']; 
+    $updateUsername =  $_POST['username']?? '';  //data['username']; 
+    $updateEmail =  $_POST['email']?? '';        //data['email'];                                
+    $updatePssword = password_hash($_POST['password']?? '', PASSWORD_DEFAULT);
+    
+    //Calling updateUser function
+    updateUser($updateId,$updateUsername,$updateEmail,$updatePssword);
+}
 
-            // Bind parameters
-            $stmt->bindParam(':value1', $data['value1']);
-            $stmt->bindParam(':value2', $data['value2']);
-            $stmt->bindParam(':id', $data['id']);
 
-            // Execute the statement
-            $stmt->execute();
+function updateUser($updateId,$updateUsername,$updateEmail,$updatePssword){
 
-            echo "Data updated successfully!";
+   // Database connection parameters
+    $host = 'localhost';
+    $dbname = 'github';
+    $username = 'root';
+    $password = '';
+
+    try {
+        // Connect to the database
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        
+        // Set PDO to throw exceptions on error
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+
+        // Prepare SQL query
+        $stmt = $pdo->prepare("UPDATE users SET username = :username, email = :email, password = :password WHERE id = :id");
+
+        // Bind parameters
+        $stmt->bindParam(':id', $updateId, PDO::PARAM_INT);
+        $stmt->bindParam(':username', $updateUsername, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $updateEmail, PDO::PARAM_STR);
+        $stmt->bindParam(':password', $updatePssword, PDO::PARAM_STR);        
+
+        // Execute the query
+        $stmt->execute();
+
+        // Check if any rows were affected
+        $rowCount = $stmt->rowCount();        
+        if ($rowCount > 0) {
+            echo "Update successful. $rowCount row(s) updated.";
         } else {
-            echo "Invalid data received!";
+            echo "No rows updated.";
         }
-    } else {
-        echo "Invalid request method or empty data!";
+    } catch (PDOException $e) {
+        // Handle errors
+        echo "Error: " . $e->getMessage();
     }
-} catch (PDOException $e) {
-    // Handle errors
-    echo "Error: " . $e->getMessage();
 }
 ?>
-
 
 ----------------------------------------------------------------------------
 

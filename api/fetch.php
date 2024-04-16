@@ -1,5 +1,6 @@
 <?php
 
+//Fetch API
 function fetchAll(){
     // Database connection parameters
     $host = 'localhost';

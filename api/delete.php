@@ -1,5 +1,6 @@
 <?php
-// Check if the request method is DELETE
+
+// Delete Api
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $deleteId = $_POST['id']?? '';   

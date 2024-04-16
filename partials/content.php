@@ -11,7 +11,7 @@ $fetchAll = fetchAll();
 </div>
 
 <div class="container">
-<div class="row col-lg-12"><strong>Update</strong>
+<div class="row col-lg-12"><strong>Update User</strong>
   <div class="col-lg-2">
     <input type="text" class=" form-control" id="username" placeholder="Name" required>
   </div>

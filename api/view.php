@@ -1,5 +1,6 @@
 <?php
 
+//View API
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $id = $_POST['id']?? '';
