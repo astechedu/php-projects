@@ -1,6 +1,6 @@
 <?php
 
-include "../database/connection.php";
+include_once "../database/connection.php";
 
 echo $searchUserName = $_GET["search"] ?? "";
 
@@ -43,7 +43,7 @@ $result = fetchUsers($conn, $searchUserName = null);
             <th>Name</th>
             <th>Email</th>
             <th>Created</th>
-            <th>Actions</th>
+            <!--<th>Actions</th>-->
          </tr>
       </thead>
       <tbody>
@@ -54,9 +54,9 @@ $result = fetchUsers($conn, $searchUserName = null);
             <td><?= $row['email']?></td>
             <td><?= $row['created_at']?></td>
             <td>
-               <button id="delete" class="delete btn btn-danger">Delete</button>
-               <button class="btn btn-success">Update</button>
-               <button class="btn btn-primary">View</button>
+               <button id="<?= $row['id']?>" class="delete btn btn-danger">Delete</button>
+               <button id="<?= $row['id']?>" class="update btn btn-success">Update</button>
+               <button id="<?= $row['id']?>" class="view btn btn-primary">View</button>              
             </td>
          </tr>
          <?php } ?>
@@ -64,3 +64,7 @@ $result = fetchUsers($conn, $searchUserName = null);
       </tbody>
    </table>
 </div>
+
+<script>
+//
+</script>

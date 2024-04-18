@@ -1,10 +1,45 @@
 
+
+Keys: 
+
+Load javascript file,
+
+When Button not trigged, Data response from server, Use this use case,
+
+
+Async & Await Details, 
+
+---------------------------------------------------------------------------
+
+
+
 ( Javascript ) : 
 
 response.json()
 response.text()
 
----------------------------------------------------------
+<script>
+
+   const d = document.getElementById('id')
+   const d = document.getElementsByTagName('div')
+   const d = document.getElementsByClassName('.active')
+
+   const d = document.querySelector('#active')
+   const d = document.querySelectorAll('.active')
+
+
+    //Event Listener
+    const deleteUser = document.querySelectorAll('.delete')
+
+    deleteUser.addEventListener('click', function(){
+        console.log("Delete")
+    })
+
+
+
+</script>
+
+-----------------------------------------------------------------------
 
 ( PHP ) : 
 
@@ -189,3 +224,259 @@ userlist.addEventListener('click', function(){
         //loadHTMLIntoElement('http://localhost/pages/users_listing.php', 'userlist');
 
 -------------------------------------------------------------------------------
+
+// Check if the button with id "myButton" exists
+
+const button = document.querySelector('#myButton');
+
+if (button) {
+    // Button exists
+    console.log('Button exists in the DOM.');
+    // You can perform further actions here, such as adding event listeners or manipulating the button.
+} else {
+    // Button does not exist
+    console.log('Button does not exist in the DOM.');
+}
+
+---------------------------------------------------------
+
+
+//create and load script in js
+
+
+
+    <h1>Dynamic Script Loading</h1>
+    <button id="loadScriptButton">Load Script</button>
+
+    <script>
+        function loadScript(url, callback) {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = url;
+
+            // Bind the event to the callback function
+            script.onload = callback;
+
+            // Append the script element to the document head
+            document.head.appendChild(script);
+        }
+
+        document.getElementById('loadScriptButton').addEventListener('click', function() {
+            loadScript('example.js', function() {
+                console.log('Script loaded successfully.');
+                // Code in the callback function runs after the script is loaded
+                // You can call functions or execute code from the loaded script here
+                exampleFunction();
+            });
+        });
+    </script>
+
+--------------------------------------------------------------------------------
+
+>>> Load javascript file 
+
+
+fetch('path/to/your/script.js')
+  .then(response => response.text())
+  .then(scriptText => {
+    const scriptElement = document.createElement('script');
+    scriptElement.textContent = scriptText;
+    document.body.appendChild(scriptElement);
+  })
+  .catch(error => console.error('Error loading script:', error));
+
+
+
+
+
+>>>> When Button not trigged, Data response from server, Use this use case
+
+
+const table = document.querySelector('table')
+
+  if(table !== 'null' && table !== 'undefinded'){
+    document.querySelector('table').addEventListener('click', function(event) {
+        // Check if the clicked element is a button
+        if (event.target && event.target.matches('.delete')) {
+          // Perform button click action
+          console.log('Button clicked!');
+        }
+   });
+
+    document.querySelector('table').addEventListener('click', function(event) {
+        // Check if the clicked element is a button
+        if (event.target && event.target.matches('.update')) {
+          // Perform button click action
+          console.log('Button updated clicked!');
+        }
+    });
+
+    document.querySelector('table').addEventListener('click', function(event) {
+        // Check if the clicked element is a button
+        if (event.target && event.target.matches('.view')) {
+          // Perform button click action
+          console.log('Button view clicked!');
+        }
+    });
+
+}
+
+------------------------------------------------------------------
+
+event delegation
+CSS properties like pointer-events set to none
+
+------------------------------------------------------------------
+
+
+>>>> Fetch data using fetch() from php file 
+
+    PHP File (getData.php):
+
+
+
+<?php
+// Assuming you have a database connection already established
+// Include your database connection file here
+
+// Get the search term from the GET request
+$searchTerm = $_GET['searchTerm'];
+
+// Prepare your SQL query with LIKE clause
+$query = "SELECT * FROM your_table WHERE your_column LIKE '%$searchTerm%'";
+
+// Execute the query
+$result = mysqli_query($connection, $query);
+
+// Convert the result into an associative array
+$data = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    $data[] = $row;
+}
+
+// Return the data as JSON
+echo json_encode($data);
+
+// Close the connection
+mysqli_close($connection);
+?>
+
+
+
+javascript
+
+const searchTerm = 'yourSearchTerm'; // This is the search term you want to use
+fetch('getData.php?searchTerm=' + searchTerm)
+    .then(response => response.json())
+    .then(data => {
+        // Handle the retrieved data here
+        console.log(data);
+    })
+    .catch(error => {
+        // Handle errors here
+        console.error('Error fetching data:', error);
+    });
+
+
+------------------------------------------------------------------
+
+
+Create Table in .js File: 
+
+   
+ // Data for the table (array of objects)
+        const data = [
+            { name: 'John Doe', age: 30, email: 'john@example.com' },
+            { name: 'Jane Smith', age: 25, email: 'jane@example.com' }
+            // Add more objects as needed
+        ];
+
+        // Create table dynamically
+        const tableContainer = document.getElementById('table-container');
+        const table = document.createElement('table');
+        table.className = 'table table-bordered';
+
+        // Create table header
+        const headerRow = document.createElement('tr');
+        for (const key in data[0]) {
+            const th = document.createElement('th');
+            th.textContent = key.charAt(0).toUpperCase() + key.slice(1); // Capitalize the first letter
+            headerRow.appendChild(th);
+        }
+        table.appendChild(headerRow);
+
+        // Create table rows and cells
+        data.forEach((item, index) => {
+            const row = document.createElement('tr');
+            for (const key in item) {
+                const td = document.createElement('td');
+                td.textContent = item[key];
+                // Set id attribute for td element
+                td.setAttribute('id', key + '-' + index); // Example of id: 'name-0', 'age-1', etc.
+                row.appendChild(td);
+            }
+            table.appendChild(row);
+        });
+
+        // Append table to table container
+        tableContainer.appendChild(table);
+         
+
+====================================================================
+
+da.forEach((d, i) => {
+
+         document.querySelector('#mtable').innerHTML = 
+
+                  '<tr>' +
+                      '<td>' + d[i].id + '</td>' + 
+                      '<td>' + d[i].email + '</td>' + 
+                      '<td>' + d[i].username + '</td>' + 
+                      '<td>' + d[i].created_at + '</td>' +
+                  '</tr>'        
+
+}
+
+
+--------------------------------------------------------------------
+
+
+Sure, here's a simple example demonstrating the use of async and await in JavaScript:
+
+javascript
+
+// Function to simulate fetching data from an API
+function fetchData() {
+  return new Promise(resolve => {
+    // Simulating delay with setTimeout
+    setTimeout(() => {
+      resolve('Data fetched successfully!');
+    }, 2000); // Resolving after 2 seconds
+  });
+}
+
+// Async function using await to fetch data
+async function fetchDataAsync() {
+  console.log('Fetching data...');
+  // Using await to wait for the promise to resolve
+  const data = await fetchData();
+  console.log('Data received:', data);
+}
+
+// Calling the async function
+fetchDataAsync();
+
+In this example:
+
+    fetchData() simulates fetching data from an API by returning a Promise that resolves after 2 seconds.
+
+    fetchDataAsync() is an async function that uses await to pause the execution until the Promise returned by fetchData() resolves. This function logs a message before and after fetching data.
+
+    When fetchDataAsync() is called, it logs "Fetching data...", then waits for 2 seconds for the data to be fetched, and finally logs "Data received: Data fetched successfully!" when the Promise resolves.
+
+    ---------------------------------------------------------------------------------------------------
+
+
+
+
+

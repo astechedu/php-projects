@@ -21,6 +21,13 @@
             <li class="nav-item">
                <a class="nav-link" href="#"><?php if(isset($_SESSION['user'])){ echo $_SESSION['user']; } ?></a>
             </li>
+
+            <?php if(isset($_SESSION['user_id'])){ ?> 
+            <li class="nav-item">
+               <a class="nav-link" href="http://localhost/pages/users_manages.php">User Manages</a>
+            </li>       
+            <?php } ?>
+
             <li class="nav-item">
                <a class="nav-link" href="http://localhost/auth/logout.php">
                <?php if(isset($_SESSION['user_id'])){ echo "Logout"; }else{ echo "Login";} ?>

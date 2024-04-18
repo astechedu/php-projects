@@ -11,7 +11,7 @@ if (!isset($_SESSION["user_id"])) {
 //echo $rootDir = $_SERVER['DOCUMENT_ROOT'];
 
 //include '../config/app.php';
-include "../database/connection.php";
+//include "../database/connection.php";
 ?>
 
 <?php include_once "../partials/header.php"; ?>
@@ -21,4 +21,7 @@ include "../database/connection.php";
 <?php include_once "dashboard_content.php"; ?>
 
 <?php include_once "../partials/footer.php"; ?>
+
+ 
+
 
