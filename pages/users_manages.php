@@ -1,6 +1,9 @@
 <?php
 include_once "../database/search.php";
 
+//echo "<pre>"; print_r($result);
+
+
 ?>
 <div class="container">
 <!-- Display search results here -->
@@ -48,5 +51,15 @@ include_once "../database/search.php";
   </div>
 </div>
 
+<div id='demo'>demo</div>
 
-   
+<script>
+      const data = '<?php echo json_decode($result); ?>'
+
+      var element = document.getElementById("demo");
+
+      // Change the content using innerText
+      element.innerText = "New text content";
+      console.log(element.style.color='red;')
+
+</script>

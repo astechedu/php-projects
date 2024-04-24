@@ -4,9 +4,8 @@ include "connection.php";
 // Retrieve the POST data
 //$data = json_decode(file_get_contents("php://input"));
 
-
 //Fetch all users
-function fetchUsers($conn, $username)
+function fetchUsers($conn, $username='')
 {
     $sql = "SELECT * FROM users where username LIKE '%$username%'";
 
@@ -26,6 +25,7 @@ $searchUserName=$_GET['id']?? '';
 
 //Saving all users and calling function
 $result = fetchUsers($conn, $searchUserName);
+
 echo json_encode($result);
 
 ?>
