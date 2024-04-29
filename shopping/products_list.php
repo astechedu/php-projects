@@ -32,7 +32,7 @@
                   </div>
                   <div class="mt-2">                     
                      <!-- Post cart data -->
-                     <form action="http://localhost/shopping/cart/cart_listing.php" method="POST">
+                     <form action="http://localhost/shopping/cart/add_to_cart.php?pid=<?= $product['product_id'] ?>" method="POST">
                      <input type="hidden" name="product_name" value="<?= $product['product_name'] ?> ">
                      <input type="hidden" name="price" value="<?= $product['price'] ?> ">
                      <input type="hidden" name="product_id" value="<?= $product['product_id'] ?> ">   

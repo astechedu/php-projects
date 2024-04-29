@@ -1,57 +1,10 @@
-<?php 
-
-   include_once '../../database/connection.php';
-   $products = $shoppingDB->readData();
+<?php
+include_once "../../database/connection.php";
+$products = $shoppingDB->readData();
 ?>
-<?php include_once '../../config/app.php'; ?>
-<?php include_once baseDir.'/partials/header.php' ?>
-<?php include_once baseDir.'/partials/nav.php';?>
-
-<?php 
-
-   $addToCart['cart'] = [];
-
-   if($_SERVER['REQUEST_METHOD'] === 'POST'){
-       //print_r($_SESSION);
-
-        //$id    = $_POST['product_id'];
-        //$name    = $_POST['product_name'];
-        //$price   = $_POST['price'];
-       // $addToCart['cart'] = $_POST;
-
-        if(empty($addToCart['cart'])){
-
-          $product_id                 = $_POST['product_id'];
-          $stock_quantity             = $_POST['stock_quantity'];
-          $product_name               = $_POST['product_name'];
-          $price                      = $_POST['price'];  
-
-          $addToCart['cart'] = [
-            'product_id' => $product_id,
-            'stock_quantity' => $stock_quantity,
-            'product_name' => $product_name,
-            'price' => $price
-          ];  //echo "<pre>";print_r($addToCart['cart']);
-        }else{
-          
-          $product_id                 = $_POST['product_id'];
-          $_POST['stock_quantity']   += $_POST['stock_quantity'];
-          $product_name               = $_POST['product_name'];
-          $price                      = $_POST['price'];  
-
-          $addToCart['cart'][] = [
-            'product_id'=>$product_id,
-            'stock_quantity'=>$_POST['stock_quantity'],
-            'product_name'=>$_POST['product_name'],
-            'price'=>$_POST['price'],
-          ];             
-            echo "<pre>";print_r( $addToCart);
-        }
-   }
- 
-   //echo "<pre>";print_r( $addToCart);
-
-?>  
+<?php include_once "../../config/app.php"; ?>
+<?php include_once baseDir . "/partials/header.php"; ?>
+<?php include_once baseDir . "/partials/nav.php"; ?> 
 
 <!-- cart + summary -->
 <section class="bg-light my-5">
@@ -63,8 +16,9 @@
                <div class="m-4">
                   <h4 class="card-title mb-4">Your shopping cart</h4>
                   <!-- One Cart Details -->
-                  <?php foreach($addToCart['cart'] as $cart) { ?>                    
+                  <?php foreach($_SESSION["cart"] as $cart) { ?>                    
                   <div class="row gy-3 mb-4">
+                     
                      <div class="col-lg-5">
                         <div class="me-lg-5">
                            <div class="d-flex">
@@ -98,75 +52,7 @@
                   </div>
                   <?php } ?>
                   <!-- One Cart Details -->
-                  <!--
-                     <div class="row gy-3 mb-4">
-                       <div class="col-lg-5">
-                         <div class="me-lg-5">
-                           <div class="d-flex">
-                             <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/12.webp" class="border rounded me-3" style="width: 96px; height: 96px;" />
-                             <div class="">
-                               <a href="#" class="nav-link">Mens T-shirt Cotton Base</a>
-                               <p class="text-muted">Blue, Medium</p>
-                             </div>
-                           </div>
-                         </div>
-                       </div>
-                       <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
-                         <div class="">
-                           <select style="width: 100px;" class="form-select me-4">
-                             <option>1</option>
-                             <option>2</option>
-                             <option>3</option>
-                             <option>4</option>
-                           </select>
-                         </div>
-                         <div class="">
-                           <text class="h6">$44.80</text> <br />
-                           <small class="text-muted text-nowrap"> $12.20 / per item </small>
-                         </div>
-                       </div>
-                       <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
-                         <div class="float-md-end">
-                           <a href="#!" class="btn btn-light border px-2 icon-hover-primary"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                           <a href="#" class="btn btn-light border text-danger icon-hover-danger"> Remove</a>
-                         </div>
-                       </div>
-                     </div>
-                     
-                     <div class="row gy-3">
-                       <div class="col-lg-5">
-                         <div class="me-lg-5">
-                           <div class="d-flex">
-                             <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/13.webp" class="border rounded me-3" style="width: 96px; height: 96px;" />
-                             <div class="">
-                               <a href="#" class="nav-link">Blazer Suit Dress Jacket for Men</a>
-                               <p class="text-muted">XL size, Jeans, Blue</p>
-                             </div>
-                           </div>
-                         </div>
-                       </div>
-                       <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
-                         <div class="">
-                           <select style="width: 100px;" class="form-select me-4">
-                             <option>1</option>
-                             <option>2</option>
-                             <option>3</option>
-                             <option>4</option>
-                           </select>
-                         </div>
-                         <div class="">
-                           <text class="h6">$1156.00</text> <br />
-                           <small class="text-muted text-nowrap"> $460.00 / per item </small>
-                         </div>
-                       </div>
-                       <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
-                         <div class="float-md-end">
-                           <a href="#!" class="btn btn-light border px-2 icon-hover-primary"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                           <a href="#" class="btn btn-light border text-danger icon-hover-danger"> Remove</a>
-                         </div>
-                       </div>
-                     </div>
-                     --> 
+
                </div>
                <div class="border-top pt-4 mx-4 mb-4">
                   <p><i class="fas fa-truck text-muted fa-lg"></i> Free Delivery within 1-2 weeks</p>
@@ -314,7 +200,9 @@
    </div>
 </section>
 <!-- Recommended -->
-<?php include_once baseDir.'/partials/footer.php' ?>
+<?php include_once '../functions.php'; 
+      template_footer();      
+?>
 <style>
    .icon-hover-primary:hover {
    border-color: #3b71ca !important;

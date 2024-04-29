@@ -7,6 +7,13 @@ Shopping Project:
 
 Keys: 
 
+     File Structure, 
+
+     Footer Template Function,
+     Header Template Function,
+     functions.php file,
+
+     Shopping Cart Using Session,
 
 ------------------------------------------------------------------------------------
 
@@ -200,8 +207,108 @@ In this example:
 
 In this example, I've inserted 10 products into the "Products" table. Each INSERT statement inserts one product with its respective details such as product ID, name, category ID, price, description, stock quantity, manufacturer, and release date.
 
----------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
+
+File Structure:
+
+//1. https://codeshack.io/shopping-cart-system-php-mysql/
+//2. https://beproblemsolver.com/simple-php-shopping-cart-with-session/
+
+
+\-- shoppingcart
+  |-- functions.php
+  |-- index.php
+  |-- home.php
+  |-- products.php
+  |-- product.php
+  |-- cart.php
+  |-- placeorder.php
+  |-- style.css
+  \-- imgs
+    |-- featured-image.jpg
+    |-- camera.jpg
+    |-- headphones.jpg
+    |-- wallet.jpg
+    |-- watch.jpg
+
+
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) NOT NULL,
+  `description` text NOT NULL,
+  `price` decimal(7,2) NOT NULL,
+  `rrp` decimal(7,2) NOT NULL DEFAULT '0.00',
+  `quantity` int(11) NOT NULL,
+  `img` text NOT NULL,
+  `date_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+INSERT INTO `products` (`id`, `title`, `description`, `price`, `rrp`, `quantity`, `img`, `date_added`) VALUES
+(1, 'Smart Watch', '<p>Unique watch made with stainless steel, ideal for those that prefer interative watches.</p>\r\n<h3>Features</h3>\r\n<ul>\r\n<li>Powered by Android with built-in apps.</li>\r\n<li>Adjustable to fit most.</li>\r\n<li>Long battery life, continuous wear for up to 2 days.</li>\r\n<li>Lightweight design, comfort on your wrist.</li>\r\n</ul>', '29.99', '0.00', 10, 'watch.jpg', '2019-03-13 17:55:22'),
+(2, 'Wallet', '', '14.99', '19.99', 34, 'wallet.jpg', '2019-03-13 18:52:49'),
+(3, 'Headphones', '', '19.99', '0.00', 23, 'headphones.jpg', '2019-03-13 18:47:56'),
+(4, 'Digital Camera', '', '69.99', '0.00', 7, 'camera.jpg', '2019-03-13 17:42:04');
+
+
+-----------------------------------------------------------------
+
+Header Template Function:
+
+functions.php file:
+
+// Template header, feel free to customize this
+function template_header($title) {
+echo <<<EOT
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>$title</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+  </head>
+  <body>
+        <header>
+            <div class="content-wrapper">
+                <h1>Shopping Cart System</h1>
+                <nav>
+                    <a href="index.php">Home</a>
+                    <a href="index.php?page=products">Products</a>
+                </nav>
+                <div class="link-icons">
+                    <a href="index.php?page=cart">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+                </div>
+            </div>
+        </header>
+        <main>
+EOT;
+}
+
+-------
+Footer Template Function: 
+
+
+// Template footer
+function template_footer() {
+$year = date('Y');
+echo <<<EOT
+        </main>
+        <footer>
+            <div class="content-wrapper">
+                <p>&copy; $year, Shopping Cart System</p>
+            </div>
+        </footer>
+    </body>
+</html>
+EOT;
+}
+
+--------------------------------------------------------------------
 
 Categories: 
 
@@ -217,3 +324,112 @@ Categories:
     Appliances
 
 Our Products
+
+
+-----------------------------------------------------------------
+
+
+Shopping Cart Using Session: 
+
+Displaying our Products: 
+
+
+Creating our Add-to-Cart Script:
+
+ add_cart.php:
+
+
+    <?php
+      session_start();
+     
+      //check if product is already in the cart
+      if(!in_array($_GET['id'], $_SESSION['cart'])){
+        array_push($_SESSION['cart'], $_GET['id']);
+        $_SESSION['message'] = 'Product added to cart';
+      }
+      else{
+        $_SESSION['message'] = 'Product already in cart';
+      }
+     
+      header('location: index.php');
+    ?>
+
+
+
+Creating our View-Cart Page:
+
+ view_cart.php:
+
+
+
+Creating our Delete Item Script:
+
+delete_item.php:
+
+
+    <?php
+      session_start();
+     
+      //remove the id from our cart array
+      $key = array_search($_GET['id'], $_SESSION['cart']);  
+      unset($_SESSION['cart'][$key]);
+     
+      unset($_SESSION['qty_array'][$_GET['index']]);
+      //rearrange array after unset
+      $_SESSION['qty_array'] = array_values($_SESSION['qty_array']);
+     
+      $_SESSION['message'] = "Product deleted from cart";
+      header('location: view_cart.php');
+    ?>
+
+
+
+Creating our Update Quantity Script:
+
+save_cart.php:
+
+
+    <?php
+      session_start();
+      if(isset($_POST['save'])){
+        foreach($_POST['indexes'] as $key){
+          $_SESSION['qty_array'][$key] = $_POST['qty_'.$key];
+        }
+     
+        $_SESSION['message'] = 'Cart updated successfully';
+        header('location: view_cart.php');
+      }
+    ?>
+
+
+
+Creating our remove-the-entire-cart Script:
+
+clear_cart.php:
+
+    <?php
+      session_start();
+      unset($_SESSION['cart']);
+      $_SESSION['message'] = 'Cart cleared successfully';
+      header('location: index.php');
+    ?>
+
+
+checkout.php:
+
+    <?php
+      session_start();
+      //user needs to login to checkout
+      $_SESSION['message'] = 'You need to login to checkout';
+      header('location: view_cart.php');
+    ?>
+
+-------------------------------------------------------------------
+
+
+
+
+
+
+
+
