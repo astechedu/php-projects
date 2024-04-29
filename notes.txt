@@ -1,0 +1,219 @@
+Shopping: 
+https://www.fundaofwebit.com/ecommerce-template/products-template-design-using-html-css-bootstrap5
+
+Shopping Project: 
+    php,mysql and js
+
+
+Keys: 
+
+
+------------------------------------------------------------------------------------
+
+MYSQL: 
+
+
+
+1. Categories Table:
+
+    This table stores information about the categories.
+
+sql
+
+CREATE TABLE Categories (
+    category_id INT PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL,
+    parent_category_id INT,
+    FOREIGN KEY (parent_category_id) REFERENCES Categories(category_id)
+);
+
+
+
+
+In this table, category_id is the unique identifier for each category, category_name stores the name of the category, and parent_category_id establishes a hierarchical relationship between categories. If a category has no parent (i.e., it's a top-level category), parent_category_id would be NULL.
+
+
+
+1. Categories table: 
+
+-- Insert top-level categories
+
+INSERT INTO Categories (category_id, category_name, parent_category_id)
+VALUES (1, 'Electronics', NULL);
+
+INSERT INTO Categories (category_id, category_name, parent_category_id)
+VALUES (2, 'Clothing', NULL);
+
+-- Insert subcategories
+INSERT INTO Categories (category_id, category_name, parent_category_id)
+VALUES (3, 'Smartphones', 1);
+
+INSERT INTO Categories (category_id, category_name, parent_category_id)
+VALUES (4, 'Laptops', 1);
+
+INSERT INTO Categories (category_id, category_name, parent_category_id)
+VALUES (5, 'T-Shirts', 2);
+
+INSERT INTO Categories (category_id, category_name, parent_category_id)
+VALUES (6, 'Jeans', 2);
+
+
+
+In this example:
+
+    We first insert top-level categories: "Electronics" and "Clothing". These categories have NULL as their parent_category_id, indicating that they are at the top level of the hierarchy.
+
+    Then, we insert subcategories such as "Smartphones" and "Laptops" under the "Electronics" category, and "T-Shirts" and "Jeans" under the "Clothing" category. We specify the parent_category_id to establish the hierarchical relationship between these subcategories and their parent categories.
+
+You can continue adding more categories and subcategories as needed, following the same pattern.
+
+
+
+
+2. Products Table:
+
+    This table stores information about the products, including the category they belong to.
+
+sql
+
+    CREATE TABLE Products (
+        product_id INT PRIMARY KEY,
+        product_name VARCHAR(100) NOT NULL,
+        category_id INT,
+        FOREIGN KEY (category_id) REFERENCES Categories(category_id)
+    );
+
+
+    In this table, product_id is the unique identifier for each product, product_name stores the name of the product, and category_id links each product to its corresponding category.
+
+With this schema, you can easily organize products into categories and subcategories, and retrieve information about products based on their categories using SQL queries.
+
+
+
+
+Certainly! Here's an example of how you can use SQL INSERT statements to populate the Products table with some sample product data:
+
+
+
+-- Insert products with their corresponding categories
+
+INSERT INTO Products (product_id, product_name, category_id)
+VALUES (1, 'iPhone 12', 3); -- Product "iPhone 12" belongs to the "Smartphones" category
+
+INSERT INTO Products (product_id, product_name, category_id)
+VALUES (2, 'Samsung Galaxy S21', 3); -- Product "Samsung Galaxy S21" also belongs to the "Smartphones" category
+
+INSERT INTO Products (product_id, product_name, category_id)
+VALUES (3, 'Dell XPS 13', 4); -- Product "Dell XPS 13" belongs to the "Laptops" category
+
+INSERT INTO Products (product_id, product_name, category_id)
+VALUES (4, 'HP Spectre x360', 4); -- Product "HP Spectre x360" also belongs to the "Laptops" category
+
+INSERT INTO Products (product_id, product_name, category_id)
+VALUES (5, 'Plain White T-Shirt', 5); -- Product "Plain White T-Shirt" belongs to the "T-Shirts" category
+
+INSERT INTO Products (product_id, product_name, category_id)
+VALUES (6, 'Blue Denim Jeans', 6); -- Product "Blue Denim Jeans" belongs to the "Jeans" category
+
+
+
+In this example:
+
+    We're inserting products into the Products table. Each product has a product_id, product_name, and category_id.
+    The category_id corresponds to the category_id in the Categories table, linking each product to its respective category.
+    For instance, the products "iPhone 12" and "Samsung Galaxy S21" both belong to the "Smartphones" category, so their category_id is set to 3, which corresponds to the "Smartphones" category.
+
+You can continue adding more products to the table using similar INSERT statements, ensuring that each product is linked to the appropriate category using the category_id.
+
+
+
+
+
+
+
+3. Products Table: 
+
+To expand the schema for the "Products" table to include more fields, you can include additional columns to store various attributes of the products. Here's an example of an extended schema for the "Products" table:
+
+sql
+
+
+CREATE TABLE Products (
+   product_id INT PRIMARY KEY,
+   product_name VARCHAR(100) NOT NULL,
+   category_id INT,
+   price DECIMAL(10, 2), -- Price of the product
+   description TEXT, -- Description of the product
+   stock_quantity INT, -- Quantity of the product in stock
+   manufacturer VARCHAR(100), -- Manufacturer of the product
+   release_date DATE, -- Release date of the product
+   FOREIGN KEY (category_id) REFERENCES Categories(category_id)
+);
+
+
+
+
+In this extended schema:
+
+    price: This column stores the price of the product. It's defined as DECIMAL(10, 2) to store decimal numbers with up to 10 digits, with 2 digits after the decimal point.
+
+    description: This column stores a text description of the product. It's defined as TEXT to accommodate larger text data.
+
+    stock_quantity: This column stores the quantity of the product currently in stock.
+
+    manufacturer: This column stores the name of the manufacturer of the product.
+
+    release_date: This column stores the release date of the product.
+
+You can customize this schema further based on your specific requirements and the additional fields you need to store information about your products. Then, when inserting data into the "Products" table, you would include values for these additional fields along with the product name, category ID, and other required fields.
+
+
+
+
+
+Insert: 
+
+Sure! Here's an example of how you can insert product data into the "Products" table with the specified fields:
+
+Certainly! Here's an example of how you can insert product data into the "Products" table with the specified fields for up to 10 products:
+
+-- Insert products with additional fields
+
+INSERT INTO Products (product_id, product_name, category_id, price, description, stock_quantity, manufacturer, release_date)
+VALUES 
+(1, 'iPhone 12', 3, 999.99, 'The latest iPhone model with 5G capability.', 100, 'Apple', '2020-10-23'),
+(2, 'Samsung Galaxy S21', 3, 899.99, 'A flagship Android smartphone from Samsung.', 150, 'Samsung', '2021-01-29'),
+(3, 'Dell XPS 13', 4, 1299.99, 'Powerful laptop with a sleek design and high-resolution display.', 50, 'Dell', '2020-09-30'),
+(4, 'HP Spectre x360', 4, 1399.99, 'Convertible laptop with premium build quality and long battery life.', 30, 'HP', '2020-11-12'),
+(5, 'Plain White T-Shirt', 5, 9.99, 'Basic white cotton t-shirt for everyday wear.', 200, 'Generic Brand', NULL),
+(6, 'Blue Denim Jeans', 6, 39.99, 'Classic blue denim jeans for casual occasions.', 100, 'Fashion Co.', NULL),
+(7, 'Sony PlayStation 5', 3, 499.99, 'Next-generation gaming console with high-performance hardware.', 80, 'Sony', '2020-11-12'),
+(8, 'Nintendo Switch', 3, 299.99, 'Portable gaming console with versatile gameplay options.', 120, 'Nintendo', NULL),
+(9, 'Amazon Echo Dot', 1, 49.99, 'Smart speaker with Alexa voice assistant for hands-free control.', 150, 'Amazon', '2020-10-22'),
+(10, 'Fitbit Charge 4', 1, 149.99, 'Fitness tracker with built-in GPS and heart rate monitoring.', 100, 'Fitbit', '2020-04-15');
+
+
+
+
+
+In this example:
+
+In this example, I've inserted 10 products into the "Products" table. Each INSERT statement inserts one product with its respective details such as product ID, name, category ID, price, description, stock quantity, manufacturer, and release date.
+
+---------------------------------------------------------------------------------------
+
+
+Categories: 
+
+
+    Home
+    All Categories
+    New Arrivals
+    Featured Products
+    Electronics
+    Fashions
+    Accessories
+    Home
+    Appliances
+
+Our Products
