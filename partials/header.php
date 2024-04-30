@@ -77,7 +77,7 @@
                   <ul class="nav justify-content-end">
                      <li class="nav-item">
                         <a class="nav-link" href="http://localhost/shopping/cart/cart_listing">
-                        <i class="fa fa-shopping-cart"></i> Cart (0)
+                        <i class="fa fa-shopping-cart"></i> Cart (<?php if(isset($_SESSION['id']) === true){ echo count($_SESSION["cart"])?? '0'; }else{ echo '0'; } ?>)
                         </a>
                      </li>
                      <li class="nav-item">

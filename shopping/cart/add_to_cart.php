@@ -1,42 +1,39 @@
-<?php 
+<?php
 session_start();
-//session_destroy();
-//exit;
-//if (isset($_GET['pid']) && $_SERVER["REQUEST_METHOD"] === "POST") {
-    //print_r($_SESSION);
-    $pid = $_GET['pid'];
-    $quantity = 0;
+
+$pid = $_GET["pid"];
+
+//echo "<pre>";print_r($_SESSION);
+if (!isset($_SESSION["cart"][$pid])):
     //echo "<pre>";print_r($_SESSION);
-        if (!isset($_SESSION["cart"][$pid])):      
-          //echo "<pre>";print_r( array_keys($_SESSION["cart"]));
-          //echo "<pre>";print_r($_SESSION);              
-            $_SESSION["cart"][$pid] = array();
-               
-                $product_id     = $_POST["product_id"];
-                $stock_quantity = $_POST["stock_quantity"];
-                $product_name   = $_POST["product_name"];
-                $price          = $_POST["price"];
+    $quantity = 0;
+    //$cartTotal = 0;
+    $_SESSION["cartTotal"] = $cartTotal;
 
+    $_SESSION["cart"][$pid] = [];
 
-            $_SESSION["cart"][$pid] = array(
-                "product_id"     => $product_id,
-                "stock_quantity" => $stock_quantity,
-                "product_name"   => $product_name,
-                "price"          => $price,
-                "quantity"       => $quantity
-            );                  
-            //echo "<pre>";print_r($_SESSION);           
-            
-        endif;
+    $product_id = $_POST["product_id"];
+    $stock_quantity = $_POST["stock_quantity"];
+    $product_name = $_POST["product_name"];
+    $price = $_POST["price"];
 
-        if (isset($_SESSION["cart"][$pid])):   
+    $_SESSION["cart"][$pid] = [
+        "product_id" => $product_id,
+        "stock_quantity" => $stock_quantity,
+        "product_name" => $product_name,
+        "price" => $price,
+        "quantity" => $quantity,
+    ];
+    //echo "<pre>";print_r($_SESSION);
+endif;
 
-                $_SESSION["cart"][$pid]["quantity"] +=1;
-                //endif;
-                //header("location: ./"); 
-             echo "<pre>";print_r($_SESSION);        
-            //endif;
-        endif;
+if (isset($_SESSION["cart"][$pid])):
 
+    //$_SESSION["cartTotal"] += 1;
 
+    $_SESSION["cart"][$pid]["quantity"] += 1;   
+    header("location: /"); 
+    exit;
+ 
+endif;
 ?> 
