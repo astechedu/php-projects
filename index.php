@@ -8,4 +8,3 @@
 <?php include_once baseDir.'/shopping/content.php';?>
 <?php include_once baseDir.'/partials/footer.php' ?>
 
-

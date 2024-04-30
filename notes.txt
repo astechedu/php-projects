@@ -6,6 +6,7 @@ Shopping Project:
 
 
 Keys: 
+     .htaccess,
 
      File Structure, 
 
@@ -424,12 +425,157 @@ checkout.php:
       header('location: view_cart.php');
     ?>
 
+
+------------------------------------------------------------------------
+
+2. Add To Cart:
+
+//https://www.sourcecodester.com/php/15712/advance-shopping-cart-using-php-free-source-code.html
+
+    <?php
+    if (isset($_POST['add'])){
+        /// print_r($_POST['product_id']);
+        if(isset($_SESSION['cart'])){
+     
+            if(in_array($_POST['product_id'], array_keys($_SESSION['cart']))){
+                $_SESSION['cart'][$_POST['product_id']] += 1;
+                header("location: ./");
+            }else{
+                // Create new session variable
+                $_SESSION['cart'][$_POST['product_id']] = 1;
+                // print_r($_SESSION['cart']);
+                header("location: ./");
+            }
+     
+        }else{
+            // Create new session variable
+            $_SESSION['cart'][$_POST['product_id']] = 1;
+            // print_r($_SESSION['cart']);
+            header("location: ./");
+        }
+    }
+    ?>
+
+-------------------------------------------------------------------
+
+Shopping Cart Example 03: 
+
+//https://www.codexworld.com/simple-php-shopping-cart-using-sessions/
+
+Before getting started take a look at the file structure of the PHP shopping cart script.
+
+
+php_shopping_cart/
+├── index.php
+├── viewCart.php
+├── checkout.php
+├── orderSuccess.php
+├── config.php
+├── dbConnect.php
+├── cartAction.php
+├── Cart.class.php
+├── js/
+|   └── jquery.min.js
+├── css/
+|   ├── bootstrap.min.css
+|   └── style.css
+└── images/
+
+
+
+Create Database Tables
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `price` float(10,2) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1=Active | 0=Inactive',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `address` text COLLATE utf8_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1=Active | 0=Inactive',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `grand_total` float(10,2) NOT NULL,
+  `created` datetime NOT NULL,
+  `status` enum('Pending','Completed','Cancelled') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Pending',
+  PRIMARY KEY (`id`),
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(5) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`),
+  CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+Cart Library (Cart.class.php)
+
+The Cart library is a custom PHP that handles shopping cart-related operations. The methods of the Cart class help you to integrate shopping cart functionality in PHP.
+
+    contents() – Returns the entire cart content as an array.
+    get_item() – Returns a specific cart item details.
+    total_items() – Returns the total item count in cart.
+    total() – Returns the total price of the cart.
+    insert() – Insert items into the cart and save them in the SESSION.
+    update() – Update items in the cart.
+    remove() – Removes an item from the cart.
+    destroy() – Empty the cart and destroy the SESSION.
+
+
 -------------------------------------------------------------------
 
 
+Remove .php extension from index.php file
+
+.htaccess
 
 
+htaccess(folder)
+  .htaccess  (file)
+  about.php  (file)
+  index.php  (file)
 
 
+.htaccess File
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^([^\.]+)/?$ $1.php [NC,L]
+</IfModule>
+
+--------------------------------------------------------------------
 
 

@@ -1,8 +1,7 @@
 <?php
    session_start();
 
-   //echo "<pre>";print_r($_SESSION);
-   
+   //echo "<pre>";print_r($_SESSION);   
    
    include_once $_SERVER['DOCUMENT_ROOT'].'/database/connection.php';
    $shopping = new ShoppingDB();
@@ -77,12 +76,12 @@
                <div class="col-md-5 my-auto">
                   <ul class="nav justify-content-end">
                      <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/shopping/cart/cart_listing.php">
+                        <a class="nav-link" href="http://localhost/shopping/cart/cart_listing">
                         <i class="fa fa-shopping-cart"></i> Cart (0)
                         </a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/user/user_wishlist.php">
+                        <a class="nav-link" href="http://localhost/user/user_wishlist">
                         <i class="fa fa-heart"></i> Wishlist (0)
                         </a>
                      </li>
@@ -92,10 +91,10 @@
                         <i class="fa fa-user"></i><?= $_SESSION['username'] ?>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <li><a class="dropdown-item" href="http://localhost/user/user_profile.php"><i class="fa fa-user"></i> Profile</a></li>
-                           <li><a class="dropdown-item" href="http://localhost/user/user_order.php"><i class="fa fa-list"></i> My Orders</a></li>
-                           <li><a class="dropdown-item" href="http://localhost/user/user_wishlist.php"><i class="fa fa-heart"></i> My Wishlist</a></li>
-                           <li><a class="dropdown-item" href="http://localhost/shopping/cart/cart_listing.php"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
+                           <li><a class="dropdown-item" href="http://localhost/user/user_profile"><i class="fa fa-user"></i> Profile</a></li>
+                           <li><a class="dropdown-item" href="http://localhost/user/user_order"><i class="fa fa-list"></i> My Orders</a></li>
+                           <li><a class="dropdown-item" href="http://localhost/user/user_wishlist"><i class="fa fa-heart"></i> My Wishlist</a></li>
+                           <li><a class="dropdown-item" href="http://localhost/shopping/cart/cart_listing"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
                            <li><a class="dropdown-item" href="http://localhost/user/logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                      </li>

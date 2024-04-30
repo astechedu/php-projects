@@ -1,6 +1,8 @@
 <?php
+
 include_once "../../database/connection.php";
 $products = $shoppingDB->readData();
+
 ?>
 <?php include_once "../../config/app.php"; ?>
 <?php include_once baseDir . "/partials/header.php"; ?>
@@ -16,9 +18,12 @@ $products = $shoppingDB->readData();
                <div class="m-4">
                   <h4 class="card-title mb-4">Your shopping cart</h4>
                   <!-- One Cart Details -->
-                  <?php foreach($_SESSION["cart"] as $cart) { ?>                    
-                  <div class="row gy-3 mb-4">
-                     
+                  <?php foreach($_SESSION["cart"] as $cart) { ?>    
+<?php 
+  //echo "<pre>"; print_r($cart);
+?>
+                        
+                  <div class="row gy-3 mb-4">                     
                      <div class="col-lg-5">
                         <div class="me-lg-5">
                            <div class="d-flex">
@@ -32,10 +37,12 @@ $products = $shoppingDB->readData();
                      </div>
                      <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
                         <div class="">
+                           <!--
                            <select style="width: 100px;" class="form-select me-4">
-                              <option><?= $cart['stock_quantity'] ?></option>                       
-
+                              <option></option>   
                            </select>
+                           -->
+                           <input type="text" name="" value="<?= $cart['quantity'] ?>" style="width: 100px;" class="form-select me-4">
                         </div>
                         <div class="">
                            <text class="h6"><?= $cart['price'] ?></text>
