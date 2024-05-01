@@ -18,9 +18,9 @@ if(!isset($_SESSION['wishlist'][$wpid])):
 endif;
 
 if(isset($_SESSION['wishlist'][$wpid])):   
-   if((int)$wpid === (int)$_SESSION['wishlist'][$wpid]):
+   if((int)$wpid === (int)$_SESSION['wishlist'][$wpid]['wpid']):
       $_SESSION['wishlist'][$wpid]['wqty'] +=1;
-      header('location: /');
+        header('location: http://localhost');
       exit;
    endif;
 endif;

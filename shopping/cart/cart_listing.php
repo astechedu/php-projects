@@ -1,5 +1,5 @@
 <?php
-
+//session_start();
 include_once "../../database/connection.php";
 $products = $shoppingDB->readData();
 
@@ -38,10 +38,10 @@ $products = $shoppingDB->readData();
                               <option></option>   
                            </select>
                            -->
-                           <input type="text" name="" value="<?= $cart['quantity'] ?>" style="width: 100px;" class="form-select me-4">
+                           <input type="text" name="" value="<?= $cart['quantity'] ?>" style="width: 100px;" class="form-select me-4 qty">
                         </div>
                         <div class="">
-                           <text class="h6"><?= $cart['price'] ?></text>
+                           <text class="h6 price"><?= $cart['price'] ?></text>
                            <br />
                            <small class="text-muted text-nowrap"> <?= $cart['price']*0.40 ?> / per item </small>
                         </div>
@@ -82,24 +82,42 @@ $products = $shoppingDB->readData();
                   </form>
                </div>
             </div>
+   <?php
+      $total=0;
+      $discount=0;
+      $tax=0;
+      $gtotal=0;
+
+   foreach($_SESSION['cart']?? [] as $checkCart):
+               //echo "<pre>";print_r($_SESSION);            
+            $total += (float)$checkCart['price'] * (float)$checkCart['quantity'];    
+   endforeach;
+
+   if($total > 0):
+      $discount = 10;
+      $tax = 14;
+      $gtotal = ($total + $tax) - $discount; 
+
+   endif;    
+   ?>
             <div class="card shadow-0 border">
                <div class="card-body">
                   <div class="d-flex justify-content-between">
                      <p class="mb-2">Total price:</p>
-                     <p class="mb-2">$329.00</p>
+                     <p class="mb-2">$<span id="total"><?= $total ?></span></p>
                   </div>
                   <div class="d-flex justify-content-between">
                      <p class="mb-2">Discount:</p>
-                     <p class="mb-2 text-success">-$60.00</p>
+                     <p class="mb-2 text-success">-$<span id="discount"><?= $discount ?></span></p>
                   </div>
                   <div class="d-flex justify-content-between">
                      <p class="mb-2">TAX:</p>
-                     <p class="mb-2">$14.00</p>
+                     <p class="mb-2">$<span id="tax"><?= $tax ?></span></p>
                   </div>
                   <hr />
                   <div class="d-flex justify-content-between">
                      <p class="mb-2">Total price:</p>
-                     <p class="mb-2 fw-bold">$283.00</p>
+                     <p class="mb-2 fw-bold">$<span id="gtotal"><?= $gtotal ?></span></p>
                   </div>
                   <div class="mt-3">
                      <a href="#" class="btn btn-success w-100 shadow-0 mb-2"> Make Purchase </a>
@@ -206,6 +224,34 @@ $products = $shoppingDB->readData();
 <?php include_once '../functions.php'; 
       template_footer();      
 ?>
+
+<script>
+const qty = document.querySelectorAll('.qty')
+const price = document.querySelectorAll('.price')
+const total = document.querySelector('#total')
+const gtotal = document.querySelector('#gtotal')
+const tax = document.querySelector('#tax')
+const discount = document.querySelector('#discount')
+
+const quantities = []
+const prices = []
+const to = []
+let sum = 0
+
+//Finding Quantities
+qty.forEach((ele, i) => {
+   quantities.push(parseInt(ele.value))
+   ele.addEventListener('keyup', (e) => {
+      price.forEach((elep, i) => {
+         elep.textContent = Number(e.target.value) * parseFloat(elep.textContent)
+         sum += parseFloat(elep.textContent)
+         total.textContent = sum.toFixed(2)
+         gtotal.textContent = (parseFloat(total.textContent) + parseFloat(tax.textContent) - parseFloat(discount.textContent)).toFixed(2)
+      })
+   })
+})          
+</script>
+
 <style>
    .icon-hover-primary:hover {
    border-color: #3b71ca !important;

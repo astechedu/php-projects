@@ -16,6 +16,20 @@ Keys:
 
      Shopping Cart Using Session,
 
+
+
+
+
+
+Vanilla Javascript: 
+
+     Keys: reducer
+
+
+
+
+
+
 ------------------------------------------------------------------------------------
 
 MYSQL: 
@@ -576,6 +590,28 @@ htaccess(folder)
     RewriteRule ^([^\.]+)/?$ $1.php [NC,L]
 </IfModule>
 
+
 --------------------------------------------------------------------
 
 
+  -----> Java Script Starts <-----
+
+
+--------------------------------------------------------------------
+
+
+JavaScript: 
+
+Reducer: reducer
+
+
+let numbers = [1, 2, 3, 4, 5];
+
+let sum = numbers.reduce(function(accumulator, currentValue) {
+    return accumulator + currentValue;
+}, 0);
+
+console.log(sum); // Output: 15 (1 + 2 + 3 + 4 + 5)
+
+
+--------------------------------------------------------------------

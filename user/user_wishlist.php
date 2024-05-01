@@ -48,7 +48,7 @@
                      </div>
                      <div class="col-md-2 col-5 my-auto">
                         <div class="remove">
-                           <a href="" class="btn btn-danger btn-sm">
+                           <a href="http://localhost/user/remove_wishlist?wid=<?= $wishlist['wpid'] ?>" class="btn btn-danger btn-sm">
                            <i class="fa fa-trash"></i> Remove
                            </a>
                         </div>

@@ -2,6 +2,7 @@
   session_start();
   //session_destroy();
   $cartTotal = $_SESSION['cart'] ?? [];
+  $wishlistTotal = $_SESSION['wishlist'] ?? [];
    //echo "<pre>";print_r($_SESSION);   
 
    include_once $_SERVER['DOCUMENT_ROOT'].'/database/connection.php';
@@ -83,8 +84,8 @@
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="http://localhost/user/user_wishlist">
-                        <i class="fa fa-heart"></i> Wishlist (0)
-                        </a>
+                        <i class="fa fa-heart"></i> Wishlist (<?php echo count($wishlistTotal) ?>)
+                        </a> 
                      </li>
                      <?php if(isset($_SESSION['id']) === true){ ?>
                      <li class="nav-item dropdown">
