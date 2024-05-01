@@ -37,12 +37,12 @@
                      <input type="hidden" name="price" value="<?= $product['price'] ?> ">
                      <input type="hidden" name="product_id" value="<?= $product['product_id'] ?> ">   
                      <input type="hidden" name="stock_quantity" value="<?= $product['stock_quantity'] ?> ">                                     
-                     <input type="submit" value="AddToCart" class="btn btn1 addtocart">      
+                     <input type="submit" value="AddToCart" class="btn btn1 addtocart">
                      </form>   
-                      <!--<a href="#" class="btn btn1 addtocart" >Add To Cart</a> -->                           
-                     <a href="<?php baseUrl;?>/user/user_wishlist.php" class="btn btn1"> <i class="fa fa-heart"></i> </a>
-                     <a href="<?php baseUrl;?>/shopping/product_view.php" class="btn btn1"> View </a>
-
+                      <!--<a href="#" class="btn btn1 addtocart" >Add To Cart</a> -->                          
+                     <a href="<?php baseUrl;?>/user/add_to_wishlist?wpid=<?= $product['product_id'] ?>&wname=<?= $product['product_name'] ?>&wqty=1&wprice=<?= $product['price'] ?>" class="btn btn1"> <i class="fa fa-heart"></i> </a>
+                     
+                     <a href="<?php baseUrl;?>/shopping/product_view" class="btn btn1"> View </a>
                   </div>
                </div>
             </div> 
@@ -52,8 +52,8 @@
       </div>
    </div>
 </div>
-
-    <h1>Loading Page with Request</h1>
+      <h1>Loading Page with Request</h1>
+    
     <div id="result"></div>
 
     <script>

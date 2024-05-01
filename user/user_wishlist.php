@@ -1,6 +1,7 @@
 <?php include_once '../config/app.php'; ?>
 <?php include_once baseDir.'/partials/header.php' ?>
 <?php include_once baseDir.'/partials/nav.php';?>
+
 <div class="py-3 py-md-5 bg-light">
    <div class="container">
       <div class="row">
@@ -22,25 +23,25 @@
                      </div>
                   </div>
                </div>
-               <?php foreach($_SESSION['cart'] as $cart){ ?>
+               <?php foreach($_SESSION['wishlist']?? [] as $wishlist){ ?>
                <div class="cart-item">
                   <div class="row">
                      <div class="col-md-6 my-auto">
                         <a href="">
                         <label class="product-name">
                         <img src="hp-laptop.jpg" style="width: 50px; height: 50px" alt="">
-                        Hp Laptop
+                        <?= $wishlist['wname'] ?>
                         </label>
                         </a>
                      </div>
                      <div class="col-md-2 my-auto">
-                        <label class="price">$<?= $cart['price'] ?></label>
+                        <label class="price">$<?= $wishlist['wprice'] ?></label>
                      </div>
                      <div class="col-md-2 col-7 my-auto">
                         <div class="quantity">
                            <div class="input-group">
                               <span class="btn btn1"><i class="fa fa-minus"></i></span>
-                              <input type="text" value="<?= $cart['quantity'] ?>" class="input-quantity" />
+                              <input type="text" value="<?= $wishlist['wqty'] ?>" class="input-quantity" />
                               <span class="btn btn1"><i class="fa fa-plus"></i></span>
                            </div>
                         </div>
@@ -54,8 +55,7 @@
                      </div>
                   </div>
                </div>
-               <?php } ?>
-    
+               <?php } ?>    
             </div>
          </div>
       </div>

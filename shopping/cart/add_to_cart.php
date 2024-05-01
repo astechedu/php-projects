@@ -6,9 +6,6 @@ $quantity = 0;
 //echo "<pre>";print_r($_SESSION);
 if (!isset($_SESSION["cart"][$pid])):
     //echo "<pre>";print_r($_SESSION);
-    
-    //$cartTotal = 0;
-    //$_SESSION["cartTotal"] = $cartTotal;
 
     $_SESSION["cart"][$pid] = [];
 
@@ -33,7 +30,6 @@ if (isset($_SESSION["cart"][$pid])):
 
     $_SESSION["cart"][$pid]["quantity"] += 1;   
     header("location: /"); 
-    exit;
- 
+    exit; 
 endif;
 ?> 
