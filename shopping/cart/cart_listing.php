@@ -49,7 +49,7 @@ $products = $shoppingDB->readData();
                      <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
                         <div class="float-md-end">
                            <a href="#!" class="btn btn-light border px-2 icon-hover-primary"><i class="fa fa-heart fa-lg px-1 text-secondary"></i></a>
-                           <a href="#" class="btn btn-light border text-danger icon-hover-danger"> Remove</a>
+                           <a href="http://localhost/shopping/cart/remove_cart?cartid=<?php echo $cart['product_id']; ?>" class="btn btn-light border text-danger icon-hover-danger"> Remove</a>
                         </div>
                      </div>
                   </div>
