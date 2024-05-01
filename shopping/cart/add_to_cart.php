@@ -2,13 +2,13 @@
 session_start();
 
 $pid = $_GET["pid"];
-
+$quantity = 0;
 //echo "<pre>";print_r($_SESSION);
 if (!isset($_SESSION["cart"][$pid])):
     //echo "<pre>";print_r($_SESSION);
-    $quantity = 0;
+    
     //$cartTotal = 0;
-    $_SESSION["cartTotal"] = $cartTotal;
+    //$_SESSION["cartTotal"] = $cartTotal;
 
     $_SESSION["cart"][$pid] = [];
 

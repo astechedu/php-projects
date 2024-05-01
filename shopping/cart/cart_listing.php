@@ -18,7 +18,7 @@ $products = $shoppingDB->readData();
                <div class="m-4">
                   <h4 class="card-title mb-4">Your shopping cart</h4>
                   <!-- One Cart Details -->
-                  <?php foreach($_SESSION["cart"] as $cart) { ?>                        
+                  <?php foreach($_SESSION['cart']?? [] as $cart) { ?>                        
                   <div class="row gy-3 mb-4">                     
                      <div class="col-lg-5">
                         <div class="me-lg-5">

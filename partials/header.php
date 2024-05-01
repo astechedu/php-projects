@@ -1,8 +1,9 @@
 <?php
-   session_start();
-
+  session_start();
+  //session_destroy();
+  $cartTotal = $_SESSION['cart'] ?? [];
    //echo "<pre>";print_r($_SESSION);   
-   
+
    include_once $_SERVER['DOCUMENT_ROOT'].'/database/connection.php';
    $shopping = new ShoppingDB();
    $conn = $shopping->connection();
@@ -77,7 +78,7 @@
                   <ul class="nav justify-content-end">
                      <li class="nav-item">
                         <a class="nav-link" href="http://localhost/shopping/cart/cart_listing">
-                        <i class="fa fa-shopping-cart"></i> Cart (<?php if(isset($_SESSION['id']) === true){ echo count($_SESSION["cart"])?? '0'; }else{ echo '0'; } ?>)
+                        <i class="fa fa-shopping-cart"></i> Cart (<?php echo count($cartTotal) ?>)
                         </a>
                      </li>
                      <li class="nav-item">

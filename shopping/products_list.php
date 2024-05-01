@@ -39,7 +39,7 @@
                      <input type="hidden" name="stock_quantity" value="<?= $product['stock_quantity'] ?> ">                                     
                      <input type="submit" value="AddToCart" class="btn btn1 addtocart">      
                      </form>   
-                      <a href="#" class="btn btn1 addtocart" >Add To Cart</a>                            
+                      <!--<a href="#" class="btn btn1 addtocart" >Add To Cart</a> -->                           
                      <a href="<?php baseUrl;?>/user/user_wishlist.php" class="btn btn1"> <i class="fa fa-heart"></i> </a>
                      <a href="<?php baseUrl;?>/shopping/product_view.php" class="btn btn1"> View </a>
 
