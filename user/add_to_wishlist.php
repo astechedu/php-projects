@@ -10,9 +10,9 @@ if(!isset($_SESSION['wishlist'][$wpid])):
    $_SESSION['wishlist'][$wpid] = [];
    
    $_SESSION['wishlist'][$wpid] = [
-     'wpid' => $wpid,
-     'wname' => $wname,
-     'wqty' => $wqty,
+     'wpid'   => $wpid,
+     'wname'  => $wname,
+     'wqty'   => $wqty,
      'wprice' => $wprice
    ];
 endif;
@@ -24,6 +24,4 @@ if(isset($_SESSION['wishlist'][$wpid])):
       exit;
    endif;
 endif;
-
-
 ?>

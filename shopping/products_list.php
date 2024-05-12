@@ -17,7 +17,7 @@
             <div class="product-card">
                <div class="product-card-img">
                   <label class="stock bg-success">In Stock</label>
-                  <img src="http://localhost/images/shirt.png" alt="Laptop">
+                  <img src="http://localhost/images/shirt2.png" alt="Laptop">
                </div>
                <div class="product-card-body">
                   <p class="product-brand">HP</p>
@@ -40,7 +40,7 @@
                      <input type="submit" value="AddToCart" class="btn btn1 addtocart">
                      </form>   
                       <!--<a href="#" class="btn btn1 addtocart" >Add To Cart</a> -->                          
-                     <a href="<?php baseUrl;?>/user/add_to_wishlist?wpid=<?= $product['product_id'] ?>&wname=<?= $product['product_name'] ?>&wqty=1&wprice=<?= $product['price'] ?>" class="btn btn1"> <i class="fa fa-heart"></i> </a>
+                     <a href="<?php baseUrl;?>/user/add_to_wishlist?wpid=<?= $product['product_id'] ?>&wname=<?= $product['product_name'] ?>&wqty=0&wprice=<?= $product['price'] ?>" class="btn btn1"> <i class="fa fa-heart"></i> </a>
                      
                      <a href="<?php baseUrl;?>/shopping/product_view" class="btn btn1"> View </a>
                   </div>

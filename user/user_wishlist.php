@@ -35,14 +35,14 @@
                         </a>
                      </div>
                      <div class="col-md-2 my-auto">
-                        <label class="price">$<?= $wishlist['wprice'] ?></label>
+                        <label id="price">$<span class="price"><?= $wishlist['wprice'] ?></span></label>
                      </div>
                      <div class="col-md-2 col-7 my-auto">
                         <div class="quantity">
                            <div class="input-group">
-                              <span class="btn btn1"><i class="fa fa-minus"></i></span>
-                              <input type="text" value="<?= $wishlist['wqty'] ?>" class="input-quantity" />
-                              <span class="btn btn1"><i class="fa fa-plus"></i></span>
+                              <span class="minus btn btn1"><i class="fa fa-minus"></i></span>
+                              <input type="text" value="<?= $wishlist['wqty'] ?>" class="qty input-quantity" />
+                              <span class="plus btn btn1"><i class="fa fa-plus"></i></span>
                            </div>
                         </div>
                      </div>
@@ -62,6 +62,57 @@
    </div>
 </div>
 <?php include_once baseDir.'/partials/footer.php';?>
+
+<script>
+const plus = document.querySelectorAll('.plus')
+const minus = document.querySelectorAll('.minus')
+const qty = document.querySelectorAll('.qty')
+const price = document.querySelectorAll('.price')
+
+// Store the initial price per unit separately
+const initialPrices = Array.from(price).map(element => parseFloat(element.textContent));
+
+//Increase input value pressing on - button
+plus.forEach((elePlus, index) => {
+   elePlus.addEventListener('click', (event) => {
+      const clickedIndex = index
+      const qtyInput = qty[clickedIndex]
+      const priceElement = price[clickedIndex]
+      const initialPrice = initialPrices[clickedIndex]; // Retrieve initial price per unit
+      let quantity = parseInt(qtyInput.value)
+      quantity++
+      qtyInput.value = quantity
+      const pricePerUnit = parseFloat(priceElement.textContent)
+      //console.log(clickedIndex,qtyInput.value, priceElement.textContent)
+      const totalPrice = quantity * initialPrice
+      priceElement.textContent = totalPrice.toFixed(2)
+   })
+
+})
+
+
+//Decrease input value pressing on - button
+
+minus.forEach((eleMinus, index) => {
+      eleMinus.addEventListener('click', (event) => {
+         const clickedIndex = index
+         const qtyInput = qty[clickedIndex]
+         const priceElement = price[clickedIndex]
+         const initialPrice = initialPrices[clickedIndex]; // Retrieve initial price per unit
+
+         let quantity = parseInt(qtyInput.value)
+         if (quantity > 0) {
+            quantity--
+            qtyInput.value = quantity
+
+            const pricePerUnit = parseFloat(priceElement.textContent)
+            const totalPrice = quantity * initialPrice
+            priceElement.textContent = totalPrice.toFixed(2)
+         }
+      })
+   }) 
+</script>
+
 <style>
    /* Cart or Wishlist */
    .shopping-cart .cart-header{
@@ -114,3 +165,6 @@
    }
    /* Cart or Wishlist */
 </style>
+
+
+

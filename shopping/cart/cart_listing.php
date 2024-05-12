@@ -38,7 +38,11 @@ $products = $shoppingDB->readData();
                               <option></option>   
                            </select>
                            -->
-                           <input type="text" name="" value="<?= $cart['quantity'] ?>" style="width: 100px;" class="form-select me-4 qty">
+                           <div class="input-group">
+                           <span class="minus btn btn1"><i class="fa fa-minus"></i></span>
+                           <input type="text" name="" value="<?= $cart['quantity'] ?>" style="width: 50px;" class="me-4 qty">
+                           <span class="plus btn btn1"><i class="fa fa-plus"></i></span>
+                           </div>                        
                         </div>
                         <div class="">
                            <text class="h6 price"><?= $cart['price'] ?></text>
@@ -48,7 +52,7 @@ $products = $shoppingDB->readData();
                      </div>
                      <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
                         <div class="float-md-end">
-                           <a href="#!" class="btn btn-light border px-2 icon-hover-primary"><i class="fa fa-heart fa-lg px-1 text-secondary"></i></a>
+                           <a href="http://localhost/user/user_wishlist" class="btn btn-light border px-2 icon-hover-primary"><i class="fa fa-heart fa-lg px-1 text-secondary"></i></a>
                            <a href="http://localhost/shopping/cart/remove_cart?cartid=<?php echo $cart['product_id']; ?>" class="btn btn-light border text-danger icon-hover-danger"> Remove</a>
                         </div>
                      </div>
@@ -120,7 +124,7 @@ $products = $shoppingDB->readData();
                      <p class="mb-2 fw-bold">$<span id="gtotal"><?= $gtotal ?></span></p>
                   </div>
                   <div class="mt-3">
-                     <a href="#" class="btn btn-success w-100 shadow-0 mb-2"> Make Purchase </a>
+                     <a href="#" id="checkout" class="btn btn-success w-100 shadow-0 mb-2"> Make Purchase </a>
                      <a href="http://localhost/index.php" class="btn btn-light w-100 border mt-2"> Back to shop </a>
                   </div>
                </div>
@@ -232,6 +236,7 @@ const total = document.querySelector('#total')
 const gtotal = document.querySelector('#gtotal')
 const tax = document.querySelector('#tax')
 const discount = document.querySelector('#discount')
+const checkout = document.querySelector('#checkout')
 
 const quantities = []
 const prices = []
@@ -239,10 +244,13 @@ const to = []
 let sum = 0
 
 //Finding Quantities
+/*
 qty.forEach((ele, i) => {
    quantities.push(parseInt(ele.value))
+
    ele.addEventListener('keyup', (e) => {
       price.forEach((elep, i) => {
+
          elep.textContent = Number(e.target.value) * parseFloat(elep.textContent)
          sum += parseFloat(elep.textContent)
          total.textContent = sum.toFixed(2)
@@ -250,6 +258,32 @@ qty.forEach((ele, i) => {
       })
    })
 })          
+*/
+
+const initialPrices = Array.from(price).map((price) => parseFloat(price.textContent))
+//Increasing quantity 
+qty.forEach((qtyEle,index) => {
+   qtyEle.addEventListener('keyup', () => {
+      const clickedIndex = index
+      const qtyInput = qty[clickedIndex]
+      const priceElement = price[clickedIndex]
+      const initialPrice = initialPrices[clickedIndex]
+      let quantity = parseInt(qtyInput.value)      
+      quantity.value = quantity
+      const pricePerUnit = parseFloat(priceElement.textContent)
+      const totalPrice = quantity * initialPrice
+      quantity++
+      //console.log(totalPrice)
+      priceElement.textContent = totalPrice.toFixed(2)
+
+      const totalPricee = price.reduce((acc, inPrice) => {
+          return acc + parseFloat(inPricee.textContent)
+      })
+      //console.log(initialPrices)      
+   })
+})
+
+
 </script>
 
 <style>
@@ -268,3 +302,5 @@ qty.forEach((ele, i) => {
    color: #dc4c64 !important;
    }  
 </style>
+
+

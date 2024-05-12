@@ -1,3 +1,9 @@
+
+Clear DNS cache in Command Prompt with the command-
+cmd> ipconfig /flushdns
+
+--------------------------------------------------------
+
 Shopping: 
 https://www.fundaofwebit.com/ecommerce-template/products-template-design-using-html-css-bootstrap5
 
@@ -16,7 +22,7 @@ Keys:
 
      Shopping Cart Using Session,
 
-
+     WhistList | - inputValue + | 
 
 
 
@@ -615,3 +621,153 @@ console.log(sum); // Output: 15 (1 + 2 + 3 + 4 + 5)
 
 
 --------------------------------------------------------------------
+
+
+
+/shopping_cart
+    /assets
+        /css
+        /js
+        /images
+    /includes
+        config.php
+        header.php
+        footer.php
+        functions.php
+        /classes
+            Cart.php
+            Product.php
+            User.php
+    /admin
+        index.php
+        login.php
+        dashboard.php
+        products.php
+        orders.php
+    /public
+        index.php
+        products.php
+        cart.php
+        checkout.php
+    /database
+        /migrations
+        /seeds
+    /templates
+        /admin
+            dashboard.php
+            login.php
+            products.php
+            orders.php
+        /public
+            index.php
+            products.php
+            cart.php
+            checkout.php
+    /vendor (if using Composer for dependency management)
+    .htaccess
+    README.md
+
+
+------------------------------------------------------------------
+
+
+PHP Image Obtimized: 
+
+<?php
+
+// Function to optimize and save image
+function optimizeImage($sourceImagePath, $outputImagePath, $quality = 75) {
+    // Get the original image dimensions
+    list($width, $height) = getimagesize($sourceImagePath);
+    
+    // Create a new image from the source
+    $sourceImage = imagecreatefromjpeg($sourceImagePath);
+    
+    // Create a new true color image with desired dimensions
+    $newImage = imagecreatetruecolor($width, $height);
+    
+    // Copy and resize part of the source image to the new image
+    imagecopyresampled($newImage, $sourceImage, 0, 0, 0, 0, $width, $height, $width, $height);
+    
+    // Save the optimized image
+    imagejpeg($newImage, $outputImagePath, $quality);
+    
+    // Free up memory
+    imagedestroy($sourceImage);
+    imagedestroy($newImage);
+}
+
+// Example usage
+$sourceImagePath = 'input.jpg';
+$outputImagePath = 'output.jpg';
+$quality = 75; // You can adjust this value according to your needs (0 - 100)
+
+optimizeImage($sourceImagePath, $outputImagePath, $quality);
+?>
+
+
+
+-------------------------------------------------------------------
+
+
+( WhistList | - inputValue + | )
+
+JavaScript: 
+
+<script>
+   const plus = document.querySelectorAll('.plus')
+   const minus = document.querySelectorAll('.minus')
+   const qty = document.querySelectorAll('.qty')
+   const price = document.querySelectorAll('.price')
+
+   // Store the initial price per unit separately
+   const initialPrices = Array.from(price).map(element => parseFloat(element.textContent));
+
+//Increase input value pressing on - button
+plus.forEach((elePlus,index) => {
+   elePlus.addEventListener('click', (event) => {
+      const clickedIndex = index     
+      const qtyInput = qty[clickedIndex]      
+      const priceElement = price[clickedIndex]    
+
+      const initialPrice = initialPrices[clickedIndex]; // Retrieve initial price per unit
+      
+      let quantity = parseInt(qtyInput.value)          
+          quantity++
+          qtyInput.value = quantity
+
+      const pricePerUnit = parseFloat(priceElement.textContent)
+       //console.log(clickedIndex,qtyInput.value, priceElement.textContent)
+      const totalPrice = quantity * initialPrice     
+            priceElement.textContent = totalPrice.toFixed(2)      
+   })
+
+})
+
+
+//Decrease input value pressing on - button
+
+minus.forEach((eleMinus,index) => {
+   eleMinus.addEventListener('click', (event) => {
+      const clickedIndex = index     
+      const qtyInput = qty[clickedIndex]      
+      const priceElement = price[clickedIndex]   
+      const initialPrice = initialPrices[clickedIndex]; // Retrieve initial price per unit
+      
+      let quantity = parseInt(qtyInput.value)    
+       if(quantity > 0){      
+          quantity--
+          qtyInput.value = quantity
+
+         const pricePerUnit = parseFloat(priceElement.textContent)      
+         const totalPrice = quantity * initialPrice     
+         priceElement.textContent = totalPrice.toFixed(2)    
+       }
+  
+   })
+
+})
+
+</script>
+
+-----------------------------------------------------------
