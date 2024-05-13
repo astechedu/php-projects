@@ -771,3 +771,22 @@ minus.forEach((eleMinus,index) => {
 </script>
 
 -----------------------------------------------------------
+
+   <?php
+      $total=0;
+      $discount=0;
+      $tax=0;
+      $gtotal=0;
+
+   foreach($_SESSION['cart']?? [] as $checkCart):
+               //echo "<pre>";print_r($_SESSION);            
+            $total += (float)$checkCart['price'] * (float)$checkCart['quantity'];    
+   endforeach;
+
+   if($total > 0):
+      $discount = $total*0.12;
+      $tax = $total * 0.4;
+      $gtotal = ($total + $tax) - $discount; 
+
+   endif;    
+   ?>

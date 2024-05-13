@@ -39,9 +39,11 @@ $products = $shoppingDB->readData();
                            </select>
                            -->
                            <div class="input-group">
-                           <span class="minus btn btn1"><i class="fa fa-minus"></i></span>
+                           <span class="minus btn btn1"><i class="fa fa-minus"></i>
+                           </span>
                            <input type="text" name="" value="<?= $cart['quantity'] ?>" style="width: 50px;" class="me-4 qty">
-                           <span class="plus btn btn1"><i class="fa fa-plus"></i></span>
+                           <span class="plus btn btn1"><i class="fa fa-plus"></i>
+                           </span>
                            </div>                        
                         </div>
                         <div class="">
@@ -98,8 +100,8 @@ $products = $shoppingDB->readData();
    endforeach;
 
    if($total > 0):
-      $discount = 10;
-      $tax = 14;
+      $discount = $total*0.12;
+      $tax = $total * 0.4;
       $gtotal = ($total + $tax) - $discount; 
 
    endif;    
@@ -108,7 +110,7 @@ $products = $shoppingDB->readData();
                <div class="card-body">
                   <div class="d-flex justify-content-between">
                      <p class="mb-2">Total price:</p>
-                     <p class="mb-2">$<span id="total"><?= $total ?></span></p>
+                     <p class="mb-2">$<span id="total"><!--<?= $total ?>--></span></p>
                   </div>
                   <div class="d-flex justify-content-between">
                      <p class="mb-2">Discount:</p>
@@ -232,16 +234,18 @@ $products = $shoppingDB->readData();
 <script>
 const qty = document.querySelectorAll('.qty')
 const price = document.querySelectorAll('.price')
+
 const total = document.querySelector('#total')
-const gtotal = document.querySelector('#gtotal')
 const tax = document.querySelector('#tax')
 const discount = document.querySelector('#discount')
+const gtotal = document.querySelector('#gtotal')
+
 const checkout = document.querySelector('#checkout')
 
-const quantities = []
-const prices = []
-const to = []
-let sum = 0
+//const quantities = []
+//const prices = []
+//const to = []
+//let sum = 0
 
 //Finding Quantities
 /*
@@ -268,20 +272,39 @@ qty.forEach((qtyEle,index) => {
       const qtyInput = qty[clickedIndex]
       const priceElement = price[clickedIndex]
       const initialPrice = initialPrices[clickedIndex]
-      let quantity = parseInt(qtyInput.value)      
+      let quantity = parseInt(qtyInput.value)     
       quantity.value = quantity
       const pricePerUnit = parseFloat(priceElement.textContent)
       const totalPrice = quantity * initialPrice
-      quantity++
+      quantity++      
       //console.log(totalPrice)
-      priceElement.textContent = totalPrice.toFixed(2)
-
-      const totalPricee = price.reduce((acc, inPrice) => {
-          return acc + parseFloat(inPricee.textContent)
-      })
-      //console.log(initialPrices)      
+      priceElement.textContent = totalPrice.toFixed(2)  
+      //console.log(initialPrices)           
+       totalSale2()
    })
 })
+
+
+totalSale2()
+
+function totalSale2(){
+
+const tot = []
+price.forEach((priceElement, index) => {  
+
+   //const mySet = new Map(priceElement.textContent)
+
+   tot.push(parseFloat(priceElement.textContent))
+      const totR=tot.reduce((acc,init)=>{
+          return acc+init
+      })
+      //console.log(totR)
+      //console.log(totR)
+      total.textContent = totR
+
+      gtotal.textContent = (parseFloat(total.textContent) + parseFloat(tax.textContent) - parseFloat(discount.textContent)).toFixed(2)
+      })
+}
 
 
 </script>
