@@ -4,6 +4,8 @@
    //print_r($products);
    //$categories = $shoppingDB->readCategories();
    //print_r($categories);
+
+
 ?>
 <div class="py-3 py-md-5 bg-light">
    <div class="container">
@@ -17,7 +19,7 @@
             <div class="product-card">
                <div class="product-card-img">
                   <label class="stock bg-success">In Stock</label>
-                  <img src="http://localhost/images/shirt2.png" alt="Laptop">
+                  <img src="http://localhost/images/shirt.png" alt="Laptop">
                </div>
                <div class="product-card-body">
                   <p class="product-brand">HP</p>

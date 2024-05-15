@@ -24,7 +24,7 @@ $products = $shoppingDB->readData();
                      <div class="col-lg-5">
                         <div class="me-lg-5">
                            <div class="d-flex">
-                              <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/11.webp" class="border rounded me-3" style="width: 96px; height: 96px;" />
+                              <img src="http://localhost/images/shirt.png" class="border rounded me-3" style="width: 96px; height: 96px;" />
                               <div class="">
                                  <a href="#" class="nav-link"><?= $cart['product_name'] ?></a>
                                  <p class="text-muted">Yellow, Jeans</p>
@@ -119,7 +119,7 @@ $products = $shoppingDB->readData();
                   <hr />
                   <div class="d-flex justify-content-between">
                      <p class="mb-2">Total price:</p>
-                     <p class="mb-2 fw-bold">$<span id="gtotal"><?= $gtotal ?></span></p>
+                     <p class="mb-2 fw-bold">$<span id="gtotal"><?= ceil($gtotal) ?></span></p>
                   </div>
                   <div class="mt-3">
                      <a href="#" id="checkout" class="btn btn-success w-100 shadow-0 mb-2"> Make Purchase </a>
@@ -239,8 +239,8 @@ const gtotal = document.querySelector('#gtotal')
 const checkout = document.querySelector('#checkout')
 
 
-
 const initialPrices = Array.from(price).map((price) => parseFloat(price.textContent))
+
 
 //Script for + button
 const plus = document.querySelectorAll('.plus')
@@ -284,8 +284,6 @@ plus.forEach((plusEle,index) => {
 })
    
 
-
-
 //Script for - button
 const minus = document.querySelectorAll('.minus')
 
@@ -327,46 +325,6 @@ minus.forEach((minusEle,index) => {
 })
    
 
-
-
-
-
-//Increasing quantity 
-/*
-qty.forEach((qtyEle,index) => {
-   qtyEle.addEventListener('keyup', () => {
-      const clickedIndex = index
-      const qtyInput = qty[clickedIndex]
-      const priceElement = price[clickedIndex]
-      const initialPrice = initialPrices[clickedIndex]
-      let quantity = parseInt(qtyInput.value)    
-
-      //Checking quantity <= 0
-      if(quantity <= 0){
-          quantity=0
-          total.textContent=0        
-          tax.textContent= 0
-          discount.textContent=0
-      }   
-      //If quantitity not a number
-      if(isNaN(quantity) ){
-          quantity=0
-          total.textContent=0        
-          tax.textContent= 0
-          discount.textContent=0
-      }  
-
-      quantity.value = quantity
-      const pricePerUnit = parseFloat(priceElement.textContent)      
-      const totalPrice = quantity * initialPrice
-      quantity++      
-      //console.log(totalPrice)
-      priceElement.textContent = totalPrice.toFixed(2)             
-      totalSale2()         
-   })
-})
-*/
-
 //totalSale2()
 
 function totalSale2(){
@@ -379,13 +337,13 @@ price.forEach((priceElement, index) => {
       const totPrice=tot.reduce((acc,init)=>{
           return acc+init
       })
-      //console.log(totR)
-      total.textContent = totPrice
+      //console.log(totR) 
+      total.textContent = totPrice.toFixed(2)
 
       tax.textContent=(totPrice*0.4).toFixed(2)
       discount.textContent=(totPrice*0.12).toFixed(2)
 
-      gtotal.textContent = (parseFloat(total.textContent) + parseFloat(tax.textContent) - parseFloat(discount.textContent)).toFixed(2)
+      gtotal.textContent = Math.ceil((parseFloat(total.textContent) + parseFloat(tax.textContent) - parseFloat(discount.textContent)))
       })
 
 }

@@ -29,7 +29,7 @@
                      <div class="col-md-6 my-auto">
                         <a href="">
                         <label class="product-name">
-                        <img src="hp-laptop.jpg" style="width: 50px; height: 50px" alt="">
+                        <img src="http://localhost/images/shirt.png" style="width: 50px; height: 50px" alt="">
                         <?= $wishlist['wname'] ?>
                         </label>
                         </a>
