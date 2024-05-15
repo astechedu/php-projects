@@ -29,8 +29,8 @@ Keys:
 
 Vanilla Javascript: 
 
-     Keys: reducer
-
+     Keys: reduce(), filder(), Map(), Set(), 
+     
 
 
 
@@ -772,21 +772,48 @@ minus.forEach((eleMinus,index) => {
 
 -----------------------------------------------------------
 
-   <?php
-      $total=0;
-      $discount=0;
-      $tax=0;
-      $gtotal=0;
+Javascript Collections: 
 
-   foreach($_SESSION['cart']?? [] as $checkCart):
-               //echo "<pre>";print_r($_SESSION);            
-            $total += (float)$checkCart['price'] * (float)$checkCart['quantity'];    
-   endforeach;
+1. Map:
 
-   if($total > 0):
-      $discount = $total*0.12;
-      $tax = $total * 0.4;
-      $gtotal = ($total + $tax) - $discount; 
+//You can use plain objects {} to mimic the behavior of Map().
 
-   endif;    
-   ?>
+const myMap = new Map();
+
+myMap.set('name', 'Ajay');
+myMap.set('age', '23');
+myMap.set('address', 'Raipur Road');
+
+console.log(
+   myMap.forEach((ele, index) => {
+     console.log(ele)
+  })
+)
+
+//set(), get(), delete(), has(), keys(), values(), and entries()
+
+
+
+2. SET: 
+
+
+//You can use arrays [] to mimic the behavior of Set()
+
+const mySet = new Set();
+
+// Adding elements to the set
+mySet.add('apple');
+mySet.add('banana');
+
+console.log(
+   mySet.forEach((ele, index) => {
+     console.log(ele)
+})
+)
+
+// Iterating over values
+for (let value of mySet.values()) {
+  console.log(value);
+}
+//add(), delete(), has(), clear(), and values()
+-----------------------------------------------------------

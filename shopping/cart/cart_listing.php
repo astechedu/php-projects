@@ -1,5 +1,6 @@
 <?php
 //session_start();
+
 include_once "../../database/connection.php";
 $products = $shoppingDB->readData();
 
@@ -18,7 +19,7 @@ $products = $shoppingDB->readData();
                <div class="m-4">
                   <h4 class="card-title mb-4">Your shopping cart</h4>
                   <!-- One Cart Details -->
-                  <?php foreach($_SESSION['cart']?? [] as $cart) { ?>                        
+                  <?php foreach($_SESSION['cart']?? [] as $cart) { ?>                      
                   <div class="row gy-3 mb-4">                     
                      <div class="col-lg-5">
                         <div class="me-lg-5">
@@ -31,23 +32,18 @@ $products = $shoppingDB->readData();
                            </div>
                         </div>
                      </div>
-                     <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                     <div class="col-lg-4 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
                         <div class="">
-                           <!--
-                           <select style="width: 100px;" class="form-select me-4">
-                              <option></option>   
-                           </select>
-                           -->
                            <div class="input-group">
-                           <span class="minus btn btn1"><i class="fa fa-minus"></i>
+                           <span class="minus btn border me-1"><i class="fa fa-minus"></i>
                            </span>
-                           <input type="text" name="" value="<?= $cart['quantity'] ?>" style="width: 50px;" class="me-4 qty">
-                           <span class="plus btn btn1"><i class="fa fa-plus"></i>
+                           <input type="text" name="" value="<?= $cart['quantity'] ?>" style="width: 40px;" class="me-1 qty">
+                           <span class="plus btn btn1 border me-1"><i class="fa fa-plus"></i>
                            </span>
                            </div>                        
                         </div>
                         <div class="">
-                           <text class="h6 price"><?= $cart['price'] ?></text>
+                           <span>$<text class="h6 price"><?= $cart['price'] ?></text></span>
                            <br />
                            <small class="text-muted text-nowrap"> <?= $cart['price']*0.40 ?> / per item </small>
                         </div>
@@ -110,7 +106,7 @@ $products = $shoppingDB->readData();
                <div class="card-body">
                   <div class="d-flex justify-content-between">
                      <p class="mb-2">Total price:</p>
-                     <p class="mb-2">$<span id="total"><!--<?= $total ?>--></span></p>
+                     <p class="mb-2">$<span id="total"><?= $total ?></span></p>
                   </div>
                   <div class="d-flex justify-content-between">
                      <p class="mb-2">Discount:</p>
@@ -242,50 +238,136 @@ const gtotal = document.querySelector('#gtotal')
 
 const checkout = document.querySelector('#checkout')
 
-//const quantities = []
-//const prices = []
-//const to = []
-//let sum = 0
 
-//Finding Quantities
-/*
-qty.forEach((ele, i) => {
-   quantities.push(parseInt(ele.value))
-
-   ele.addEventListener('keyup', (e) => {
-      price.forEach((elep, i) => {
-
-         elep.textContent = Number(e.target.value) * parseFloat(elep.textContent)
-         sum += parseFloat(elep.textContent)
-         total.textContent = sum.toFixed(2)
-         gtotal.textContent = (parseFloat(total.textContent) + parseFloat(tax.textContent) - parseFloat(discount.textContent)).toFixed(2)
-      })
-   })
-})          
-*/
 
 const initialPrices = Array.from(price).map((price) => parseFloat(price.textContent))
+
+//Script for + button
+const plus = document.querySelectorAll('.plus')
+
+       
+plus.forEach((plusEle,index) => { 
+   plusEle.addEventListener('click', () => {       
+      const clickedIndex = index
+      const qtyInput = qty[clickedIndex]
+      const priceElement = price[clickedIndex]
+      const initialPrice = initialPrices[clickedIndex]
+      let quantity = parseInt(qtyInput.value)    
+
+      //Checking quantity <= 0
+      if(quantity <= 0){
+          //quantity=0
+          total.textContent=0        
+          tax.textContent= 0
+          discount.textContent=0
+          qtyInput.value = 0
+      }   
+      //If quantitity not a number
+      if(isNaN(quantity) ){
+          //quantity=0
+          total.textContent=0        
+          tax.textContent= 0
+          discount.textContent=0
+          qtyInput.value = 0
+      }  
+      quantity++   
+      qtyInput.value = quantity
+      //quantity.value = quantity
+      const pricePerUnit = parseFloat(priceElement.textContent)      
+      const totalPrice = quantity * initialPrice     
+      
+      //alert(quantity)   
+      //console.log(totalPrice)
+      priceElement.textContent = totalPrice.toFixed(2)             
+      totalSale2()         
+   })
+})
+   
+
+
+
+//Script for - button
+const minus = document.querySelectorAll('.minus')
+
+minus.forEach((minusEle,index) => { 
+   minusEle.addEventListener('click', () => {       
+      const clickedIndex = index
+      const qtyInput = qty[clickedIndex]
+      const priceElement = price[clickedIndex]
+      const initialPrice = initialPrices[clickedIndex]
+      let quantity = parseInt(qtyInput.value)    
+
+      //Checking quantity <= 0
+      if(quantity <= 0){
+          //quantity=0
+          total.textContent=0        
+          tax.textContent= 0
+          discount.textContent=0
+          qtyInput.value = 0
+      }   
+      //If quantitity not a number
+      if(isNaN(quantity) ){
+          //quantity=0
+          total.textContent=0        
+          tax.textContent= 0
+          discount.textContent=0
+          qtyInput.value = 0
+      }  
+      quantity--  
+      qtyInput.value = quantity
+      const pricePerUnit = parseFloat(priceElement.textContent)      
+      const totalPrice = quantity * initialPrice
+       
+      //qtyInput.value = quantity
+      //alert(quantity)   
+      //console.log(totalPrice)
+      priceElement.textContent = totalPrice.toFixed(2)             
+      totalSale2()         
+   })
+})
+   
+
+
+
+
+
 //Increasing quantity 
+/*
 qty.forEach((qtyEle,index) => {
    qtyEle.addEventListener('keyup', () => {
       const clickedIndex = index
       const qtyInput = qty[clickedIndex]
       const priceElement = price[clickedIndex]
       const initialPrice = initialPrices[clickedIndex]
-      let quantity = parseInt(qtyInput.value)     
+      let quantity = parseInt(qtyInput.value)    
+
+      //Checking quantity <= 0
+      if(quantity <= 0){
+          quantity=0
+          total.textContent=0        
+          tax.textContent= 0
+          discount.textContent=0
+      }   
+      //If quantitity not a number
+      if(isNaN(quantity) ){
+          quantity=0
+          total.textContent=0        
+          tax.textContent= 0
+          discount.textContent=0
+      }  
+
       quantity.value = quantity
-      const pricePerUnit = parseFloat(priceElement.textContent)
+      const pricePerUnit = parseFloat(priceElement.textContent)      
       const totalPrice = quantity * initialPrice
       quantity++      
       //console.log(totalPrice)
-      priceElement.textContent = totalPrice.toFixed(2)  
-      //console.log(initialPrices)           
-       totalSale2()
+      priceElement.textContent = totalPrice.toFixed(2)             
+      totalSale2()         
    })
 })
+*/
 
-
-totalSale2()
+//totalSale2()
 
 function totalSale2(){
 
@@ -293,18 +375,30 @@ const tot = []
 price.forEach((priceElement, index) => {  
 
    //const mySet = new Map(priceElement.textContent)
-
    tot.push(parseFloat(priceElement.textContent))
-      const totR=tot.reduce((acc,init)=>{
+      const totPrice=tot.reduce((acc,init)=>{
           return acc+init
       })
       //console.log(totR)
-      //console.log(totR)
-      total.textContent = totR
+      total.textContent = totPrice
+
+      tax.textContent=(totPrice*0.4).toFixed(2)
+      discount.textContent=(totPrice*0.12).toFixed(2)
 
       gtotal.textContent = (parseFloat(total.textContent) + parseFloat(tax.textContent) - parseFloat(discount.textContent)).toFixed(2)
       })
+
 }
+
+//Clicking on checkout button
+
+checkout.addEventListener('click', (e) => {
+  
+   //console.log("You are not lgged in")
+   alert("You are not lgged in")
+})
+
+
 
 
 </script>
@@ -323,7 +417,8 @@ price.forEach((priceElement, index) => {
    }
    .icon-hover-danger:hover i {
    color: #dc4c64 !important;
-   }  
+   } 
+
 </style>
 
 
