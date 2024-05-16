@@ -14,7 +14,7 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'CakePHP: shopping cart';
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,29 +27,34 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake']) ?>
+    <?= $this->Html->css('bootstrap533.min') ?>  
+    <?= $this->Html->script('bootstrap533.bundle.min') ?>
+    <?= $this->Html->script('popper.min') ?>
+  
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-nav">
-        <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
+    <div class="container">
+        <div class="row">
+        <?php echo $this->element('navbar') ?>
         </div>
-        <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
-        </div>
-    </nav>
+    </div>
+
     <main class="main">
         <div class="container">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
         </div>
     </main>
-    <footer>
-    </footer>
+
+
+    <div class="container">
+        <div class="row">
+        <?php echo $this->element('footer') ?>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,0 +1,72 @@
+ipconfig /flushdns
+
+
+------------------------------------------------------------------------------------------
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+-------------------------------------------------------------------------------------------
+
+
+echo $this->Html->charset();
+echo $this->Html->charset('ISO-8859-1');
+echo $this->Html->css('forms');
+echo $this->Html->css(['forms', 'tables', 'menu']);
+echo $this->Html->css('DebugKit.toolbar.css');
+echo $this->Html->css('Blog.common.css', ['plugin' => false]);
+
+echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);
+
+echo $this->Html->image("recipes/6.jpg", [
+    "alt" => "Brownies",
+    'url' => ['controller' => 'Recipes', 'action' => 'view', 6]
+]);
+
+echo $this->Html->image("logo.png", ['fullBase' => true]);
+
+echo $this->Html->image('DebugKit.icon.png');
+echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
+echo $this->Html->image("logo.png", ['pathPrefix' => '']);
+
+echo $this->Html->link(
+    'Enter',
+    '/pages/home',
+    ['class' => 'button', 'target' => '_blank']
+);
+
+echo $this->Html->link(
+    'Delete',
+    ['controller' => 'Recipes', 'action' => 'delete', 6],
+    ['confirm' => 'Are you sure you wish to delete this recipe?']
+);
+
+echo $this->Html->link(
+    $this->Html->image("recipes/6.jpg", ["alt" => "Brownies"]),
+    "recipes/view/6",
+    ['escape' => false]
+);
+
+ <?= $this->Html->media('audio.mp3') ?>
+
+ echo $this->Html->script('scripts');
+
+ echo $this->Html->script('/otherdir/script_file');
+
+echo $this->Html->script(['jquery', 'wysiwyg', 'scripts']);
+
+// Define a script block all at once, with the defer attribute.
+$this->Html->scriptBlock('alert("hi")', ['defer' => true]);
+
+// Buffer a script block to be output later.
+$this->Html->scriptBlock('alert("hi")', ['block' => true]);
+
+echo $this->Html->tableHeaders(['Date', 'Title', 'Active']);
+
+<?php echo $html->url('/files/somefile.pdf'); ?>
+
+<?php echo $this->request->webroot . 'carpetadentrodelwebroot/archivo.pdf'; ?>
+<?php echo $html->url('/files/somefile.pdf'); ?>
+<?php echo $html->link('pdf', $this->webroot('files'.DS.'test.pdf'); ?>
+
+$html->link('Pdf', '/files/myfile.pdf');
