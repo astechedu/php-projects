@@ -1,2 +1,2 @@
 # php-projects:
-PHP Projects For Beginners
+This is main blank repository
