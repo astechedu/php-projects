@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container my-1">
     <div class="row">
         <div class="col-md-3 col-sm-6">
             <div class="product-grid">
                 <div class="product-image">
                     <a href="#" class="image">
-                        <img class="pic-1" src="images/img-1.jpg">
-                        <img class="pic-2" src="images/img-2.jpg">
+                        <img class="pic-1" src="/img/shopping1.png">
+                        <img class="pic-2" src="/img/shop1.png">                        
                     </a>
                     <span class="product-sale-label">hot</span>
                     <span class="product-discount-label">-33%</span>
@@ -32,8 +32,8 @@
             <div class="product-grid">
                 <div class="product-image">
                     <a href="#" class="image">
-                        <img class="pic-1" src="images/img-3.jpg">
-                        <img class="pic-2" src="images/img-4.jpg">
+                        <img class="pic-1" src="/img/shop1.png">
+                        <img class="pic-2" src="/img/shopping1.png">                      
                     </a>
                     <span class="product-sale-label">hot</span>
                 </div>
@@ -55,7 +55,170 @@
                 </div>
             </div>
         </div>
-    </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#" class="image">
+                        <img class="pic-1" src="/img/shop1.png">
+                        <img class="pic-2" src="/img/shopping1.png">                      
+                    </a>
+                    <span class="product-sale-label">hot</span>
+                </div>
+                <div class="product-content">
+                    <ul class="rating">
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                    </ul>
+                    <h3 class="title"><a href="#">Women's Shirt</a></h3>
+                    <div class="price">$12.30</div>
+                    <div class="product-button-group">
+                        <a class="product-like-icon" href="#"><i class="fas fa-heart"></i></a>
+                        <a class="add-to-cart" href="#"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
+                        <a class="product-compare-icon" href="#"><i class="fas fa-random"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#" class="image">
+                        <img class="pic-1" src="/img/shop1.png">
+                        <img class="pic-2" src="/img/shopping1.png">                      
+                    </a>
+                    <span class="product-sale-label">hot</span>
+                </div>
+                <div class="product-content">
+                    <ul class="rating">
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                    </ul>
+                    <h3 class="title"><a href="#">Women's Shirt</a></h3>
+                    <div class="price">$12.30</div>
+                    <div class="product-button-group">
+                        <a class="product-like-icon" href="#"><i class="fas fa-heart"></i></a>
+                        <a class="add-to-cart" href="#"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
+                        <a class="product-compare-icon" href="#"><i class="fas fa-random"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#" class="image">
+                        <img class="pic-1" src="/img/shop1.png">
+                        <img class="pic-2" src="/img/shopping1.png">                      
+                    </a>
+                    <span class="product-sale-label">hot</span>
+                </div>
+                <div class="product-content">
+                    <ul class="rating">
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                    </ul>
+                    <h3 class="title"><a href="#">Women's Shirt</a></h3>
+                    <div class="price">$12.30</div>
+                    <div class="product-button-group">
+                        <a class="product-like-icon" href="#"><i class="fas fa-heart"></i></a>
+                        <a class="add-to-cart" href="#"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
+                        <a class="product-compare-icon" href="#"><i class="fas fa-random"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#" class="image">
+                        <img class="pic-1" src="/img/shop1.png">
+                        <img class="pic-2" src="/img/shopping1.png">                      
+                    </a>
+                    <span class="product-sale-label">hot</span>
+                </div>
+                <div class="product-content">
+                    <ul class="rating">
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                    </ul>
+                    <h3 class="title"><a href="#">Women's Shirt</a></h3>
+                    <div class="price">$12.30</div>
+                    <div class="product-button-group">
+                        <a class="product-like-icon" href="#"><i class="fas fa-heart"></i></a>
+                        <a class="add-to-cart" href="#"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
+                        <a class="product-compare-icon" href="#"><i class="fas fa-random"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#" class="image">
+                        <img class="pic-1" src="/img/shop1.png">
+                        <img class="pic-2" src="/img/shopping1.png">                      
+                    </a>
+                    <span class="product-sale-label">hot</span>
+                </div>
+                <div class="product-content">
+                    <ul class="rating">
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                    </ul>
+                    <h3 class="title"><a href="#">Women's Shirt</a></h3>
+                    <div class="price">$12.30</div>
+                    <div class="product-button-group">
+                        <a class="product-like-icon" href="#"><i class="fas fa-heart"></i></a>
+                        <a class="add-to-cart" href="#"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
+                        <a class="product-compare-icon" href="#"><i class="fas fa-random"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#" class="image">
+                        <img class="pic-1" src="/img/shop1.png">
+                        <img class="pic-2" src="/img/shopping1.png">                      
+                    </a>
+                    <span class="product-sale-label">hot</span>
+                </div>
+                <div class="product-content">
+                    <ul class="rating">
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                       <li class="fas fa-star"></li>
+                    </ul>
+                    <h3 class="title"><a href="#">Women's Shirt</a></h3>
+                    <div class="price">$12.30</div>
+                    <div class="product-button-group">
+                        <a class="product-like-icon" href="#"><i class="fas fa-heart"></i></a>
+                        <a class="add-to-cart" href="#"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
+                        <a class="product-compare-icon" href="#"><i class="fas fa-random"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+              
+    </div>    
 </div>
 <style>
 CSS (Fonts required : Oswald)

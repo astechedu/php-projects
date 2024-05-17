@@ -13,7 +13,7 @@ use Cake\View\Exception\MissingTemplateException;
 class CartsController extends AppController
 {
 
-    public function product()
+    public function listingcart()
     {
 
     }    

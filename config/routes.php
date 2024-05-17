@@ -58,7 +58,7 @@ return function (RouteBuilder $routes): void {
         //$builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
         $builder->connect('/', ['controller' => 'Users', 'action' => 'index']);
         $builder->connect('/product', ['controller' => 'Products', 'action' => 'product']);
-        $builder->connect('/cart', ['controller' => 'Carts', 'action' => 'cart']);
+        $builder->connect('/carts', ['controller' => 'Carts', 'action' => 'listingcart']);
         /*
          * ...and connect the rest of 'Pages' controller's URLs.
          */
