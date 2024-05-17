@@ -217,7 +217,7 @@
                 </div>
             </div>
         </div>
-              
+
     </div>    
 </div>
 <style>
@@ -367,3 +367,4 @@ CSS (Fonts required : Oswald)
     .product-grid{ margin-bottom: 30px; }
 }
 </style>
+
