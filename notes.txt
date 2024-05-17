@@ -13,3 +13,9 @@ https://freefrontend.com/bootstrap-product-cards/
 -----------------------------------------------------
 
 This is shop-yii2
+
+yii migrate/create <name>
+yii migrate/create create_news_table
+yii migrate/create create_post_table
+
+
