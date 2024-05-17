@@ -16,7 +16,7 @@ $this->title = 'Shopping';
                         <div class="product-action">
                            <div class="product-action-style"> <a href="#"> <i class="fa fa-plus"></i> </a> <a href="#"> <i class="fa fa-heart"></i> </a> <a href="#"> <i class="fa fa-shopping-cart"></i> </a> </div>
                         </div>
-                     </div>
+                     </div> 
                   </div>
                </div>
                <div class="col-md-3">
