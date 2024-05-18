@@ -12,4 +12,8 @@ class Product extends BaseController
     {
         return view('products/product_listing');
     }
+    public function product_grid_view()
+    {
+        return view('products/product_grid_view');
+    }    
 }

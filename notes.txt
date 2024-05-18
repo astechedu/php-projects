@@ -37,6 +37,11 @@ php spark make:controller Cart
 
 -------------------------------------------------------------------
 
+Read this: 
+
+https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-ecommerce-dashboard.html
+
+-------------------------------------------------------------------
 Shopping Cart: 
 
 https://www.codexworld.com/codeigniter-shopping-cart-checkout-implementation/

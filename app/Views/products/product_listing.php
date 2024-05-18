@@ -6,488 +6,107 @@
 
 <?= $this->section('content') ?>
 
-<div class="container-fluid mt-5 mb-5">
-  <div class="row g-2">
-    <div class="col-md-3">
-      <div class="t-products p-2">
-        <h6 class="text-uppercase">Computer & Periferals</h6>
-        <div class="p-lists">
-          <div class="d-flex justify-content-between mt-2">
-            <span>Laptops</span>
-            <span>23</span>
-          </div>
-          <div class="d-flex justify-content-between mt-2">
-            <span>Desktops</span>
-            <span>46</span>
-          </div>
-          <div class="d-flex justify-content-between mt-2">
-            <span>Monitors</span>
-            <span>13</span>
-          </div>
-          <div class="d-flex justify-content-between mt-2">
-            <span>Mouse</span>
-            <span>33</span>
-          </div>
-          <div class="d-flex justify-content-between mt-2">
-            <span>Keyboard</span>
-            <span>12</span>
-          </div>
-          <div class="d-flex justify-content-between mt-2">
-            <span>Printer</span>
-            <span>53</span>
-          </div>
-          <div class="d-flex justify-content-between mt-2">
-            <span>Mobiles</span>
-            <span>203</span>
-          </div>
-          <div class="d-flex justify-content-between mt-2">
-            <span>CPU</span>
-            <span>23</span>
-          </div>
+<div class="container mydiv">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- bbb_deals -->
+            <div class="bbb_deals">
+                <div class="ribbon ribbon-top-right"><span><small class="cross">x </small>4</span></div>
+                <div class="bbb_deals_title">Today's Combo Offer</div>
+                <div class="bbb_deals_slider_container">
+                    <div class=" bbb_deals_item">
+                        <div class="bbb_deals_image"><img src="https://i.imgur.com/9UYzfny.png" alt=""></div>
+                        <div class="bbb_deals_content">
+                            <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+                                <div class="bbb_deals_item_category"><a href="#">Laptops</a></div>
+                                <div class="bbb_deals_item_price_a ml-auto"><strike>₹30,000</strike></div>
+                            </div>
+                            <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+                                <div class="bbb_deals_item_name">HP Notebook</div>
+                                <div class="bbb_deals_item_price ml-auto">₹25,550</div>
+                            </div>
+                            <div class="available">
+                                <div class="available_line d-flex flex-row justify-content-start">
+                                    <div class="available_title">Available: <span>6</span></div>
+                                    <div class="sold_stars ml-auto"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+                                </div>
+                                <div class="available_bar"><span style="width:17%"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="processor p-2">
-        <div class="heading d-flex justify-content-between align-items-center">
-          <h6 class="text-uppercase">Processor</h6>
-          <span>--</span>
+        <div class="col-md-4">
+            <!-- bbb_deals -->
+            <div class="bbb_deals">
+                <div class="ribbon ribbon-top-right"><span><small class="cross">x </small>2</span></div>
+                <div class="bbb_deals_title">Today's Combo Offer</div>
+                <div class="bbb_deals_slider_container">
+                    <div class=" bbb_deals_item">
+                        <div class="bbb_deals_image"><img src="https://i.imgur.com/9UYzfny.png" alt=""></div>
+                        <div class="bbb_deals_content">
+                            <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+                                <div class="bbb_deals_item_category"><a href="#">Laptops</a></div>
+                                <div class="bbb_deals_item_price_a ml-auto"><strike>₹40,000</strike></div>
+                            </div>
+                            <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+                                <div class="bbb_deals_item_name">HP Envy</div>
+                                <div class="bbb_deals_item_price ml-auto">₹35,550</div>
+                            </div>
+                            <div class="available">
+                                <div class="available_line d-flex flex-row justify-content-start">
+                                    <div class="available_title">Available: <span>6</span></div>
+                                    <div class="sold_stars ml-auto"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+                                </div>
+                                <div class="available_bar"><span style="width:17%"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault"> Intel Core i7 </label>
-          </div>
-          <span>3</span>
+        <div class="col-md-4">
+            <!-- bbb_deals -->
+            <div class="bbb_deals">
+                <div class="ribbon ribbon-top-right"><span><small class="cross">x </small>3</span></div>
+                <div class="bbb_deals_title">Today's Combo Offer</div>
+                <div class="bbb_deals_slider_container">
+                    <div class=" bbb_deals_item">
+                        <div class="bbb_deals_image"><img src="https://i.imgur.com/9UYzfny.png" alt=""></div>
+                        <div class="bbb_deals_content">
+                            <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+                                <div class="bbb_deals_item_category"><a href="#">Laptops</a></div>
+                                <div class="bbb_deals_item_price_a ml-auto"><strike>₹30,000</strike></div>
+                            </div>
+                            <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+                                <div class="bbb_deals_item_name">Toshiba B77</div>
+                                <div class="bbb_deals_item_price ml-auto">₹27,550</div>
+                            </div>
+                            <div class="available">
+                                <div class="available_line d-flex flex-row justify-content-start">
+                                    <div class="available_title">Available: <span>6</span></div>
+                                    <div class="sold_stars ml-auto"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+                                </div>
+                                <div class="available_bar"><span style="width:17%"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Intel Core i6 </label>
-          </div>
-          <span>4</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Intel Core i3 </label>
-          </div>
-          <span>14</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Intel Centron </label>
-          </div>
-          <span>8</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Intel Pentinum </label>
-          </div>
-          <span>14</span>
-        </div>
-      </div>
-      <div class="brand p-2">
-        <div class="heading d-flex justify-content-between align-items-center">
-          <h6 class="text-uppercase">Brand</h6>
-          <span>--</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault"> Apple </label>
-          </div>
-          <span>13</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Asus </label>
-          </div>
-          <span>4</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Dell </label>
-          </div>
-          <span>24</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Lenovo </label>
-          </div>
-          <span>18</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Acer </label>
-          </div>
-          <span>44</span>
-        </div>
-      </div>
-      <div class="type p-2 mb-2">
-        <div class="heading d-flex justify-content-between align-items-center">
-          <h6 class="text-uppercase">Type</h6>
-          <span>--</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault"> Hybrid </label>
-          </div>
-          <span>23</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Laptop </label>
-          </div>
-          <span>24</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Desktop </label>
-          </div>
-          <span>14</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Touch </label>
-          </div>
-          <span>28</span>
-        </div>
-        <div class="d-flex justify-content-between mt-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked"> Tablets </label>
-          </div>
-          <span>44</span>
-        </div>
-      </div>
     </div>
-    <div class="col-md-9">
-      <div class="row g-2">
-        <div class="col-md-4">
-          <div class="product py-4">
-            <span class="off bg-success">-25% OFF</span>
-            <div class="text-center">
-              <img src="https://i.imgur.com/nOFet9u.jpg" width="200">
-            </div>
-            <div class="about text-center">
-              <h5>XRD Active Shoes</h5>
-              <span>$1,999.99</span>
-            </div>
-            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
-              <button class="btn btn-primary text-uppercase">Add to cart</button>
-              <div class="add">
-                <span class="product_fav">
-                  <i class="fa fa-heart-o"></i>
-                </span>
-                <span class="product_fav">
-                  <i class="fa fa-opencart"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product py-4">
-            <span class="off bg-warning">SALE</span>
-            <div class="text-center">
-              <img src="https://i.imgur.com/VY0R9aV.png" width="200">
-            </div>
-            <div class="about text-center">
-              <h5>Hygen Smart watch </h5>
-              <span>$123.43</span>
-            </div>
-            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
-              <button class="btn btn-primary text-uppercase">Add to cart</button>
-              <div class="add">
-                <span class="product_fav">
-                  <i class="fa fa-heart-o"></i>
-                </span>
-                <span class="product_fav">
-                  <i class="fa fa-opencart"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product py-4">
-            <div class="text-center">
-              <img src="https://i.imgur.com/PSGrLdz.jpg" width="200">
-            </div>
-            <div class="about text-center">
-              <h5>Acer surface book 2.5</h5>
-              <span>$1,999.99</span>
-            </div>
-            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
-              <button class="btn btn-primary text-uppercase">Add to cart</button>
-              <div class="add">
-                <span class="product_fav">
-                  <i class="fa fa-heart-o"></i>
-                </span>
-                <span class="product_fav">
-                  <i class="fa fa-opencart"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product py-4">
-            <span class="off bg-success">-10% OFF</span>
-            <div class="text-center">
-              <img src="https://i.imgur.com/OdRSpXG.jpg" width="200">
-            </div>
-            <div class="about text-center">
-              <h5>Dell XPS Surface</h5>
-              <span>$1,245.89</span>
-            </div>
-            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
-              <button class="btn btn-primary text-uppercase">Add to cart</button>
-              <div class="add">
-                <span class="product_fav">
-                  <i class="fa fa-heart-o"></i>
-                </span>
-                <span class="product_fav">
-                  <i class="fa fa-opencart"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product py-4">
-            <!-- <span class="off bg-success">-25% OFF</span> -->
-            <div class="text-center">
-              <img src="https://i.imgur.com/X2AwTCY.jpg" width="200">
-            </div>
-            <div class="about text-center">
-              <h5>Acer surface book 5.5</h5>
-              <span>$2,999.99</span>
-            </div>
-            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
-              <button class="btn btn-primary text-uppercase">Add to cart</button>
-              <div class="add">
-                <span class="product_fav">
-                  <i class="fa fa-heart-o"></i>
-                </span>
-                <span class="product_fav">
-                  <i class="fa fa-opencart"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product py-4">
-            <span class="off bg-success">-5% OFF</span>
-            <div class="text-center">
-              <img src="https://i.imgur.com/QQwcBpF.png" width="200">
-            </div>
-            <div class="about text-center">
-              <h5>Xps smart watch 5.0</h5>
-              <span>$999.99</span>
-            </div>
-            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
-              <button class="btn btn-primary text-uppercase">Add to cart</button>
-              <div class="add">
-                <span class="product_fav">
-                  <i class="fa fa-heart-o"></i>
-                </span>
-                <span class="product_fav">
-                  <i class="fa fa-opencart"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product py-4">
-            <span class="off bg-warning">SALE</span>
-            <div class="text-center">
-              <img src="https://i.imgur.com/PSGrLdz.jpg" width="200">
-            </div>
-            <div class="about text-center">
-              <h5>Acer surface book 8.5</h5>
-              <span>$3,999.99</span>
-            </div>
-            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
-              <button class="btn btn-primary text-uppercase">Add to cart</button>
-              <div class="add">
-                <span class="product_fav">
-                  <i class="fa fa-heart-o"></i>
-                </span>
-                <span class="product_fav">
-                  <i class="fa fa-opencart"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product py-4">
-            <div class="text-center">
-              <img src="https://i.imgur.com/m22OQy9.jpg" width="200">
-            </div>
-            <div class="about text-center">
-              <h5>Tyko Running shoes</h5>
-              <span>$99.99</span>
-            </div>
-            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
-              <button class="btn btn-primary text-uppercase">Add to cart</button>
-              <div class="add">
-                <span class="product_fav">
-                  <i class="fa fa-heart-o"></i>
-                </span>
-                <span class="product_fav">
-                  <i class="fa fa-opencart"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product py-4">
-            <div class="text-center">
-              <img src="https://i.imgur.com/OdRSpXG.jpg" width="200">
-            </div>
-            <div class="about text-center">
-              <h5>Dell surface book 5</h5>
-              <span>$1,999.99</span>
-            </div>
-            <div class="cart-button mt-3 px-2 d-flex justify-content-between align-items-center">
-              <button class="btn btn-primary text-uppercase">Add to cart</button>
-              <div class="add">
-                <span class="product_fav">
-                  <i class="fa fa-heart-o"></i>
-                </span>
-                <span class="product_fav">
-                  <i class="fa fa-opencart"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
-<?= $this->endSection() ?>
-
 
 <style>
-body {
-    background-color: #eee
-}
-
-.t-products {
-    background-image: linear-gradient(to right top, #5629c0, #5625cb, #5620d5, #551ae0, #5412eb);
-    color: #fff;
-    border-radius: 3px
-}
-
-.processor {
-    background-color: #fff;
-    margin-top: 5px;
-    border-bottom: 1px solid #eee
-}
-
-.brand {
-    background-color: #fff;
-    border-bottom: 1px solid #eee
-}
-
-.type {
-    background-color: #fff
-}
-
-.product {
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    position: relative
-}
-
-.about span {
-    color: #5629c0;
-    font-size: 16px
-}
-
-.cart-button button {
-    font-size: 12px;
-    color: #fff;
-    background-color: #5629c0;
-    height: 38px
-}
-
-.cart-button button:focus,
-button:active {
-    font-size: 12px;
-    color: #fff;
-    background-color: #5629c0;
-    box-shadow: none
-}
-
-.product_fav i {
-    line-height: 40px;
-    color: #5629c0;
-    font-size: 15px
-}
-
-.product_fav {
-    display: inline-block;
-    width: 36px;
-    height: 39px;
-    background: #FFFFFF;
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 11%;
-    text-align: center;
-    cursor: pointer;
-    margin-left: 3px;
-    -webkit-transition: all 200ms ease;
-    -moz-transition: all 200ms ease;
-    -ms-transition: all 200ms ease;
-    -o-transition: all 200ms ease;
-    transition: all 200ms ease
-}
-
-.product_fav:hover {
-    background: #5629c0
-}
-
-.product_fav:hover i {
-    color: #fff
-}
-
-.about {
-    margin-top: 12px
-}
-
-.off {
-    position: absolute;
-    left: 65%;
-    top: 6%;
-    width: 80px;
-    text-align: center;
-    height: 30px;
-    line-height: 8px;
-    border-radius: 5px;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff
-}	
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');html, body{height: 100%}body{display: grid;background: #fff;font-family: 'Manrope', sans-serif}.mydiv{margin-top: 50px;margin-bottom: 50px}.cross{font-size:10px}.padding-0{padding-right: 5px;padding-left: 5px}.img-style{margin-left: -11px;box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);border-radius: 5px;max-width: 104% !important}.m-t-20{margin-top: 20px}.bbb_background{background-color: #E0E0E0 !important}.ribbon{width: 150px;height: 150px;overflow: hidden;position: absolute}.ribbon span{position: absolute;display: block;width: 34px;border-radius: 50%;padding: 8px 0;background-color: #3498db;box-shadow: 0 5px 10px rgba(0, 0, 0, .1);color: #fff;font: 100 18px/1 'Lato', sans-serif;text-shadow: 0 1px 1px rgba(0, 0, 0, .2);text-transform: uppercase;text-align: center}.ribbon-top-right{top: -10px;right: -10px}.ribbon-top-right::before, .ribbon-top-right::after{border-top-color: transparent;border-right-color: transparent}.ribbon-top-right::before{top: 0;left: 17px}.ribbon-top-right::after{bottom: 17px;right: 0}.sold_stars i{color: orange}.ribbon-top-right span{right: 17px;top: 17px}div{display: block;position: relative;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box}.bbb_deals_featured{width: 100%}.bbb_deals{width: 100%;margin-right: 7%;padding-top: 80px;padding-left: 25px;padding-right: 25px;padding-bottom: 34px;box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);border-radius: 5px;margin-top: 0px}.bbb_deals_title{position: absolute;top: 10px;left: 22px;font-size: 18px;font-weight: 500;color: #000000}.bbb_deals_slider_container{width: 100%}.bbb_deals_item{width: 100% !important}.bbb_deals_image{width: 100%}.bbb_deals_image img{width: 100%}.bbb_deals_content{margin-top: 33px}.bbb_deals_item_category a{font-size: 14px;font-weight: 400;color: rgba(0, 0, 0, 0.5)}.bbb_deals_item_price_a{font-size: 14px;font-weight: 400;color: rgba(0, 0, 0, 0.6)}.bbb_deals_item_price_a strike{color: red}.bbb_deals_item_name{font-size: 24px;font-weight: 400;color: #000000}.bbb_deals_item_price{font-size: 24px;font-weight: 500;color: #6d6e73}.available{margin-top: 19px}.available_title{font-size: 16px;color: rgba(0, 0, 0, 0.5);font-weight: 400}.available_title span{font-weight: 700}@media only screen and (max-width: 991px){.bbb_deals{width: 100%;margin-right: 0px}}@media only screen and (max-width: 575px){.bbb_deals{padding-left: 15px;padding-right: 15px}.bbb_deals_title{left: 15px;font-size: 16px}.bbb_deals_slider_nav_container{right: 5px}.bbb_deals_item_name, .bbb_deals_item_price{font-size: 20px}}
 </style>
 
+
+
+
 <script>
-    alert('hi')
+// For Filters
 </script>
+
+<?= $this->endSection() ?>

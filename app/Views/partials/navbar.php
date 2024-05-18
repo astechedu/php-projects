@@ -27,6 +27,12 @@
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/categories">Categories</a>
+        </li>  
+        <li class="nav-item">
+          <a class="nav-link" href="/grid">GridView</a>
+        </li>                         
+        <li class="nav-item">
           <a class="nav-link" href="/cart">Cart(0)</a>
         </li>        
       </ul>
