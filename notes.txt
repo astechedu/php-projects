@@ -1,13 +1,38 @@
-php spark help <generator_command>
 
 
 
+Keys: 
+
+ 	base_url(), site_url(), spark, 
+
+
+--------------------------------------------------------------------
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+base_url();
+echo base_url();
+echo base_url('blog/post/123');
+
+
+site_url()
+echo site_url('news/local/123');
+$segments = ['news', 'local', '123'];
+echo site_url($segments);
+
+
+<?php echo base_url(); ?>
+<?php echo site_url(); ?>
+
+-------------------------------------------------------------------
 -------------------------------------------------------------------
 
 Spark: 
 
+php spark
+php spark help <generator_command>
 php spark make:controller Cart
-
 
 
 -------------------------------------------------------------------
@@ -41,6 +66,7 @@ codeigniter_shopping_cart/
     │   └── style.css
     └── js/
         └── jquery.min.js
+
 
         
 CREATE TABLE `products` (
@@ -101,7 +127,7 @@ CREATE TABLE `order_items` (
 
 
 
-
+--------------------------------------------------------------------------------------
 
 https://bbbootstrap.com/snippets/bootstrap-ecommerce-product-listings-filters-74673706
 
@@ -111,4 +137,5 @@ Cart Listing:
 
 https://bootdey.com/snippets/view/shopping-cart-with-selected-products-order-summary-and-checkout-button#css
 
+--------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------

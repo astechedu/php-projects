@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'http://localhost:8080/';
+    public string $baseURL = 'http://localhost/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -41,7 +41,7 @@ class App extends BaseConfig
      * from your site URIs, set this variable to an empty string.
      */
     public string $indexPage = 'index.php';
-
+    //public string $indexPage = '';
     /**
      * --------------------------------------------------------------------------
      * URI PROTOCOL

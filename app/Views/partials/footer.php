@@ -1,5 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">      
-</script>
 
 <!-- Footer 2 - Bootstrap Brain Component -->
 <footer class="footer">
@@ -131,6 +129,11 @@
   </div>
 </div></div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">      
+</script>
+
+<script type="text/javascript" src="<?php echo base_url('js/custom.js'); ?>"></script>
 
   </body>
 </html>
