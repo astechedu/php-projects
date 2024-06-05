@@ -1,6 +1,11 @@
 @extends('layouts.default')
 
+@section('title')
+Cart
+@endsection
+
 @section('content')
+
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
 	<main class="page">

@@ -46,3 +46,33 @@ https://bootsnipp.com/tags/footer/4
 
 
 ---------------------------------------------------------------
+
+Laravel api 11 (using class Repository):
+With Best Practices: 
+-Using Interface, Requests, Classes, Repositories etc
+
+https://medium.com/@1415sandalanka/laravel-11-rest-api-crud-with-best-practices-fcc26505e0d2
+
+--------------------------------------------------------------
+
+Laravel 11 Normal api
+
+https://www.binaryboxtuts.com/php-tutorials/laravel-tutorials/how-to-make-laravel-11-rest-api/
+
+--------------------------------------------------------------
+
+Laravel 11 normal api:
+
+https://www.techiediaries.com/laravel-11-crud-api-tutorial/
+
+---------------------------------------------------------------
+
+Laravel 11 Passposrt Api:
+
+https://www.binaryboxtuts.com/php-tutorials/laravel-tutorials/laravel-11-api-authentication-using-laravel-passport/
+
+----------------------------------------------------------------
+
+Larave Repository Pattern:
+https://www.twilio.com/en-us/blog/repository-pattern-in-laravel-application
+----------------------------------------------------------------------------

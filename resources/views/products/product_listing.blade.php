@@ -1,5 +1,11 @@
 @extends('layouts.default')
+
+@section('title')
+Poroducts
+@endsection
+
 @section('content')
+
     <div class="py-3 py-md-5 bg-light">
         <div class="container">
             <div class="row">
@@ -27,13 +33,22 @@
                                         
                                     </span></span>
                             </div>
-                            <div class="mt-2">
-                                <a href="" class="btn btn1">Add To Cart</a>
-                                <a href="" class="btn btn1"> <i class="fa fa-heart"></i> </a>
-                                <a href="" class="btn btn1"> View </a>
-                            </div>
+                            <form action="{{route('cart.addtocart')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="pname" value="<?= $product['name'] ?>">
+                                <input type="hidden" name="pprice" value="<?= $product['price'] ?>">
+                                <input type="hidden" name="description" value="<?= $product['description'] ?>">                        
+                                <input type="submit" name="submit" value="Add To Cart">
+                            </form>
+                            <!--
+                                    <div class="mt-2">
+                                        <a href="" class="btn btn1">Add To Cart</a>
+                                        <a href="" class="btn btn1"> <i class="fa fa-heart"></i> </a>
+                                        <a href="" class="btn btn1"> View </a>
+                                    </div>    
+                            -->
                         </div>
-                    </div>
+                    </div>          
                 </div>
                 <?php } ?>
 <!--
@@ -117,9 +132,9 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<script>
+//
+</script>
 
 <style type="text/css">
 /* Product Card */

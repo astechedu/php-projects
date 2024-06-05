@@ -19,4 +19,4 @@ Route::delete('/products/{product}', [ProductController::class, 'destroy'])->nam
 
 //Cart
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
-Route::get('addtocart', [CartController::class, 'addToCart'])->name('cart.addtocart');
+Route::post('addtocart', [CartController::class, 'addToCart'])->name('cart.addtocart');
