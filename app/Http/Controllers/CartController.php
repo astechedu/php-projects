@@ -10,13 +10,13 @@ class CartController extends Controller
 {
 	public function index() //: view
 	{
-
 		return view('cart/cart_listing');
 	}
-	public function addToCart() 
+	public function addToCart(Request $res) 
 	{
-
+		dd($res);
       //d("Add to cart");
-		return view('cart/add_to_cart');
+		//return view('cart/add_to_cart');
+		return view('cart/cart_listing');
 	}
 }
