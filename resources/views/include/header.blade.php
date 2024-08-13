@@ -35,7 +35,7 @@
               </form>     
         </li>           
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('cart.addtocart') }}">Cart(0)</a>
+          <a class="nav-link" href="{{ route('cart.index') }}">Cart(0)</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Login</a>
