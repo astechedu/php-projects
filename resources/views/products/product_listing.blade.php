@@ -37,8 +37,9 @@ Poroducts
                                 @csrf
                                 <input type="hidden" name="pname" value="<?= $product['name'] ?>">
                                 <input type="hidden" name="pprice" value="<?= $product['price'] ?>">
-                                <input type="hidden" name="description" value="<?= $product['description'] ?>">                        
+                                <input type="hidden" name="description" value="<?= $product['description'] ?>">  
                                 <input type="submit" name="submit" value="Add To Cart">
+                                <input type="number" name="qty" value="1" class="">                            
                             </form>
                             <!--
                                     <div class="mt-2">
