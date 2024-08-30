@@ -14,23 +14,42 @@ class CartController extends Controller
 		$carts = Cart::all();
 		return view('cart/cart_listing',compact('carts'));
 	}
-	public function addToCart(Request $request)//: view 
-	{
-	  //dd($request);exit;
-      $cart = new Cart;
-      $cart->name = $request->pname;
-      $cart->price = $request->pprice;
-      $cart->description = $request->description;
-      $cart->qty = $request->qty;
-      //$product->is_active = $request->is_active;
-      //$cart->save();
 
-      if($request->qty < 1){
-        // $cart->qty = 0
-      }
-      	$cart->qty=$request->qty++;
-		$cart->save();
-      //dd($cart);
+	public function addToCart(Request $request)
+	{		
+
+       $product_pid = $request->pid;
+       $cart = Cart::find($product_pid);
+		
+       if(empty($cart)){
+	   		 $cart = new Cart; 
+			      $cart->name = $request->pname;
+			      $cart->price = $request->pprice;
+			      $cart->description = $request->description;
+			      $cart->qty = $request->qty;
+			      $cart->pid = $request->pid;
+	         	  $cart->save();
+       }
+       if(!empty($cart)){   
+            if($cart->pid === (int) $request->pid){
+                  //$cartObj = new Cart;			       
+			      $cart->qty += (int) $request->qty;
+	         	  $cart->update();
+            }    	
+       }        
+
 	  return redirect('/');
 	}
+
+	public function cartItemCount(Request $request) 
+	{
+     if($request->method() == "POST")
+	  $cart = Cart::get();
+	  $noOfItems = count($cart);
+      //echo $noOfItems;
+      return response()->json(array("cartCounter" => $noOfItems));
+	}	
+    
+
 }
+	

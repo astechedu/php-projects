@@ -35,6 +35,7 @@ Poroducts
                             </div>
                             <form action="{{route('cart.addtocart')}}" method="post">
                                 @csrf
+                                <input type="hidden" name="pid" value="<?= $product['id'] ?>">                                
                                 <input type="hidden" name="pname" value="<?= $product['name'] ?>">
                                 <input type="hidden" name="pprice" value="<?= $product['price'] ?>">
                                 <input type="hidden" name="description" value="<?= $product['description'] ?>">  
@@ -204,4 +205,6 @@ Poroducts
 }
 /* Product Card End */    
 </style>
+
+
 @endsection

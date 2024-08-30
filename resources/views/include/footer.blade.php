@@ -57,8 +57,7 @@
 		</div>
 	</section>
 	
-	<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>	
-	<script src="{{ asset('js/jquery341.min.js') }}"></script>
+
 </body>
 </html>
 	<!-- ./Footer -->

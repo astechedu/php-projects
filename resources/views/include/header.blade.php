@@ -34,9 +34,9 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
               </form>     
         </li>           
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('cart.index') }}">Cart(0)</a>
-        </li>
+        <li class="nav-item" id="cartTotal">
+          <a class="nav-link" href="{{ route('cart.index') }}">Cart(<span id="cartCounter">0</span>)</a>
+        </li>        
         <li class="nav-item">
           <a class="nav-link" href="#">Login</a>
         </li>       
