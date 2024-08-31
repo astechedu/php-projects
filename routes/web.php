@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 
+use App\Mail\MyTestEmail;
+use Illuminate\Support\Facades\Mail;
+
 //Route::get('/', function () {
     //return view('welcome');
 //});
@@ -22,3 +25,20 @@ Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('cart', [CartController::class, 'addToCart'])->name('cart.addtocart');
 
 Route::post('cartitems', [CartController::class, 'cartItemCount'])->name('cart.counter');
+
+
+
+
+
+
+
+//Sending Email Testing
+Route::get('/testroute', function() {
+    $mailData['name'] = "Funny Coder";
+    $mailData['title'] = "Testing Mail";
+
+    //The email sending is done using the to method on the Mail facade
+    Mail::to('ajaysisaudiya@gmail.com')->send(new MyTestEmail($mailData));
+
+    return 'Email sent!';
+});

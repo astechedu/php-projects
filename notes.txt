@@ -14,6 +14,12 @@ To quickly clear your cache at any time, download CCleaner and add a shortcut to
 
 ---------------------------------------------------
 
+Keys: 
+
+Laravel 11 Send Email, 
+
+---------------------------------------------------
+
 -> Artisan Commands <-
 
 1. php artisan make:model -msf Product    //Migration, Seeder, Factory
@@ -83,3 +89,130 @@ https://www.binaryboxtuts.com/php-tutorials/laravel-tutorials/laravel-11-api-aut
 Larave Repository Pattern:
 https://www.twilio.com/en-us/blog/repository-pattern-in-laravel-application
 ----------------------------------------------------------------------------
+
+
+
+
+--> Laravel 11 Send Email: <--
+
+Check Mails in Storage/logs/larave.log file
+
+
+
+1. Artisan commands:
+   php artisan make:mail MyTestEmail
+   
+
+2. env
+
+	MAIL_MAILER=log
+	MAIL_HOST=127.0.0.1
+	MAIL_PORT=2525
+	MAIL_USERNAME=null
+	MAIL_PASSWORD=null
+	MAIL_ENCRYPTION=null
+	MAIL_FROM_ADDRESS="hello@example.com"
+	MAIL_FROM_NAME="${APP_NAME}"
+
+
+
+	web.php
+
+	use App\Mail\MyTestEmail;
+	use Illuminate\Support\Facades\Mail;
+
+
+	//Sending Email Testing
+	Route::get('/testroute', function() {
+	    $mailData['name'] = "Funny Coder";
+	    $mailData['title'] = "Testing Mail";
+
+	    //The email sending is done using the to method on the Mail facade
+	    Mail::to('ajay@gmail.com')->send(new MyTestEmail($mailData));
+
+	    return 'Email sent!';
+	});
+
+
+
+4. resources/views/mail/testMail.blade.php
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laravel 11 Send Email with Attachment Example - Techsolutiontuff</title>
+</head>
+<body>
+    <h1>{{ $mailData['title'] }}</h1>
+  
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.</p>
+     
+    <p>Thank you</p>
+</body>
+</html>
+
+
+5.
+
+//app\Mail\MyTestEmail.php
+
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
+
+class MyTestEmail extends Mailable 
+{
+    use Queueable, SerializesModels;
+
+    /**
+     * Create a new message instance.
+     */
+    public function __construct(public $mailData)
+    {
+        //
+    }
+
+    /**
+     * Get the message envelope.
+     */
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: 'My Test Email',
+        );
+    }
+
+    /**
+     * Get the message content definition.
+    */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'mail.testMail',
+        );
+    }
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+    */ 
+    public function attachments(): array
+    {
+        return [];
+    }
+}
+
+
+
+
+-End of Sending Mail-
+
+--------------xxx-------------
