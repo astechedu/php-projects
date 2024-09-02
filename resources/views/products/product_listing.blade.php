@@ -27,21 +27,25 @@ Poroducts
                                </a>
                             </h5>
                             <div>
-                                <span class="selling-price">$<span><?= $product['price'] ?></span></span>
+                                <span class="selling-price">$<span ><?= $product['price'] ?></span></span>
                                 <span class="original-price">$<span>
                                     <?= $product['price'] + $product['price']*0.4 ?>
                                         
                                     </span></span>
                             </div>
-                            <form action="{{route('cart.addtocart')}}" method="post">
+                            <form action="{{ route('cart.addtocart') }}" method="post" id="ajax">
                                 @csrf
-                                <input type="hidden" name="pid" value="<?= $product['id'] ?>">                                
-                                <input type="hidden" name="pname" value="<?= $product['name'] ?>">
-                                <input type="hidden" name="pprice" value="<?= $product['price'] ?>">
-                                <input type="hidden" name="description" value="<?= $product['description'] ?>">  
-                                <input type="submit" name="submit" value="Add To Cart" id="cartTotal">
-                                <input type="number" name="qty" value="1" class="">                            
-                            </form>
+                                <input type="hidden" name="pid" value="<?= $product['id'] ?>" id="pid">                                
+                                <input type="hidden" name="pname" value="<?= $product['name'] ?>" id="pname">
+                                <input type="hidden" name="pprice" value="<?= $product['price'] ?>" id="pprice">
+                                <input type="hidden" name="description" value="<?= $product['description'] ?>" id="description">  
+
+                                <input type="hidden" name="qty" value="1" class="" id="qty">    
+
+                                <input type="submit" name="submit" value="Add To Cart" id="cartTotal"> 
+                                                               
+                            </form>                     
+
                             <!--
                                     <div class="mt-2">
                                         <a href="" class="btn btn1">Add To Cart</a>

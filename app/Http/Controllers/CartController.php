@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\Cart;
 
+
 class CartController extends Controller
 {
 	public function index(): view
@@ -17,9 +18,14 @@ class CartController extends Controller
 
 	public function addToCart(Request $request)
 	{		
+          if($request->ajax() && $request->method() == "POST"){
+          	echo "hiiii";
+          }
+       $product_pid = (int) $request->pid;
 
-       $product_pid = $request->pid;
        $cart = Cart::find($product_pid);
+
+       //dd($cart);exit;
 		
        if(empty($cart)){
 	   		 $cart = new Cart; 
@@ -37,19 +43,37 @@ class CartController extends Controller
 	         	  $cart->update();
             }    	
        }        
-
-	  return redirect('/');
+	return response()->json( [ 'success' => 'Customer registered successfully!' ] );
+	  //return redirect('/');
 	}
 
 	public function cartItemCount(Request $request) 
 	{
-     if($request->method() == "POST")
-	  $cart = Cart::get();
-	  $noOfItems = count($cart);
-      //echo $noOfItems;
-      return response()->json(array("cartCounter" => $noOfItems));
+     if($request->ajax() && $request->method() == "GET"){
+		$cart = Cart::get();
+		$noOfItems = count($cart);
+     	 //echo $noOfItems;
+		return response()->json(array("cartCounter" => $noOfItems));     	
+     }
+	    //return response()->json(array("cartCounter" => "No"));
+		return redirect('/');
+
 	}	
     
+	public function cartItemRemove(Request $request) 
+	{	
 
+        if($request->ajax() && $request->method() == "POST"){
+ 			$cartpid = (int) $request->pid;        
+      		$pid = Cart::where('pid', $cartpid)->delete();          	
+            //return response()->json(["success","Item $cartpid succesfully deleted"]);
+			  return response()->json(array("success" => "Item $cartpid succesfully deleted","pid"=>$cartpid));
+        }
+      //$cartpid = (int) $request->pid;        
+      //$pid = Cart::where('pid', $cartpid)->delete();      
+      		return response()->json(["success no"]);     
+      //return response()->json(array("success" => "Item $cartPid successfully deleted!"));
+
+	}	
 }
 	

@@ -7,20 +7,24 @@ Cart
 @section('content')
 
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	
+	<div class="alert alert-success" id="success" style="position: absolute;top:60px;left:300;width:85%;">
+        <!--{{ session('success') }}-->
+    </div>
 
-	<main class="page">
+	<main class="page">  
 	 	<section class="shopping-cart dark">
 	 		<div class="container">
 		        <div class="block-heading">
 		          <h2>Shopping Cart</h2>
-		          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
-		        </div>
-		        <div class="content">
+		          <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>-->
+		        </div>       
+		        <div class="content">	 	        	        	
 	 				<div class="row">	
 	 					<div class="col-md-12 col-lg-8">
 	 						<div class="items">
 	 							<?php foreach($carts as $cart) { ?>
-				 				<div class="product">
+				 				<div class="product" pid="{{$cart['pid']}}">
 				 					<div class="row">
 					 					<div class="col-md-3">
 					 						<img class="img-fluid mx-auto d-block image" src="{{asset('images/shop1.png')}}">
@@ -43,11 +47,20 @@ Cart
 							 							<input id="quantity" type="number" value ="{{$cart['qty']}}" class="form-control quantity-input">
 							 						</div>
 							 						<div class="col-md-3 price">
-							 							<span>${{$cart['price']}}</span>
+							 							<span id="price">${{$cart['price']}}</span>
 							 						</div>
+<div class="col-md-2">             
+                               
+			                                                
+			                                <a href="#" id="cartRemove" class="btn btn-md btn-danger" pid="{{$cart['pid']}}">
+			                               Remove</a>               
+			                           
+</div>
+
 							 					</div>
 							 				</div>
 					 					</div>
+
 					 				</div>
 				 				</div>
 				 				<?php } ?>
@@ -86,8 +99,8 @@ Cart
 }
 
 .shopping-cart .block-heading{
-    padding-top: 50px;
-    margin-bottom: 40px;
+    padding-top: 0px;
+    margin-bottom: 0px;
     text-align: center;
 }
 
