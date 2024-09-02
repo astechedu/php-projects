@@ -8,6 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 
 class PostEventNotification
 {
+    
     /**
      * Create the event listener.
      */
@@ -22,5 +23,6 @@ class PostEventNotification
     public function handle(PostEvent $event): void
     {
         //
+        echo $event->pid;
     }
 }

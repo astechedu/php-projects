@@ -9,11 +9,12 @@
     <title>@yield('title')</title>
     <!-- load bootstrap from a cdn -->
 	<link href="{{ asset('css/bootstrap533.min.css') }}" rel="stylesheet"> 
-	<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">    
-	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>	
-	<script src="{{ asset('js/jquery341.min.js') }}"></script>
-	<script src="{{ asset('js/custom.js') }}"></script>
+	<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet"> 
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">   
+
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script> 
+    <script src="{{ asset('js/jquery341.min.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 
 </head>
 <body>

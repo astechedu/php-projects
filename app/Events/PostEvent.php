@@ -17,20 +17,16 @@ class PostEvent
     /**
      * Create a new event instance.
      */
-    public function __construct(public $post)
+    public $pid;
+
+    public function __construct($pid='')
     {
         //
+        $this->pid = $pid;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
-    public function broadcastOn(): array
+    public function handle(PodcastProcessed $event): void
     {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+        // ...
     }
 }

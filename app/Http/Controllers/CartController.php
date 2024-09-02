@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\Cart;
 
+use App\Events\PostEvent;
 
 class CartController extends Controller
 {
@@ -18,16 +19,16 @@ class CartController extends Controller
 
 	public function addToCart(Request $request)
 	{		
-          if($request->ajax() && $request->method() == "POST"){
-          	echo "hiiii";
-          }
+       
+         	
        $product_pid = (int) $request->pid;
-
-       $cart = Cart::find($product_pid);
-
+       //$cart = Cart::findOrFail($product_pid);
+       //$cart = Cart::where('pid', $product_pid);  //If id not primary
+       $cart = Cart::firstWhere('pid', $product_pid);
        //dd($cart);exit;
 		
        if(empty($cart)){
+      
 	   		 $cart = new Cart; 
 			      $cart->name = $request->pname;
 			      $cart->price = $request->pprice;
@@ -37,43 +38,55 @@ class CartController extends Controller
 	         	  $cart->save();
        }
        if(!empty($cart)){   
-            if($cart->pid === (int) $request->pid){
-                  //$cartObj = new Cart;			       
+   	  	   	         
+            if($cart->pid === (int) $product_pid){
+            	//echo $request->qty;exit;
+                  //$cart = new Cart;
 			      $cart->qty += (int) $request->qty;
 	         	  $cart->update();
+
             }    	
        }        
-	return response()->json( [ 'success' => 'Customer registered successfully!' ] );
-	  //return redirect('/');
+	  //return response()->json( [ 'success' => 'Customer registered successfully!' ] );
+       
+	  //return redirect()->back();
 	}
 
-	public function cartItemCount(Request $request) 
-	{
-     if($request->ajax() && $request->method() == "GET"){
-		$cart = Cart::get();
-		$noOfItems = count($cart);
-     	 //echo $noOfItems;
-		return response()->json(array("cartCounter" => $noOfItems));     	
-     }
-	    //return response()->json(array("cartCounter" => "No"));
-		return redirect('/');
 
-	}	
-    
 	public function cartItemRemove(Request $request) 
 	{	
+        if($request->ajax() && $request->method() == "DELETE"){
 
-        if($request->ajax() && $request->method() == "POST"){
  			$cartpid = (int) $request->pid;        
-      		$pid = Cart::where('pid', $cartpid)->delete();          	
-            //return response()->json(["success","Item $cartpid succesfully deleted"]);
-			  return response()->json(array("success" => "Item $cartpid succesfully deleted","pid"=>$cartpid));
+      		$pid = Cart::firstWhere('pid', $cartpid);
+
+      		if($pid){
+      			$pid->delete();      		         	
+              // call the event             
+
+			  return response()->json(array("success" => "Item pid $cartpid succesfully deleted","pid"=>$cartpid));
+			}
+  		                     
+			return response()->json(array("success" => "Item pid $cartpid not found or already deleted","pid"=>$cartpid));
+
         }
       //$cartpid = (int) $request->pid;        
       //$pid = Cart::where('pid', $cartpid)->delete();      
-      		return response()->json(["success no"]);     
+      		//return response()->json(["success no"]);     
       //return response()->json(array("success" => "Item $cartPid successfully deleted!"));
-
+ 			//return response()->json(array("success" => "Item pid $cartpid not found or already deleted","pid"=>$cartpid));
+        return redirect()->route('cart.addToCart');
 	}	
+
+
+
+//Event and listener Testing
+
+	public function eventlistener(Request $request) 
+	{     
+		event(new PostEvent("Email has been sent to user"));     
+	}	
+    
+
 }
 	

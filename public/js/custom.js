@@ -26,14 +26,21 @@ $(function(){
 //Adding Cart Items
 //addToCart()
 function addToCart(){
-$("#ajax").on('submit', function(e) {
+$("#ajax").on('click', function(e) {
     e.preventDefault();
 
+    let qty = $('#qty').val()
+	let description = $('#description').val()
+	let pprice = $('#pprice').val()
+	let pname = $('#pname').val()
+    let data = {qty:qty,description:description,price:pprice,name:pname}
+
     $.ajax({        
-        url: "{{ route('cart') }}",        
+        url: "{{ route('cart.addtocart') }}",        
         type: "POST",
         dataType: "json",
-        data: $('#ajax').serialize(),
+        //data: $('#ajax').serialize(),
+        data: data,
         contentType: false,
         cache: false,
         processData: false,
@@ -54,22 +61,23 @@ $("#success").hide();
 	removeCart();
 	function removeCart(){
 			$('#cartRemove').on('click', function(){
-			$("#success").show();
+			$("#success").fadeIn(1500);
 				let pid = $('#cartRemove').attr('pid');
-	           //alert(pid);
+	          
 				$.ajax({				
-					type:'POST',
-					url:'http://localhost/remove',				
+					type:'DELETE',
+					url: "http://localhost/remove",				
 					data: {'pid':pid},
 					//_token: '{{ csrf_token() }}',
 					dataType: 'json',
 					success: function(response){
 					    $('#success').html(response.success);
-					    $("#success").fadeOut(2000);
+					    $("#success").fadeOut(1500);
 						//console.log()
 					},				
 				});
 			});	
 	}
+
 
 })

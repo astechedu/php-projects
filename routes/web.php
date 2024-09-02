@@ -22,14 +22,10 @@ Route::delete('/products/{product}', [ProductController::class, 'destroy'])->nam
 
 //Cart
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('cart', [CartController::class, 'addToCart'])->name('cart.addtocart');
+Route::post('addtocart', [CartController::class, 'addToCart'])->name('cart.addtocart');
 
 Route::get('cartitems', [CartController::class, 'cartItemCount'])->name('cart.counter');
-Route::post('remove', [CartController::class, 'cartItemRemove'])->name('cart.remove');
-
-
-
-
+Route::delete('remove', [CartController::class, 'cartItemRemove'])->name('cart.remove');
 
 
 
@@ -43,3 +39,8 @@ Route::get('/testroute', function() {
 
     return 'Email sent!';
 });
+
+
+//Event and listener testing
+Route::get('eventlistener', [CartController::class, 'eventlistener']);
+

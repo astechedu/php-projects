@@ -23,6 +23,13 @@ Cart
 	 				<div class="row">	
 	 					<div class="col-md-12 col-lg-8">
 	 						<div class="items">
+@php
+  $subtotal=0;
+  $discount=10;
+  $shipping=40;
+  $oneItemCost=0;
+  $total=0;  
+@endphp		 							
 	 							<?php foreach($carts as $cart) { ?>
 				 				<div class="product" pid="{{$cart['pid']}}">
 				 					<div class="row">
@@ -49,20 +56,22 @@ Cart
 							 						<div class="col-md-3 price">
 							 							<span id="price">${{$cart['price']}}</span>
 							 						</div>
-<div class="col-md-2">             
-                               
-			                                                
-			                                <a href="#" id="cartRemove" class="btn btn-md btn-danger" pid="{{$cart['pid']}}">
-			                               Remove</a>               
-			                           
-</div>
+													<div class="col-md-2">                
+						                                <a href="#" id="cartRemove" class="btn btn-md btn-danger" pid="{{$cart['pid']}}">
+						                               Remove</a>               
+						                         	</div>
 
 							 					</div>
 							 				</div>
 					 					</div>
-
+@php
+  $oneItemCost = $cart['price'] * $cart['qty'];
+  $subtotal += $oneItemCost;
+  $total = $subtotal - $discount + $shipping;
+@endphp		
 					 				</div>
 				 				</div>
+
 				 				<?php } ?>
 
 				 			</div>
@@ -70,18 +79,26 @@ Cart
 			 			<div class="col-md-12 col-lg-4">
 			 				<div class="summary">
 			 					<h3>Summary</h3>
-			 					<div class="summary-item"><span class="text">Subtotal</span><span class="price">$360</span></div>
-			 					<div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
-			 					<div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div>
-			 					<div class="summary-item"><span class="text">Total</span><span class="price">$360</span></div>
+			 					<div class="summary-item"><span class="text">Subtotal</span><span class="price">$<span id="subtotal"><?= $subtotal ?></span></div>
+			 					<div class="summary-item"><span class="text">Discount</span><span class="price" id="discount">$<?= $discount ?></span></div>
+			 					<div class="summary-item"><span class="text">Shipping</span><span class="price" id="shipping">$<?= $shipping ?></span></div>
+			 					<div class="summary-item"><span class="text">Total</span><span class="price" id="total">$<?= $total ?></span></div>
 			 					<button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
 				 			</div>
 			 			</div>
 		 			</div> 
 		 		</div>
 	 		</div>
+
+	 		<div id="ajaxcart">
+             <div id="li">
+             	
+             </div>
+	 		</div>
 		</section>
 	</main>
+
+
 
 <style>
 .shopping-cart{
