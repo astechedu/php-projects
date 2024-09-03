@@ -6,7 +6,7 @@ use App\Events\PostEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class AdminNotify// implements ShouldQueue
+class AdminNotify // implements ShouldQueue
 {
     /**
      * Create the event listener.

@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Mail\MyTestEmail;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\Cart;
+use App\Models\User;
+
 use App\Mail\MyTestEmail;
-use Illuminate\Support\Facade\Mail;
+use Illuminate\Support\Facades\Mail;
 
 use App\Events\PostEvent;
 
@@ -37,6 +39,9 @@ class CartController extends Controller
 			      $cart->qty = $request->qty;
 			      $cart->pid = $request->pid;
 	         	  $cart->save();
+
+	         	  //Send Mail Example
+	           	  //Mail::to('ajaysisaudiya@gmail.com')->send(new MyTestEmail($cart));
        }
        if(!empty($cart)){   
    	  	   	         
@@ -45,7 +50,7 @@ class CartController extends Controller
                   //$cart = new Cart;
 			      $cart->qty += (int) $request->qty;
 	         	  $cart->update();
-
+	  
                  //return response()->json( [ 'success' => 'Customer registered successfully!' ] );
             }    	
        }        
@@ -54,9 +59,10 @@ class CartController extends Controller
 	  return redirect()->back();
 	}
 
-
+    //Remove cart
 	public function cartItemRemove(Request $request) 
 	{	
+
         if($request->ajax() && $request->method() == "DELETE"){
 
  			$cartpid = (int) $request->pid;        
@@ -70,7 +76,6 @@ class CartController extends Controller
 			}
   		                     
 			return response()->json(array("success" => "Item pid $cartpid not found or already deleted","pid"=>$cartpid));
-
         }
 
         return redirect()->route('cart.addToCart');
@@ -88,13 +93,21 @@ class CartController extends Controller
 	}
 
 
-    //Sending Mail
-	public function sendMail(Request $request) 
+    //Sending Mail Example
+	public function sendmail(Request $request) 
 	{	
+		//echo "hhi";exit;
+	    $mailData['name'] = "Funny Coder";
+	    $mailData['title'] = "Testing Mail";
 	  //$id = $request->id;
-	  $id = 1;
-      $user = User::find($id);
-      Mail::to('ajaysisaudiya@gmail.com')->send($user->email);
+	  //$id = 1;
+	  // $user = User::find($id);
+	    //Or
+     // $user = User::all();
+      //dd($user); exit;
+      Mail::to('ajaysisaudiya@gmail.com')->send(new MyTestEmail($mailData));
+
+      return 'Email Successully sent to the user!';
 	}
 
 

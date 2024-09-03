@@ -11,8 +11,7 @@ $(function(){
 		//$('#cartTotal').on('mouseover', function(){
 			$.ajax({			
 				type:'GET',
-				url: "{{ route('cart.counter') }}",   
-	            //headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
+				url: "http://localhost/cartitems", 
 				dataType: 'json',
 				success:function(response){
 					$cartCounter = response.cartCounter
@@ -64,11 +63,11 @@ $("#success").hide();
 			$("#success").fadeIn(1500);
 				let pid = $('#cartRemove').attr('pid');
 	          
-				$.ajax({				
-					type:'DELETE',
-					url: "{{ route('cart.remove') }}",			
+				$.ajax({	
+					//url: "{{ route('cart.remove') }}",
+					url: "http://localhost/remove",			
+					type:'DELETE',													
 					data: {'pid':pid},
-					//_token: '{{ csrf_token() }}',
 					dataType: 'json',
 					success: function(response){
 					    $('#success').html(response.success);
@@ -81,17 +80,14 @@ $("#success").hide();
 
 
 //Practice
-	practice()
+	//practice()
 		function practice(){
 		//$('#cartTotal').on('mouseover', function(){
 			$.ajax({			
 				type:'GET',
-				url: "{{ route('cart.counter') }}",   
-	            //headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
-				dataType: 'html',
+				url: "#",   
+	            dataType: 'html',
 				success:function(response){
-					$cartCounter = response.cartCounter
-					$('#cartCounter').text($cartCounter)
 					//console.log(response)
 				},
 			});
