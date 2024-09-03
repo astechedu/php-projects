@@ -1,0 +1,349 @@
+c:/>ipconfig /flushdns
+c:/>netsh int ip reset
+
+
+H:\xampp\htdocs\php-projects
+
+https://kinsta.com/blog/laravel-model-factories/
+
+To clear the system cache, go to Settings > System > Storage > Configure Storage Sense or run it now > Clean now.
+
+To clear your internet cache and cookies, go to Control Panel > Network and Internet > Delete browsing history and cookies.
+
+To quickly clear your cache at any time, download CCleaner and add a shortcut to your desktop.
+
+---------------------------------------------------
+
+Keys: 
+
+Laravel 11 Send Email, 
+
+---------------------------------------------------
+
+-> Artisan Commands <-
+
+1. php artisan make:model -msf Product    //Migration, Seeder, Factory
+                              
+2. php artisan migrate:fresh --seed
+---------------------------------------------------
+
+<!-- load bootstrap from a cdn -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+{{ URL::asset('css/main.css') }}
+    
+<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet"> 
+<link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">  
+
+http://localhost/css/font-awesome.min.css
+
+@extends('layouts.app')
+
+@section('content')
+@include('pages.main')
+
+@include('partials._footer')
+
+@endsection
+
+
+
+
+--------------------------------------------------------------
+
+
+https://bootsnipp.com/tags/footer/4
+
+
+---------------------------------------------------------------
+
+Laravel api 11 (using class Repository):
+With Best Practices: 
+-Using Interface, Requests, Classes, Repositories etc
+
+https://medium.com/@1415sandalanka/laravel-11-rest-api-crud-with-best-practices-fcc26505e0d2
+
+--------------------------------------------------------------
+
+Laravel 11 Normal api
+
+https://www.binaryboxtuts.com/php-tutorials/laravel-tutorials/how-to-make-laravel-11-rest-api/
+
+--------------------------------------------------------------
+
+Laravel 11 normal api:
+
+https://www.techiediaries.com/laravel-11-crud-api-tutorial/
+
+---------------------------------------------------------------
+
+Laravel 11 Passposrt Api:
+
+https://www.binaryboxtuts.com/php-tutorials/laravel-tutorials/laravel-11-api-authentication-using-laravel-passport/
+
+----------------------------------------------------------------
+
+Larave Repository Pattern:
+https://www.twilio.com/en-us/blog/repository-pattern-in-laravel-application
+----------------------------------------------------------------------------
+
+
+
+
+--> Laravel 11 Send Email: <--
+
+Check Mails in Storage/logs/larave.log file
+
+
+
+1. Artisan commands:
+   php artisan make:mail MyTestEmail
+   
+
+2. env
+
+	MAIL_MAILER=log
+	MAIL_HOST=127.0.0.1
+	MAIL_PORT=2525
+	MAIL_USERNAME=null
+	MAIL_PASSWORD=null
+	MAIL_ENCRYPTION=null
+	MAIL_FROM_ADDRESS="hello@example.com"
+	MAIL_FROM_NAME="${APP_NAME}"
+
+ 3. web.php
+
+	use App\Mail\MyTestEmail;
+	use Illuminate\Support\Facades\Mail;
+
+	//Sending Email Testing
+	Route::get('/testroute', function() {
+	    $mailData['name'] = "Funny Coder";
+	    $mailData['title'] = "Testing Mail";
+
+	    //The email sending is done using the to method on the Mail facade
+	    Mail::to('ajay@gmail.com')->send(new MyTestEmail($mailData));
+
+	    return 'Email sent!';
+	});
+
+
+
+4. resources/views/mail/testMail.blade.php
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laravel 11 Send Email with Attachment Example - Techsolutiontuff</title>
+</head>
+<body>
+    <h1>{{ $mailData['title'] }}</h1>
+  
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.</p>
+     
+    <p>Thank you</p>
+</body>
+</html>
+
+
+5.
+
+//app\Mail\MyTestEmail.php
+
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
+
+class MyTestEmail extends Mailable 
+{
+    use Queueable, SerializesModels;
+
+    /**
+     * Create a new message instance.
+     */
+    public function __construct(public $mailData)
+    {
+        //
+    }
+
+    /**
+     * Get the message envelope.
+     */
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: 'My Test Email',
+        );
+    }
+
+    /**
+     * Get the message content definition.
+    */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'mail.testMail',
+        );
+    }
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+    */ 
+    public function attachments(): array
+    {
+        return [];
+    }
+}
+
+
+
+-End of Sending Mail-
+
+--------------xx- End of Sending Mail -xx-----------------------
+
+
+
+---| Event & Listeners |---
+---|                   |---
+
+
+php artisan make:event PostEvent
+php artisan make:listener  listenerName --event=PostEvent
+
+
+//app\Events\PostEvent.php                         //Event - 1 
+
+
+//app\Listeners\PostEventNotification.php          //Listener - 1
+
+<?php
+
+namespace App\Events;
+
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class PostEvent
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * Create a new event instance.
+     */
+    public $post;
+
+    public function __construct($post='')
+    {
+        //
+        $this->post = $post;
+    }
+
+    public function handle(PodcastProcessed $event): void
+    {
+        // ...
+    }
+}
+
+//app\listeners\PostEventNotification.php
+
+<?php
+
+namespace App\Listeners;
+
+use App\Events\PostEvent;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+
+class PostEventNotification implements ShouldQueue
+{
+    
+    public function __construct()
+    {
+        //
+    }
+
+    public function handle(PostEvent $event): void
+    {
+        //
+        echo $event->post;
+    }
+}
+
+
+//AppServiceProvider Or EventServiceProvider
+
+use App\Events\PostEvent;
+use App\Listeners\PostEventNotification;
+
+use App\Listeners\UserNotify;
+use App\Listeners\AdminNotify;
+
+
+use Illuminate\Support\Facades\Event;
+
+    public function boot(): void
+    {
+        //
+        Event::listen(            
+            PostEventNotification::class,
+            UserNotify::class,
+            AdminNotify::class,
+        );      
+    }
+
+
+//routes\Web.php
+
+//Event and listener testing
+Route::get('usernotify', [CartController::class, 'userNotify']);
+Route::get('adminnotify', [CartController::class, 'AdminNotify']);
+Route::get('eventlistener', [CartController::class, 'eventlistener']);
+
+
+//web.php or Controller.php
+
+
+use App\Mail\MyTestEmail;
+use Illuminate\Support\Facades\Mail;
+
+//Sending Email Testing
+Route::get('/testroute', function() {
+    $mailData['name'] = "Funny Coder";
+    $mailData['title'] = "Testing Mail";
+
+    //The email sending is done using the to method on the Mail facade
+    Mail::to('ajaysisaudiya@gmail.com')->send(new MyTestEmail($mailData));
+
+    return 'Email sent!';
+});
+
+
+-- Same As PostEventNotification.php -- 
+
+//app\Listeners\UserNotify.php          //Listener - 2
+
+//app\Listeners\AdminNotify.php          //Listener - 3
+
+
+
+
+
+--------------xx- Event & Listeners -xx------------------------
+
