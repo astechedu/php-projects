@@ -1,6 +1,8 @@
 c:/>ipconfig /flushdns
 c:/>netsh int ip reset
+--lara11 + vue -- Orpah
 
+git checkout --orphan shop-lara11vue
 
 H:\xampp\htdocs\php-projects
 
