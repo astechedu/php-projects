@@ -29,6 +29,10 @@ Route::delete('remove', [CartController::class, 'cartItemRemove'])->name('cart.r
 
 
 
+
+//Sending mail to user
+Route::post('sendmailtouser', [CartController::class, 'sendMail'])->name('cart.sendmail');
+//OR
 //Sending Email Testing
 Route::get('/testroute', function() {
     $mailData['name'] = "Funny Coder";
@@ -39,8 +43,11 @@ Route::get('/testroute', function() {
 
     return 'Email sent!';
 });
-
+/// End of sending mail
 
 //Event and listener testing
+Route::get('usernotify', [CartController::class, 'userNotify']);
+Route::get('adminnotify', [CartController::class, 'AdminNotify']);
 Route::get('eventlistener', [CartController::class, 'eventlistener']);
+
 

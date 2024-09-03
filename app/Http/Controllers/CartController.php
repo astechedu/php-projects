@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Mail\MyTestEmail;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\Cart;
+use App\Mail\MyTestEmail;
+use Illuminate\Support\Facade\Mail;
 
 use App\Events\PostEvent;
 
@@ -19,8 +21,7 @@ class CartController extends Controller
 
 	public function addToCart(Request $request)
 	{		
-       
-         	
+                	
        $product_pid = (int) $request->pid;
        //$cart = Cart::findOrFail($product_pid);
        //$cart = Cart::where('pid', $product_pid);  //If id not primary
@@ -45,11 +46,12 @@ class CartController extends Controller
 			      $cart->qty += (int) $request->qty;
 	         	  $cart->update();
 
+                 //return response()->json( [ 'success' => 'Customer registered successfully!' ] );
             }    	
        }        
 	  //return response()->json( [ 'success' => 'Customer registered successfully!' ] );
        
-	  //return redirect()->back();
+	  return redirect()->back();
 	}
 
 
@@ -70,23 +72,47 @@ class CartController extends Controller
 			return response()->json(array("success" => "Item pid $cartpid not found or already deleted","pid"=>$cartpid));
 
         }
-      //$cartpid = (int) $request->pid;        
-      //$pid = Cart::where('pid', $cartpid)->delete();      
-      		//return response()->json(["success no"]);     
-      //return response()->json(array("success" => "Item $cartPid successfully deleted!"));
- 			//return response()->json(array("success" => "Item pid $cartpid not found or already deleted","pid"=>$cartpid));
+
         return redirect()->route('cart.addToCart');
 	}	
 
+    //Cart Coutner
+	public function cartItemCount(Request $request) 
+	{	
+        if($request->ajax() && $request->method() == "GET"){
+			$carts = Cart::all();
+			$cartCounter = count($carts);
+            return response()->json(['cartCounter' => $cartCounter]);
+        }
+         //return response()->json(['cartCounter' => 100]);       
+	}
+
+
+    //Sending Mail
+	public function sendMail(Request $request) 
+	{	
+	  //$id = $request->id;
+	  $id = 1;
+      $user = User::find($id);
+      Mail::to('ajaysisaudiya@gmail.com')->send($user->email);
+	}
 
 
 //Event and listener Testing
-
+	public function AdminNotify(Request $request) 
+	{     
+		event(new PostEvent("Email has been sent to admin! <br>")); 
+	}	  
 	public function eventlistener(Request $request) 
 	{     
-		event(new PostEvent("Email has been sent to user"));     
+		event(new PostEvent("Email has been sent to user! <br>")); 
 	}	
     
-
+	public function userNotify(Request $request) 
+	{     
+		//event(new PostEvent("Email has been sent to user! <br>")); 
+	    //event(new PostEvent(MyTestEmail()); 
+	}	
+  
 }
 	

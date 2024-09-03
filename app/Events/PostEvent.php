@@ -17,12 +17,12 @@ class PostEvent
     /**
      * Create a new event instance.
      */
-    public $pid;
+    public $post;
 
-    public function __construct($pid='')
+    public function __construct($post='')
     {
         //
-        $this->pid = $pid;
+        $this->post = $post;
     }
 
     public function handle(PodcastProcessed $event): void

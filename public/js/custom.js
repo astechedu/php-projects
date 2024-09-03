@@ -11,7 +11,7 @@ $(function(){
 		//$('#cartTotal').on('mouseover', function(){
 			$.ajax({			
 				type:'GET',
-				url: 'http://localhost/cartitems',	
+				url: "{{ route('cart.counter') }}",   
 	            //headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
 				dataType: 'json',
 				success:function(response){
@@ -37,7 +37,7 @@ $("#ajax").on('click', function(e) {
 
     $.ajax({        
         url: "{{ route('cart.addtocart') }}",        
-        type: "POST",
+        type: "POST",        
         dataType: "json",
         //data: $('#ajax').serialize(),
         data: data,
@@ -66,7 +66,7 @@ $("#success").hide();
 	          
 				$.ajax({				
 					type:'DELETE',
-					url: "http://localhost/remove",				
+					url: "{{ route('cart.remove') }}",			
 					data: {'pid':pid},
 					//_token: '{{ csrf_token() }}',
 					dataType: 'json',
@@ -78,6 +78,25 @@ $("#success").hide();
 				});
 			});	
 	}
+
+
+//Practice
+	practice()
+		function practice(){
+		//$('#cartTotal').on('mouseover', function(){
+			$.ajax({			
+				type:'GET',
+				url: "{{ route('cart.counter') }}",   
+	            //headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
+				dataType: 'html',
+				success:function(response){
+					$cartCounter = response.cartCounter
+					$('#cartCounter').text($cartCounter)
+					//console.log(response)
+				},
+			});
+		//});
+		}
 
 
 })

@@ -114,13 +114,10 @@ Check Mails in Storage/logs/larave.log file
 	MAIL_FROM_ADDRESS="hello@example.com"
 	MAIL_FROM_NAME="${APP_NAME}"
 
-
-
-	web.php
+ 3. web.php
 
 	use App\Mail\MyTestEmail;
 	use Illuminate\Support\Facades\Mail;
-
 
 	//Sending Email Testing
 	Route::get('/testroute', function() {
@@ -212,7 +209,141 @@ class MyTestEmail extends Mailable
 
 
 
-
 -End of Sending Mail-
 
---------------xxx-------------
+--------------xx- End of Sending Mail -xx-----------------------
+
+
+
+---| Event & Listeners |---
+---|                   |---
+
+
+php artisan make:event PostEvent
+php artisan make:listener  listenerName --event=PostEvent
+
+
+//app\Events\PostEvent.php                         //Event - 1 
+
+
+//app\Listeners\PostEventNotification.php          //Listener - 1
+
+<?php
+
+namespace App\Events;
+
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class PostEvent
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * Create a new event instance.
+     */
+    public $post;
+
+    public function __construct($post='')
+    {
+        //
+        $this->post = $post;
+    }
+
+    public function handle(PodcastProcessed $event): void
+    {
+        // ...
+    }
+}
+
+//app\listeners\PostEventNotification.php
+
+<?php
+
+namespace App\Listeners;
+
+use App\Events\PostEvent;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+
+class PostEventNotification implements ShouldQueue
+{
+    
+    public function __construct()
+    {
+        //
+    }
+
+    public function handle(PostEvent $event): void
+    {
+        //
+        echo $event->post;
+    }
+}
+
+
+//AppServiceProvider Or EventServiceProvider
+
+use App\Events\PostEvent;
+use App\Listeners\PostEventNotification;
+
+use App\Listeners\UserNotify;
+use App\Listeners\AdminNotify;
+
+
+use Illuminate\Support\Facades\Event;
+
+    public function boot(): void
+    {
+        //
+        Event::listen(            
+            PostEventNotification::class,
+            UserNotify::class,
+            AdminNotify::class,
+        );      
+    }
+
+
+//routes\Web.php
+
+//Event and listener testing
+Route::get('usernotify', [CartController::class, 'userNotify']);
+Route::get('adminnotify', [CartController::class, 'AdminNotify']);
+Route::get('eventlistener', [CartController::class, 'eventlistener']);
+
+
+//web.php or Controller.php
+
+
+use App\Mail\MyTestEmail;
+use Illuminate\Support\Facades\Mail;
+
+//Sending Email Testing
+Route::get('/testroute', function() {
+    $mailData['name'] = "Funny Coder";
+    $mailData['title'] = "Testing Mail";
+
+    //The email sending is done using the to method on the Mail facade
+    Mail::to('ajaysisaudiya@gmail.com')->send(new MyTestEmail($mailData));
+
+    return 'Email sent!';
+});
+
+
+-- Same As PostEventNotification.php -- 
+
+//app\Listeners\UserNotify.php          //Listener - 2
+
+//app\Listeners\AdminNotify.php          //Listener - 3
+
+
+
+
+
+--------------xx- Event & Listeners -xx------------------------
+
