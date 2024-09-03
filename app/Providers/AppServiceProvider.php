@@ -2,14 +2,8 @@
 
 namespace App\Providers;
 
-use App\Events\PostEvent;
-use App\Listeners\PostEventNotification;
-use App\Listeners\UserNotify;
-use App\Listeners\AdminNotify;
-
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\ServiceProvider;
-
-use Illuminate\Support\Facades\Event;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,18 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-        Event::listen(            
-            PostEventNotification::class,
-            UserNotify::class,
-            AdminNotify::class,
-        );        
-
+        ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
+            return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
+        });
     }
 }
-
-//protected $listen = [
-//'App\Event\UserCreated' => [
-      //'App\Listener\SendEmail',
-    //],
-//];
