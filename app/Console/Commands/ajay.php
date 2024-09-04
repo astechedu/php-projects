@@ -26,6 +26,7 @@ class ajay extends Command
     public function handle()
     {
         //
-        echo "name: ajay, age:32  FilePath: app/console/commands/ajay";
+        //echo "name: ajay, age:32  FilePath: app/console/commands/ajay";
+        echo "h:";
     }
 }

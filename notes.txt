@@ -12,6 +12,8 @@ To clear your internet cache and cookies, go to Control Panel > Network and Inte
 
 To quickly clear your cache at any time, download CCleaner and add a shortcut to your desktop.
 
+git checkout --orphan <newBranch>
+
 ---------------------------------------------------
 
 Keys: 

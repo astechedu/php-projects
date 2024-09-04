@@ -1,4 +1,5 @@
 $(function(){
+
 	//Counter Cart Items        
         $.ajaxSetup({
             headers:
@@ -11,7 +12,8 @@ $(function(){
 		//$('#cartTotal').on('mouseover', function(){
 			$.ajax({			
 				type:'GET',
-				url: "http://localhost/cartitems", 
+				url: "http://localhost/cartitems",
+				//url: "{{ route('cart.counter') }}", 
 				dataType: 'json',
 				success:function(response){
 					$cartCounter = response.cartCounter
@@ -19,14 +21,14 @@ $(function(){
 					//console.log(response)
 				},
 			});
-		//});
+		///});
 		}
 
 //Adding Cart Items
 //addToCart()
 function addToCart(){
 $("#ajax").on('click', function(e) {
-    e.preventDefault();
+    //e.preventDefault();
 
     let qty = $('#qty').val()
 	let description = $('#description').val()
@@ -40,10 +42,10 @@ $("#ajax").on('click', function(e) {
         dataType: "json",
         //data: $('#ajax').serialize(),
         data: data,
-        contentType: false,
-        cache: false,
-        processData: false,
-        success: function(data){
+        //contentType: false,
+        //cache: false,
+        //processData: false,
+        success: function(data){        	  
               alert("Data Save: " + data);
         },
         error: function (xhr, status, error) {
@@ -59,9 +61,10 @@ $("#success").hide();
 
 	removeCart();
 	function removeCart(){
-			$('#cartRemove').on('click', function(){
+
+			$('.cartRemove').on('click', function(){
 			$("#success").fadeIn(1500);
-				let pid = $('#cartRemove').attr('pid');
+				let pid = $(this).attr('pid');
 	          
 				$.ajax({	
 					//url: "{{ route('cart.remove') }}",
@@ -72,10 +75,20 @@ $("#success").hide();
 					success: function(response){
 					    $('#success').html(response.success);
 					    $("#success").fadeOut(1500);
-						//console.log()
+						
 					},				
+				}).done(function(response){
+						//let products = document.querySelectorAll('.product')
+
+                        $('.product').map(function(){
+                        	//$(this).attr('class')
+                        	if($(this).attr('pid') == parseInt(response.pid)){
+                              $(this).fadeOut(500)  
+                              countCartItems()                                         
+                        	}                     	
+                        })		
 				});
-			});	
+			});
 	}
 
 
@@ -93,6 +106,9 @@ $("#success").hide();
 			});
 		//});
 		}
+
+
+
 
 
 })

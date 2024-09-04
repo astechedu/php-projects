@@ -26,7 +26,7 @@ class CartController extends Controller
                 	
        $product_pid = (int) $request->pid;
        //$cart = Cart::findOrFail($product_pid);
-       //$cart = Cart::where('pid', $product_pid);  //If id not primary
+       //$cart = Cart::where('pid', $product_pid);  ///If id not primary
        $cart = Cart::firstWhere('pid', $product_pid);
        //dd($cart);exit;
 		
@@ -67,9 +67,8 @@ class CartController extends Controller
 
  			$cartpid = (int) $request->pid;        
       		$pid = Cart::firstWhere('pid', $cartpid);
-
       		if($pid){
-      			$pid->delete();      		         	
+      			$pid->delete();     	         	
               // call the event             
 
 			  return response()->json(array("success" => "Item pid $cartpid succesfully deleted","pid"=>$cartpid));
@@ -78,7 +77,7 @@ class CartController extends Controller
 			return response()->json(array("success" => "Item pid $cartpid not found or already deleted","pid"=>$cartpid));
         }
 
-        return redirect()->route('cart.addToCart');
+        //return redirect()->route('cart.addToCart');
 	}	
 
     //Cart Coutner

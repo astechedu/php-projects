@@ -6,8 +6,8 @@ Cart
 
 @section('content')
 
-	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-	
+	<link href="{{ asset('css/montserrat.css') }}" rel="stylesheet">
+
 	<div class="alert alert-success" id="success" style="position: absolute;top:60px;left:300;width:85%;">
         <!--{{ session('success') }}-->
     </div>
@@ -51,14 +51,14 @@ Cart
 							 						</div>
 							 						<div class="col-md-4 quantity">
 							 							<label for="quantity">Quantity:</label>
-							 							<input id="quantity" type="number" value ="{{$cart['qty']}}" class="form-control quantity-input">
+							 							<input id="quantity" type="number" value ="{{$cart['qty']}}" class="form-control quantity-input qty">
 							 						</div>
 							 						<div class="col-md-3 price">
-							 							<span id="price">${{$cart['price']}}</span>
+							 							$<span id="prc" class="prc">{{$cart['price']}}</span>
 							 						</div>
 													<div class="col-md-2">                
-						                                <a href="#" id="cartRemove" class="btn btn-md btn-danger" pid="{{$cart['pid']}}">
-						                               Remove</a>               
+						                                <div class="btn btn-md btn-danger cartRemove" pid="{{$cart['pid']}}">
+						                               Remove</div>               
 						                         	</div>
 
 							 					</div>
