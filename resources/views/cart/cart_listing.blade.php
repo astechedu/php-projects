@@ -33,8 +33,8 @@ Cart
 	 							<?php foreach($carts as $cart) { ?>
 				 				<div class="product" pid="{{$cart['pid']}}">
 				 					<div class="row">
-					 					<div class="col-md-3">
-					 						<img class="img-fluid mx-auto d-block image" src="{{asset('images/shop1.png')}}">
+					 					<div class="col-md-1">
+					 						<img class="img-fluid mx-auto d-block image" src="{{asset('images/shop3.png')}}">
 					 					</div>
 					 					<div class="col-md-8">
 					 						<div class="info">
@@ -235,5 +235,75 @@ Cart
 }
 
 </style>
+
+<script>
+	$(function(){
+
+ 			let qty = document.querySelectorAll('.qty')
+			let priceT = document.querySelectorAll('.prc')
+
+/*
+		$('.qty').on('change',function(){
+			$.each(qty,function(i,eleQty){
+				console.log(eleQty.value)
+				$.each(price,function(i,elePrice){
+					console.log(elePrice.textContent * eleQty.value)
+
+				})
+			})				
+		})
+*/
+        let tot=0;
+        let  p = [$('.prc')]
+        //let price = 0
+
+		$('.qty').on('change',function(i){
+			 let q  = $(this)
+			 let qty = parseInt($(this).val());
+
+		    $.each(p,function(i,elePrice){ 
+		            
+		           if(q.closest(elePrice[i])){              
+
+					    let price = q.parent().siblings('.price').find('.prc')
+					 //console.log(a[i].innerText * q.val()) 
+					 tot = parseFloat(price[i].innerText) * qty           
+		                price[i].innerText = tot
+
+		                		
+		            }
+		    })
+				
+		})		
+
+
+/*
+        let tot=0;
+		$('.qty').on('change',function(){
+			 let q  = $(this)
+			 let qty = parseInt($(this).val());
+			 //console.log(q)
+              
+             if($(this).closest('.pcr')){
+             	
+             	let  p = $('.prc')[0]
+             	let priceFloat = parseFloat(p.textContent)
+             	    tot = qty * priceFloat
+                    p.textContent = tot
+                //$('.prc').text(qty*priceFloat);
+             	console.log(p)
+             }
+
+			//$.each(qty,function(i,eleQty){
+				//console.log(eleQty)
+				//let f = $('.qty').parent('.quantity').siblings('.price').children('.prc')
+				                
+			//})				
+		})	
+*/
+
+
+	})
+</script>
 
 @endsection

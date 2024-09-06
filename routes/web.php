@@ -21,15 +21,17 @@ Route::patch('/products/{product}', [ProductController::class, 'update'])->name(
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 //Cart
+//Route::name('cart')->group(function(){
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('addtocart', [CartController::class, 'addToCart'])->name('cart.addtocart');
+
+//})
 
 Route::get('cartitems', [CartController::class, 'cartItemCount'])->name('cart.counter');
 Route::delete('remove', [CartController::class, 'cartItemRemove'])->name('cart.remove');
 
 
 //Sending mail to user
-
 Route::get('sendmail', [CartController::class, 'sendmail'])->name('cart.sendmail');
 
 //OR
@@ -50,4 +52,7 @@ Route::get('usernotify', [CartController::class, 'userNotify']);
 Route::get('adminnotify', [CartController::class, 'AdminNotify']);
 Route::get('eventlistener', [CartController::class, 'eventlistener']);
 
+
+//Payment
+Route::get('checkout', [PamentController::class, 'checkout'])->name('payment.checkout');
 

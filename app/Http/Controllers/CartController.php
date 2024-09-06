@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+//use App\Http\Requests\AddToCart;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\Cart;
@@ -22,41 +23,51 @@ class CartController extends Controller
 	}
 
 	public function addToCart(Request $request)
-	{		
-                	
+	{	
+        
+       //if($request->ajax()){      //Ajax Start
+        //echo "<pre>";print_r($request->input()); exit;
+            //return "Request is of Ajax Type";
+       //	dd($request->input());exit;
+
        $product_pid = (int) $request->pid;
        //$cart = Cart::findOrFail($product_pid);
        //$cart = Cart::where('pid', $product_pid);  ///If id not primary
        $cart = Cart::firstWhere('pid', $product_pid);
-       //dd($cart);exit;
+       //return response()->json( ['data'=>$request->input()] );exit;
+       //return response()->json( ['data'=>$cart] );exit;
 		
-       if(empty($cart)){
-      
-	   		 $cart = new Cart; 
-			      $cart->name = $request->pname;
-			      $cart->price = $request->pprice;
-			      $cart->description = $request->description;
-			      $cart->qty = $request->qty;
-			      $cart->pid = $request->pid;
-	         	  $cart->save();
+       if(empty($cart)){      
+//return response()->json( ['data'=>$request->input()] );exit;
+	   		 $ifCartNull = new Cart; 
+			      $ifCartNull->name = (string) $request->pname;
+			      $ifCartNull->price = (float) $request->pprice;
+			      $ifCartNull->description = (string) $request->description;
+			      $ifCartNull->qty = (int) $request->qty;
+			      $ifCartNull->pid = (int) $request->pid;
+	         	  $ifCartNull->save();
 
+				//return response()->json( ['success' => 'Add to cart successfylly! Null','data'=>$ifCartNull] );
 	         	  //Send Mail Example
 	           	  //Mail::to('ajaysisaudiya@gmail.com')->send(new MyTestEmail($cart));
        }
-       if(!empty($cart)){   
-   	  	   	         
+       if(!empty($cart)){      	  	   	         
             if($cart->pid === (int) $product_pid){
             	//echo $request->qty;exit;
                   //$cart = new Cart;
 			      $cart->qty += (int) $request->qty;
 	         	  $cart->update();
 	  
-                 //return response()->json( [ 'success' => 'Customer registered successfully!' ] );
+               //return response()->json( ['success' => 'Add to cart successfylly! not null'] );
             }    	
        }        
-	  //return response()->json( [ 'success' => 'Customer registered successfully!' ] );
        
-	  return redirect()->back();
+	  	//return response()->json( [ 'success' => 'Cart saved !' ] );
+        //} //Ajax End
+
+            //return "NO Request is of Ajax Type";  
+            session()->flash('success', 'Item successfully added to cart');     
+	  		return Redirect()->back();
 	}
 
     //Remove cart

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-success">
+<nav class="navbar navbar-expand-lg navbar-light bg-success ">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,13 +25,11 @@
           </ul>
         </li>
       -->
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
+
         <li class="nav-item" style="width:40em">
               <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-outline-success search-button" type="submit">Search</button>
               </form>     
         </li>           
         <li class="nav-item">
@@ -49,3 +47,36 @@
   </div>
 </nav>
 
+<style>
+.navbar {
+  background-image: linear-gradient(15deg, #80d0c7 0%, #13547a 100%);
+}
+.search-button{background: #fff;}
+
+.navbar-nav li {
+  a {
+    color: #1a1a1a !important;
+    &:hover {
+      color: #0d0d0d !important;
+      font-weight: bold !important;
+    }
+  }
+}
+
+.navbar-collapse .nav-item > .nav-link.active  {
+    color: #0d0d0d !important;
+    font-weight: bold !important;
+}
+
+.container-fluid {
+  font-size: 18px;
+  line-height: 1.8em;
+}
+
+.main {
+  margin-top: 85px;
+  background-color: #ddd;
+}
+
+
+</style>

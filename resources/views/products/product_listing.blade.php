@@ -5,19 +5,23 @@ Poroducts
 @endsection
 
 @section('content')
-
     <div class="py-3 py-md-5 bg-light">
         <div class="container">
+        <div class="alert alert-success" id="success" style="position: absolute;top:60px;left:300;width:85%;">
+            <!--{{ session('success') }}-->
+            {!! Session::has('success') ? Session::get("success") : '' !!}
+        </div>  
+
             <div class="row">
                 <div class="col-md-12">
                     <h4 class="mb-4">Our Products</h4>
                 </div>
                 <?php foreach($products as $product) { ?>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="product-card">
                         <div class="product-card-img">
                             <label class="stock bg-success">In Stock</label>
-                            <img src="{{ asset('images/shop1.png')}}" alt="Laptop">
+                            <img src="{{ asset('images/shop3.png')}}" alt="Laptop">
                         </div>
                         <div class="product-card-body">
                             <p class="product-brand">HP</p>
@@ -33,18 +37,33 @@ Poroducts
                                         
                                     </span></span>
                             </div>
+ 
+                         <!-- Add to Cart Without Jquery  -->
                             <form action="{{ route('cart.addtocart') }}" method="post" id="ajax">
-                                @csrf
+                                @csrf                                
+                               
                                 <input type="hidden" name="pid" value="<?= $product['id'] ?>" id="pid">                                
                                 <input type="hidden" name="pname" value="<?= $product['name'] ?>" id="pname">
                                 <input type="hidden" name="pprice" value="<?= $product['price'] ?>" id="pprice">
                                 <input type="hidden" name="description" value="<?= $product['description'] ?>" id="description">  
 
-                                <input type="hidden" name="qty" value="1" class="" id="qty">    
+                                <input type="hidden" name="qty" value="1" class="" id="qty">  
 
-                                <input type="submit" name="submit" value="Add To Cart" id="cartTotal"> 
-                                                               
-                            </form>                     
+                                <input type="submit" name="submit" value="Add To Cart" id="addStatButton">  
+
+                            </form> 
+             
+                    <!-- Add to Cart Without Jquery:  Not Working -->
+                 <!--   
+                              <input type="hidden" value="<?= $product['id'] ?>" id="pid">                                
+                                <input type="hidden"  value="<?= $product['name'] ?>" id="pname">
+                                <input type="hidden" value="<?= $product['price'] ?>" id="pprice">
+                                <input type="hidden"  value="<?= $product['description'] ?>" id="description">  
+
+                                <input type="hidden" value="1" class="" id="qty">  
+                                                                    
+                                <button type="button" id="addStatButton">Button</button>
+                  -->
 
                             <!--
                                     <div class="mt-2">
@@ -57,83 +76,7 @@ Poroducts
                     </div>          
                 </div>
                 <?php } ?>
-<!--
-                <div class="col-md-3">
-                    <div class="product-card">
-                        <div class="product-card-img">
-                            <label class="stock bg-success">In Stock</label>
-                            <img src="/images/shop1.png" alt="Red MI Note 8">
-                        </div>
-                        <div class="product-card-body">
-                            <p class="product-brand">MI</p>
-                            <h5 class="product-name">
-                               <a href="">
-                                    Red MI Note 8
-                               </a>
-                            </h5>
-                            <div>
-                                <span class="selling-price">$200</span>
-                                <span class="original-price">$300</span>
-                            </div>
-                            <div class="mt-2">
-                                <a href="" class="btn btn1">Add To Cart</a>
-                                <a href="" class="btn btn1"> <i class="fa fa-heart"></i> </a>
-                                <a href="" class="btn btn1"> View </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="product-card">
-                        <div class="product-card-img">
-                            <label class="stock bg-success">In Stock</label>
-                            <img src="/images/shop1.png" alt="Mens Shirt">
-                        </div>
-                        <div class="product-card-body">
-                            <p class="product-brand">Levis</p>
-                            <h5 class="product-name">
-                               <a href="">
-                                    Mens Shirt 
-                               </a>
-                            </h5>
-                            <div>
-                                <span class="selling-price">$299</span>
-                                <span class="original-price">$359</span>
-                            </div>
-                            <div class="mt-2">
-                                <a href="" class="btn btn1">Add To Cart</a>
-                                <a href="" class="btn btn1"> <i class="fa fa-heart"></i> </a>
-                                <a href="" class="btn btn1"> View </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="product-card">
-                        <div class="product-card-img">
-                            <label class="stock bg-success">In Stock</label>
-                            <img src="/images/shop1.png" alt="Head Phone">
-                        </div>
-                        <div class="product-card-body">
-                            <p class="product-brand">Asus</p>
-                            <h5 class="product-name">
-                               <a href="">
-                                Head Phone
-                               </a>
-                            </h5>
-                            <div>
-                                <span class="selling-price">$399</span>
-                                <span class="original-price">$499</span>
-                            </div>
-                            <div class="mt-2">
-                                <a href="" class="btn btn1">Add To Cart</a>
-                                <a href="" class="btn btn1"> <i class="fa fa-heart"></i> </a>
-                                <a href="" class="btn btn1"> View </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
--->
+
             </div>
         </div>
     </div>

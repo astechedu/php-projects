@@ -349,3 +349,171 @@ Route::get('/testroute', function() {
 
 --------------xx- Event & Listeners -xx------------------------
 
+   - A J A X -
+
+'_token': $('input[name=_token]').val()
+
+Controller:
+
+public function postSubscribeAjax() {
+
+    if($request->ajax()){
+        return "Request is of Ajax Type";
+    }
+        return "NO Request is of Ajax Type";exit;
+}
+---------------------------------------------------------------
+
+addToCart()           //Method 1 
+
+function addToCart(){
+$("input#addStatButton").on('click', function(e) {
+   // e.preventDefault();
+
+    let qty = $('#qty').val()
+    let description = $('#description').val()
+    let pprice = $('#pprice').val()
+    let pname = $('#pname').val()
+    let data = {qty:qty,description:description,price:pprice,name:pname}
+
+    $.ajax({        
+        url: "{{ route('cart.addtocart') }}",   
+        //url: "http://localhost/addtocart",    
+        type: "POST",        
+        dataType: "json",
+        //data: $('#ajax').serialize(),
+        data: data,
+        //contentType: false,
+        //cache: false,
+        //processData: false,
+        success: function(data){              
+              alert("Data Save: " + data);
+        },
+        error: function (xhr, status, error) {
+              console.error(xhr.responseText);
+            // Handle error response
+        }
+    });
+});
+}
+
+-------------------------------------------------------------
+
+    <!-- Add to Cart Without Jquery  -->
+
+    Ajay Forrm: 
+
+ <!-- Add to Cart Without Jquery  -->
+
+<!--
+                            <form action="{{ route('cart.addtocart') }}" method="post" id="ajax">
+                                @csrf                                
+                               
+                                <input type="hidden" name="pid" value="<?= $product['id'] ?>" id="pid">                                
+                                <input type="hidden" name="pname" value="<?= $product['name'] ?>" id="pname">
+                                <input type="hidden" name="pprice" value="<?= $product['price'] ?>" id="pprice">
+                                <input type="hidden" name="description" value="<?= $product['description'] ?>" id="description">  
+
+                                <input type="hidden" name="qty" value="1" class="" id="qty">  
+   
+                                <input type="submit" name="submit" value="Add To Cart" id="cartTotal">                         
+                            </form>     
+ -->         
+  
+//Add to Cart Without jQuery Ajax Request: Working
+addToCart()           //Method 1   Page Loading
+function addToCart(){
+$("input#addStatButton").on('submit', function(e) {
+    e.preventDefault();
+/*
+    let qty = $('#qty').val()
+    let description = $('#description').val()
+    let price = $('#pprice').val()
+    let name = $('#pname').val()
+    let pid = $('#pid').val()
+    let data = {qty:qty,description:description,price:pprice,name:pname,pid:pid}
+*/
+    $.ajax({        
+        //url: "{{ route('cart.addtocart') }}",   
+        url: "http://localhost/addtocart",    
+        type: "POST",        
+        dataType: "json",
+        data: $('form#ajax').serialize(),
+        //data: data,
+        //contentType: false,
+        //cache: false,
+        //processData: false,
+        success: function(data){              
+             // alert("Data Save: " + data);
+        },
+        error: function (xhr, status, error) {
+              console.error(xhr.responseText);
+            // Handle error response
+        }
+    });
+});
+}
+
+
+
+
+
+
+
+
+    <!-- For Jquery Request: Add to cart -->
+                  
+     <!--                 
+                                <input type="hidden" name="pid" value="<?= $product['id'] ?>" id="pid">                                
+                                <input type="hidden" name="pname" value="<?= $product['name'] ?>" id="pname">
+                                <input type="hidden" name="pprice" value="<?= $product['price'] ?>" id="pprice">
+                                <input type="hidden" name="description" value="<?= $product['description'] ?>" id="description">  
+
+                                <input type="hidden" name="qty" value="1" class="" id="qty">  
+                                                                    
+                                <button type="button" id="addStatButton">Button</button>
+    -->
+
+
+
+Token Field: 
+<input type="text" class="form-control" id="tokenfield-typeahead" value="red,green,blue" />    
+
+<input type="text" name="csrfToken" value="red" class="" id="csrfToken" />   
+
+
+-------------------------------------------------
+
+
+Larave 11 Image Upload:
+
+//https://medium.com/@techsolutionstuff/how-to-upload-image-using-ajax-in-laravel-11-41c7cf4979a6
+
+    public function store(Request $request): JsonResponse
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:4096'
+        ]);
+            
+        $image_name = time().'.'.$request->image->extension();  
+             
+        $request->image->move(public_path('images'), $image_name);
+          
+        Image::create(['name' => $image_name]);
+  
+        return response()->json(['success' => 'Images uploaded successfully!']);
+    }
+
+    --------------------------------------------- 
+
+
+    Jquery: 
+
+   $(".add").on("click", function () {
+    var val = $(this).closest("div.options").find("input[name='quantity']").val();
+});
+
+$(link).closest(".options").find("input[name=quantity]")
+
+$(this).parent().parent().find("input[name=quantity]").val()
+
