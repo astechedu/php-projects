@@ -34,15 +34,21 @@
         </li>           
         <li class="nav-item">
           <a class="nav-link" href="{{ route('cart.index') }}">Cart(<span id="cartCounter">0</span>)</a>
-        </li>        
+        </li>      
         <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
-        </li>       
+          <a class="nav-link" href="{{ route('register') }}">Register</a>
+        </li> 
         <li class="nav-item">
-          <a class="nav-link" href="#">Register</a>
-        </li>             
-      </ul>
-    </div>
+        @if(Auth::check())
+          <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+        @else       
+          <a class="nav-link" href="{{ route('login') }}">Login</a>   
+        @endif  
+        <li class="nav-item">
+          <a class="nav-link" href="#">@if(Auth::check()) <span class="text-info">Profile:&nbsp</span>{{ auth()->user()->name}} @else {{ ' ' }} @endif</a>
+        </li>                             
+      </ul>  
+    </div>  
 
   </div>
 </nav>

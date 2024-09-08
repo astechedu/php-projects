@@ -1,5 +1,5 @@
 <!-- resources/views/layouts/app.blade.php -->
- 
+<!doctype html>
 <html>
     <head>
         <title>App Name - @yield('title')</title>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 class AdminController extends Controller
 {
     /**
@@ -62,4 +64,63 @@ class AdminController extends Controller
     {
         //
     }
-}
+
+//https://magecomp.com/blog/laravel-10-custom-user-registration-login/?srsltid=AfmBOoq7-E1nIlvdFfJ88lNzJ2yTuikZD-r98iBXH9F4D4Z5pI39sI7m
+ /*
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+     
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+     
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('/');
+        }
+     
+        return redirect('/login')->with('error', 'Invalid credentials. Please try again.');
+    }
+
+*/
+
+ /*
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+ 
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+        ]);
+ 
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+ 
+        return redirect('/login')->with('success', 'Registration successful! Please log in.');
+    }
+
+Schema::create('users', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->string('email')->unique();
+    $table->string('password');
+    $table->timestamps();
+});
+
+
+composer create-project --prefer-dist laravel/laravel ProjectName "10.*"
+    
+ */
+
+
+
+} //Controller ends

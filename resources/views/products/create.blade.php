@@ -1,5 +1,7 @@
 @extends('layouts.default')
-
+@section('title')
+Products
+@endsection
 @section('content')
     <h1>Create Product</h1>
 

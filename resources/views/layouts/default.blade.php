@@ -4,11 +4,13 @@
    @include('include.head')
 </head>
 
-<body>
+<body>  
   <header class="row">
       @include('include.header')
   </header> 
-
+  <slider class="row">
+      @include('include.slider')
+  </slider> 
   <div class="container">
      <div id="main" class="row">
         @yield('content')

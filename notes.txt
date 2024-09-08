@@ -517,3 +517,178 @@ $(link).closest(".options").find("input[name=quantity]")
 
 $(this).parent().parent().find("input[name=quantity]").val()
 
+--------------------------------------------------------------
+
+Laravel migration example for image: 
+
+Schema::create('photos', function (Blueprint $table) {
+        $table->increments('id'); //you save this id in other tables
+        $table->string('title');
+        $table->string('src');
+        $table->string('mime_type')->nullable();
+        $table->string('title')->nullable();
+        $table->string('alt')->nullable();
+        $table->text('description')->nullable();
+        $table->timestamps();
+    });
+
+
+class Photo extends Model
+{
+   protected $fillable = [
+    'title',
+    'src', //the path you uploaded the image
+    'mime_type'
+    'description',
+    'alt',
+  ];
+}
+
+ Schema::table('others', function(Blueprint $table){
+        $table->foreign('photo_id')->references('id')->on('photos');
+ });
+
+ class Other extends Model
+{
+
+ public function photo()
+ {
+     return $this->belongsTo(Photo::class,'photo_id');
+ }
+
+}
+---------------------------------------------------------------------
+
+
+---> Shopping Cart Fetures <----
+
+//https://www.geeksforgeeks.org/how-to-design-a-database-for-shopping-cart/
+
+Features of a Shopping Cart Database
+
+    Product Management: 
+    Efficiently manage product information, including details like name, description, price, and availability.
+
+    Customer Management: 
+    Store customer data such as names, addresses, contact information, and order histories.
+   
+    Order Management: 
+    Track orders placed by customers, including details like order IDs, products purchased, quantities, and total amounts.
+    
+    Cart Management: 
+    Enable users to add, remove, and update items in their shopping carts before checkout.
+   
+    Payment Processing: 
+    Securely handle payment transactions, including payment methods, billing details, and 
+    transaction statuses.
+    
+    Inventory Management: 
+    Monitor product inventory levels to prevent overselling and ensure timely restocking
+
+
+Entities and Attributes for the Shopping Cart Database
+Product: Represents individual products available for purchase.
+
+    ProductID (Primary Key): Unique identifier for each product.
+    Name: Name of the product.
+    Description: Description of the product.
+    Price: Price of the product.
+    QuantityAvailable: Quantity of the product available in stock.
+
+Customer: Represents individuals or organizations making purchases.
+
+    CustomerID (Primary Key): Unique identifier for each customer.
+    FirstName: First name of the customer.
+    LastName: Last name of the customer.
+    Email: Email address of the customer.
+    Address: Shipping address of the customer.
+    ContactNumber: Contact number of the customer.
+
+Order: Represents individual orders placed by customers.
+
+    OrderID (Primary Key): Unique identifier for each order.
+    CustomerID (Foreign Key): Reference to the customer placing the order.
+    OrderDate: Date and time when the order was placed.
+    TotalAmount: Total amount of the order.
+
+OrderItem: Represents individual items included in an order.
+
+    OrderItemID (Primary Key): Unique identifier for each order item.
+    OrderID (Foreign Key): Reference to the order containing the item.
+    ProductID (Foreign Key): Reference to the product being purchased.
+    Quantity: Quantity of the product purchased.
+    Price: Price of the product at the time of purchase.
+
+Cart: Represents individual shopping carts created by customers.
+
+
+    CartID (Primary Key): Unique identifier for each shopping cart.
+    CustomerID (Foreign Key): Reference to the customer owning the cart.
+
+
+
+Relationships Between Entities:
+-------------------------------
+Customer – Order Relationship
+
+    Each order is associated with one customer (CustomerID in the Order table references CustomerID in the Customer table).
+    This is a one-to-many relationship, as one customer can place multiple orders.
+
+Order – OrderItem Relationship
+
+    Each order item is associated with one order (OrderID in the OrderItem table references OrderID in the Order table).
+    This is a one-to-many relationship, as one order can contain multiple items.
+
+Customer – Cart Relationship
+
+    Each shopping cart is associated with one customer (CustomerID in the Cart table references CustomerID in the Customer table).
+    This is a one-to-one relationship, as each customer has only one active shopping cart at a time.
+
+Entities Structures in SQL Format
+
+CREATE TABLE Product (
+    ProductID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Description TEXT,
+    Price DECIMAL(10, 2),
+    QuantityAvailable INT
+);
+
+
+CREATE TABLE Customer (
+    CustomerID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(100),
+    Address VARCHAR(255),
+    ContactNumber VARCHAR(15)
+);
+
+
+CREATE TABLE Order (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate TIMESTAMP,
+    TotalAmount DECIMAL(10, 2),
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+);
+
+
+CREATE TABLE OrderItem (
+    OrderItemID INT PRIMARY KEY,
+    OrderID INT,
+    ProductID INT,
+    Quantity INT,
+    Price DECIMAL(10, 2),
+    FOREIGN KEY (OrderID) REFERENCES Order(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+);
+
+
+CREATE TABLE Cart (
+    CartID INT PRIMARY KEY,
+    CustomerID INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+);
+
+------------------------------------------------------------------------

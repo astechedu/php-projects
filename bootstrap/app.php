@@ -15,6 +15,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             //
             //'CheckAge' => \App\Http\Middleware\CheckAge::class,
+            'LogoutClearCache' => \App\Http\Middleware\LogoutClearCache::class,
+            
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

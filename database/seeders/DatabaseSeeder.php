@@ -17,9 +17,17 @@ class DatabaseSeeder extends Seeder
          //User::factory(5)->create();
 
         //User::factory()->create([
-            //'name' => 'Test User',
-            //'email' => 'test@example.com',
+            //'name' => 'ajay',
+            //'email' => 'exmple1@gmail.com',
+            //'password' => Hash::make('ajay123')
         //]
+        
+        //Product::factory()->create([
+            //'name' => 'laptop',
+            //'description' => 'This is good in condition.',
+            //'price' => 200,
+        //]
+
     //);
         User::factory(5)->create();
         Product::factory(10)->create();

@@ -17,11 +17,12 @@ Poroducts
                     <h4 class="mb-4">Our Products</h4>
                 </div>
                 <?php foreach($products as $product) { ?>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="product-card">
                         <div class="product-card-img">
                             <label class="stock bg-success">In Stock</label>
-                            <img src="{{ asset('images/shop3.png')}}" alt="Laptop">
+                            
+                            <img src="http://localhost/images/<?= $product['src'] ?>.webp" alt="Laptop">
                         </div>
                         <div class="product-card-body">
                             <p class="product-brand">HP</p>

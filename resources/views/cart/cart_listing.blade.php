@@ -56,7 +56,7 @@ Cart
 							 						<div class="col-md-3 price">
 							 							$<span id="prc" class="prc">{{$cart['price']}}</span>
 							 						</div>
-													<div class="col-md-2">                
+													<div class="col-md-2">             
 						                                <div class="btn btn-md btn-danger cartRemove" pid="{{$cart['pid']}}">
 						                               Remove</div>               
 						                         	</div>
@@ -83,9 +83,12 @@ Cart
 			 					<div class="summary-item"><span class="text">Discount</span><span class="price" id="discount">$<?= $discount ?></span></div>
 			 					<div class="summary-item"><span class="text">Shipping</span><span class="price" id="shipping">$<?= $shipping ?></span></div>
 			 					<div class="summary-item"><span class="text">Total</span><span class="price" id="total">$<?= $total ?></span></div>
-			 					<button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+			 					<button type="button" class="btn btn-primary btn-lg btn-block" id="checkout">Checkout</button>
 				 			</div>
 			 			</div>
+
+
+
 		 			</div> 
 		 		</div>
 	 		</div>
@@ -239,8 +242,8 @@ Cart
 <script>
 	$(function(){
 
- 			let qty = document.querySelectorAll('.qty')
-			let priceT = document.querySelectorAll('.prc')
+ 		let qty = document.querySelectorAll('.qty')
+		let price = document.querySelectorAll('.prc')
 
 /*
 		$('.qty').on('change',function(){
@@ -253,29 +256,36 @@ Cart
 			})				
 		})
 */
-        let tot=0;
-        let  p = [$('.prc')]
+ 
+        
         //let price = 0
 
+/* Working 
 		$('.qty').on('change',function(i){
 			 let q  = $(this)
 			 let qty = parseInt($(this).val());
 
+			let  p = [$('.prc')]
+
 		    $.each(p,function(i,elePrice){ 
 		            
-		           if(q.closest(elePrice[i])){              
+		        if(q.closest(elePrice[i])){              
+                      
+				let price = q.parent().siblings('.price').find('.prc')
+				prevPrice = price[i].innerText
+					 //console.log(a[i].innerText * q.val())					     
+				let tot = parseFloat(price[i].innerText) * qty  		        
+			    price[i].innerText = tot
+			    tot = price[i].innerText
 
-					    let price = q.parent().siblings('.price').find('.prc')
-					 //console.log(a[i].innerText * q.val()) 
-					 tot = parseFloat(price[i].innerText) * qty           
-		                price[i].innerText = tot
-
-		                		
-		            }
-		    })
-				
+			        if(qty < 1){   	
+			            q.val(1)
+                        price[i].innerText = prevPrice 
+					}	                		
+		        }
+		    })				
 		})		
-
+*/   //End
 
 /*
         let tot=0;

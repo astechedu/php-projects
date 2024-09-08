@@ -8,13 +8,17 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+//use Hash;
 
 class ProductController extends Controller
 {
 
 	public function index(): View
 	{
-		$products = Product::all();
+        //dd(Hash::make('ajay123'));exit; 
+        //dd(auth()->user()->email);
+    	$products = Product::all();
 		return view('products/product_listing', compact('products'));
 	}
 

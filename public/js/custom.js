@@ -214,4 +214,14 @@ axios({
 */
 
 
-})
+
+//Payment pages
+//Checkout Page
+$('button#checkout').on('click', function(e) {
+    //e.preventDefault();
+  window.location.href='payment'
+
+});
+
+
+})  //Ready function ends
