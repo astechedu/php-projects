@@ -18,7 +18,8 @@ return new class extends Migration
             $table->decimal('price', 8, 2); 
             $table->integer('qty');
             $table->integer('pid');   
-            //$table->integer('pid')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');         
+            $table->integer('user_id');             
+            $table->integer('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');         
             $table->timestamps();
         });
     }

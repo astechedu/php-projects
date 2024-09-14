@@ -21,6 +21,17 @@ Route::post('products', [ProductController::class, 'store'])->name('products.sto
 Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::patch('products/{product}', [ProductController::class, 'update'])->name('products.update');
 Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+//OR
+/*
+Route::controller(ProductCotroller::class)->group(function(){
+    Route::get('products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::patch('products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+});
+*/
 //Route::group(['middleware'=>'LogoutClearCache'], function() {
 //});
 //Cart
@@ -30,9 +41,11 @@ Route::group(['middleware'=>'auth'], function() {
 Route::post('addtocart', [CartController::class, 'addToCart'])->name('cart.addtocart');
 
 Route::get('cartitems', [CartController::class, 'cartItemCount'])->name('cart.counter');
+
 Route::delete('remove', [CartController::class, 'cartItemRemove'])->name('cart.remove');
 
 //Sending mail to user
+
 Route::get('sendmail', [CartController::class, 'sendmail'])->name('cart.sendmail');
 
 //OR
@@ -70,7 +83,6 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-
 //Route::prefix('cart')->group(['middleware'=>'auth'], function(){
 //
 //});
@@ -84,4 +96,57 @@ $response->headers->set('Cache-Control', 'nocache, no-store, max-age=0, must-rev
 $response->headers->set('Pragma','no-cache');
 $response->headers->set('Expires','Sat, 01 Jan 2000 00:00:00 GMT');
 return $response;
+*/
+
+
+
+//Route Groups
+/*
+Route::middleware(['first', 'second'])->group(function () {
+    Route::get('/', function () {
+        // Uses first & second middleware...
+    });
+ 
+    Route::get('/user/profile', function () {
+        // Uses first & second middleware...
+    });
+});
+*/
+
+/* 
+Route::controller(OrderController::class)->group(function () {
+    Route::get('/orders/{id}', 'show');
+    Route::post('/orders', 'store');
+});
+*/
+
+//Prefix
+/*
+Route::prefix('admin')->group(function () {
+    Route::get('/users', function () {
+        // Matches The "/admin/users" URL
+    });
+});
+*/
+
+/*
+Route::prefix('admin')->group(function(){
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('create', [AdminController::class, 'create'])->name('admin.create');
+    Route::post('store', [AdminController::class, 'store'])->name('admin.store');
+    Route::get('edit/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+    Route::patch('update/{id}', [AdminController::class, 'update'])->name('admin.update');
+    Route::delete('destroy/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+});
+*/
+
+/*
+Route::prefix('product')->group(function(){
+    Route::get('products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::patch('products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+});
 */

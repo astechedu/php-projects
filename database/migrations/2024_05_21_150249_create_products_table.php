@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('src')->default('shop6');
             $table->text('description');
-            $table->decimal('price', 8, 2);            
+            $table->decimal('price', 8, 2); 
+            $table->integer('stock')->default(5);           
             $table->timestamps();
         });
     }

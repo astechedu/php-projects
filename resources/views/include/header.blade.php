@@ -42,7 +42,7 @@
         @if(Auth::check())
           <a class="nav-link" href="{{ route('logout') }}">Logout</a>
         @else       
-          <a class="nav-link" href="{{ route('login') }}">Login</a>   
+          <a class="nav-link" href="#" id="loginForm">Login</a>   
         @endif  
         <li class="nav-item">
           <a class="nav-link" href="#">@if(Auth::check()) <span class="text-info">Profile:&nbsp</span>{{ auth()->user()->name}} @else {{ ' ' }} @endif</a>
