@@ -3,7 +3,7 @@
 
 <!-- The form -->
 <div class="form-popup" id="myForm">
-  <form action="/action_page.php" class="form-container">
+  <form action="{{ route('login') }}" method="POST" class="form-container">
     @csrf
     <h1>Login</h1>
 
@@ -90,7 +90,7 @@
     }     
 </style>
 
-<script>
+<script>  
     function openForm() {
     document.getElementById("myForm").style.display = "block";
     }
@@ -98,4 +98,13 @@
     function closeForm() {
     document.getElementById("myForm").style.display = "none";
     } 
+
+//Login Form 
+$(function(){
+  alert('hi');
+    $('#loginForm').on('click', function(){
+        $('.form-popup').css('display','block');
+    });
+});
+
 </script>

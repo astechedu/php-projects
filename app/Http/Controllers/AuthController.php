@@ -13,21 +13,21 @@ use App\Model\User;
 
 class AuthController extends Controller
 {
-
+    
     public function showLoginForm()
     {        
         return view('auth.login');
     }
 
     public function login(UserLoginRequest $request)
-    {      
+    {  
         $credentials = $request->only('email','password');
        
         if (Auth::attempt($credentials)) {
           
-            return redirect()->intended('/');
+           // return redirect()->intended('/');
+           return redirect()->route('cart.index');
         }
-
        //echo "Not logged in";
         return redirect('login')->with('error', 'Invalid credentials. Please try again.');
         //return back()->withErrors([

@@ -5,13 +5,15 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
-
+use App\Http\Controllers\UserController;
 //use App\Mail\MyTestEmail;
 //use Illuminate\Support\Facades\Mail;
 
 //Route::get('/', function () {
     //return view('welcome');
 //});
+
+Route::post('store', [UserController::class, 'store'])->name('user.store');
 
 Route::get('/', [ProductController::class, 'index']);
 

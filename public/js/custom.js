@@ -224,4 +224,13 @@ $('button#checkout').on('click', function(e) {
 });
 
 
+//Register Form 
+
+$('#registerForm').on('click', function(){
+	//alert('h')
+	$('.form-popup-register').css('display','block');
+});
+
+
+
 })  //Ready function ends

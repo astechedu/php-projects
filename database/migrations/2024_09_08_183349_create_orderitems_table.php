@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('orderitems', function (Blueprint $table) {
             $table->id();
-            $table->interger('orderid'); 
-            $table->interger('productid');      
-            $table->interger('quantity');  
+            //$table->integer('orderid'); 
+            //$table->integer('productid');      
+            $table->integer('quantity');  
             $table->decimal('price',10,2);
             $table->foreign('orderid')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('productid')->references('id')->on('products')->onDelete('cascade');                                                                   
