@@ -29,10 +29,11 @@ class AuthController extends Controller
            return redirect()->route('cart.index');
         }
        //echo "Not logged in";
-        return redirect('login')->with('error', 'Invalid credentials. Please try again.');
+        //return redirect('login')->with('error', 'Invalid credentials. Please try again.');
         //return back()->withErrors([
             //'email' => 'The provided credentials do not match our records.',
         //])->onlyInput('email');
+        return redirect()->route('/');
 
     }   
 

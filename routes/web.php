@@ -70,6 +70,7 @@ Route::get('eventlistener', [CartController::class, 'eventlistener']);
 
 //Payment
 Route::resource('payment', PaymentController::class);
+//Route::resource('checkout', PaymentController::class);
 
 //Auth
 Route::get('register', [AuthController::class, 'showRegistrationForm']);

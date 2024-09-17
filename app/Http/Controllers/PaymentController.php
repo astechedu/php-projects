@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\fr;
+use App\Models\Payment;
 use Illuminate\Http\Request;
+use Auth;
 
 class PaymentController extends Controller
 {
@@ -12,7 +13,12 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('payment.checkout');
+        if(auth()->user()->id){
+            $auth_id = Auth::user()->name;
+            $payment = ['subtotal'=>200, 'discount'=>10, 'shipping'=>40, 'total'=>1000, 'auth_id'=>$auth_id];
+            return view('payment.checkout', ['payment'=>$payment]);
+        }
+        return 'Sign in';
     }
 
     /**
