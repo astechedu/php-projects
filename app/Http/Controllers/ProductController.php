@@ -16,6 +16,7 @@ class ProductController extends Controller
 
 	public function index(): View
 	{
+        //dd(session());
         //dd(Hash::make('ajay123'));exit; 
         //dd(auth()->user()->email);
     	$products = Product::all();

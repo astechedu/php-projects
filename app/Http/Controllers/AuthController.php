@@ -16,7 +16,7 @@ class AuthController extends Controller
     
     public function showLoginForm()
     {        
-        return view('auth.login');
+        return view('auth.popup-login');
     }
 
     public function login(UserLoginRequest $request)
@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view('auth.popup-register');
     }
  
     public function register(Request $request)
@@ -87,7 +87,10 @@ class AuthController extends Controller
     {
         return view('user.user_dashboard');
     }
-
+    public function testLogin()
+    {        
+        return view('auth.test-login');
+    }
 }
 
 

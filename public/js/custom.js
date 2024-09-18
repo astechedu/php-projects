@@ -212,9 +212,7 @@ axios({
 });
 
 */
-
-
-
+//
 //Payment pages
 //Checkout Page
 $('button#checkout').on('click', function(e) {
@@ -225,12 +223,33 @@ $('button#checkout').on('click', function(e) {
 
 
 //Register Form 
-
 $('#registerForm').on('click', function(){
-	//alert('h')
-	$('.form-popup-register').css('display','block');
+	$.ajax({
+		url: 'http://localhost/register',
+		type: 'GET',
+		dataType: 'html',
+		success: function(response){
+			//$('#form-group-test').css('display','block')
+			$('#tlogin').html(response)
+		}
+	});
+	//$('.form-popup-register').css('display','block');
 });
 
 
+//Login Form
+$('#loginForm').on('click', function(){
+	//$('.form-popup-test').css('display','block');	
+	$.ajax({
+		url: 'http://localhost/login',
+		type: 'GET',
+		dataType: 'html',
+		success: function(data){
+			console.log(data);
+			//$('#form-group-test').css('display','block')
+			$('#tlogin').html(data)
+		}
+	});
+});
 
 })  //Ready function ends

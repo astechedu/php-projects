@@ -153,3 +153,6 @@ Route::prefix('product')->group(function(){
     Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
 */
+
+//Testing
+//Route::get('testlogin', [AuthController::class, 'testLogin']);

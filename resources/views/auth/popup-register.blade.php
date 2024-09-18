@@ -5,9 +5,11 @@
 
 <!-- The form -->
 <div class="form-popup" id="myForm">
-  <form action="{{ route('login') }}" method="POST" class="form-container">
+  <form action="{{ route('register') }}" method="POST" class="form-container">
     @csrf
-    <h1>Login</h1>
+    <h1>Register</h1>
+    <label for="name"><b>Name</b></label>
+    <input type="text" placeholder="Enter Name" name="name" required>
 
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>
@@ -15,7 +17,7 @@
     <label for="password"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required>
 
-    <button type="submit" class="btn">Login</button>
+    <button type="submit" class="btn">Sign Up</button>
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>
 </div> 

@@ -1,10 +1,5 @@
- <!-- A button to open the popup form -->
-  <!--
- <button class="open-button" onclick="openForm()">Open Form</button>
--->
-
 <!-- The form -->
-<div class="form-popup" id="myForm">
+<div class="form-popup-test" id="testForm">
   <form action="{{ route('login') }}" method="POST" class="form-container">
     @csrf
     <h1>Login</h1>
@@ -38,7 +33,7 @@
     }
 
     /* The popup form - hidden by default */
-    .form-popup {
+    .form-popup-test {
     display: block;
     position: fixed;
     top: 0;
@@ -94,19 +89,18 @@
 
 <script>  
     function openForm() {
-    document.getElementById("myForm").style.display = "block";
+    document.getElementById("testForm").style.display = "block";
     }
 
     function closeForm() {
-    document.getElementById("myForm").style.display = "none";
+    document.getElementById("testForm").style.display = "none";
     } 
 
 //Login Form 
 /*
 $(function(){
-  alert('hi');
-    $('#loginForm').on('click', function(){
-        $('.form-popup').css('display','block');
+    $('#testLogin').on('click', function(){        
+        $('.form-popup-test').css('display','block');
     });
 });
 */
