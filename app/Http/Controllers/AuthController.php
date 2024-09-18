@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 //use Illuminate\Support\Facades\Cache;
 
 use Hash;
-use App\Model\User;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -53,10 +53,10 @@ class AuthController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
         ]);
  
-        return redirect('login')->with('success', 'Registration successful! Please log in.');
+        return redirect('/')->with('success', 'Registration successful! Please log in.');
     }
 
     public function logout(UserLoginRequest $request){  

@@ -37,9 +37,10 @@ Route::controller(ProductCotroller::class)->group(function(){
 //Route::group(['middleware'=>'LogoutClearCache'], function() {
 //});
 //Cart
-Route::group(['middleware'=>'auth'], function() {
-	Route::get('cart', [CartController::class, 'index'])->name('cart.index');
-});
+//Route::group(['middleware'=>'auth'], function() {
+	//Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+//});
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('addtocart', [CartController::class, 'addToCart'])->name('cart.addtocart');
 
 Route::get('cartitems', [CartController::class, 'cartItemCount'])->name('cart.counter');
