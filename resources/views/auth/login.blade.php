@@ -48,7 +48,6 @@ Cart
 </div>
 
 
-
 <style>
 :root{
   --main-bg:#e91e63;
@@ -97,12 +96,6 @@ document
 -->
 
 <!-- The form -->
-
-
-
-
-
-
 
 @endsection
 

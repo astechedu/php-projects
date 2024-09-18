@@ -3,7 +3,7 @@
 @section('content')
     <h1>Payment Page</h1>
     <h6>Your Order</h6>
-    Name: {{ $payment['auth_id'] }}
+    Name: {{ $payment['auth_name'] }}
     <div><strong>Subtotal:</strong> {{ $payment['subtotal'] }}</div>
     <div><strong>Discount:</strong> {{ $payment['discount'] }}</div>
     <div><strong>Shipping:</strong> {{ $payment['shipping'] }}</div>

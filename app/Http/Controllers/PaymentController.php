@@ -13,12 +13,15 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->id){
-            $auth_id = Auth::user()->name;
-            $payment = ['subtotal'=>200, 'discount'=>10, 'shipping'=>40, 'total'=>1000, 'auth_id'=>$auth_id];
+        
+        if(auth()->user() != null){
+            $auth_name = Auth::user()->name;
+            $payment = ['subtotal'=>200, 'discount'=>10, 'shipping'=>40, 'total'=>1000, 'auth_name'=>$auth_name];
             return view('payment.checkout', ['payment'=>$payment]);
+        }else{
+            return redirect()->route('cart.index');            
         }
-        return 'Sign in';
+        return redirect()->route('cart.index'); 
     }
 
     /**

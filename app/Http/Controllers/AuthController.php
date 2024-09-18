@@ -76,11 +76,10 @@ class AuthController extends Controller
             //Session::flushId($sessionId);
            // Session::remove(auth()->user()->id);
             //$request->session()->flush();
-    //Artisan::call('cache:clear');       
-
+    //Artisan::call('cache:clear');  
              
         //return redirect()->rotue('products.index');
-            return redirect()->route('login');
+            return redirect()->route('/');
     }
 
     public function home()
