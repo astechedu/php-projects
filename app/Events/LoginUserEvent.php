@@ -17,7 +17,7 @@ class LoginUserEvent
     /**
      * Create a new event instance.
      */
-    public function __construct(public $userLogin)
+    public function __construct(public $loggedInUser)
     {
         //
     }

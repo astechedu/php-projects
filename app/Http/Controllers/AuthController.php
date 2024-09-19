@@ -7,7 +7,7 @@ use App\Http\Requests\UserLoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 //use Illuminate\Support\Facades\Cache;
-use App\Event\LoginUserEvent;
+use App\Events\LoginUserEvent;
 
 use App\Mail\UserRegisteredEmail;
 use Illuminate\Support\Facades\Mail;
@@ -34,15 +34,13 @@ class AuthController extends Controller
        
         if (Auth::attempt($credentials)) {
           
-            Mail::to(auth()->user()->email)->send( new LoggedInUserEmail(auth()->user()));
+           //Mail::to(auth()->user()->email)->send( new LoggedInUserEmail(auth()->user()));
+           
+           event(new LoginUserEvent(auth()->user()));
            // return redirect()->intended('/');
            return redirect()->route('products.index');
         }
-       //echo "Not logged in";
-        //return redirect('login')->with('error', 'Invalid credentials. Please try again.');
-        //return back()->withErrors([
-            //'email' => 'The provided credentials do not match our records.',
-        //])->onlyInput('email');
+ 
         return redirect()->route('/');
         //event(new LoginUserEvent($user));
 

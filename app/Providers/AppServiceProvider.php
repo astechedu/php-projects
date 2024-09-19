@@ -6,6 +6,7 @@ use App\Events\PostEvent;
 use App\Listeners\PostEventNotification;
 use App\Listeners\UserNotify;
 use App\Listeners\AdminNotify;
+use App\Listeners\LoginUserEventListener;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -31,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
             PostEventNotification::class,
             UserNotify::class,
             AdminNotify::class,
+            LoginUserEventListener::class,
         );        
 
     }

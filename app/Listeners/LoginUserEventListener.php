@@ -6,6 +6,9 @@ use App\Events\LoginUserEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LoggedInUserEmail;
+
 class LoginUserEventListener
 {
     /**
@@ -21,6 +24,9 @@ class LoginUserEventListener
      */
     public function handle(LoginUserEvent $event): void
     {
-        echo $event->name;
+        $loggedInUser = $event->loggedInUser;
+        $email=$loggedInUser['email'];
+        
+        Mail::to($email)->send( new LoggedInUserEmail($loggedInUser));
     }
 }
