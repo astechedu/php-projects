@@ -20,7 +20,7 @@ class LogoutClearCache
         $response = $next($request);
         $response->headers->set('Cache-Control', 'nocache, no-store, max-age=0, must-revalidate');
         $response->headers->set('Pragma','no-cache');
-        $response->headers->set('Expires','Sat, 07 July 2024 00:00:00 GMT');
+        $response->headers->set('Expires','Sat, 07 July 2023 00:00:00 GMT');
         return $response;	 
     }
 }

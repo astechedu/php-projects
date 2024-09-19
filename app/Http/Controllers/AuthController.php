@@ -74,27 +74,17 @@ class AuthController extends Controller
         return redirect('/')->with('success', 'Registration successful! Please log in.');
     }
 
-    public function logout(UserLoginRequest $request){  
-
-          //$value = Cache::get('key', 'default');
-            //Cache::flush();
+    public function logout(Request $request){  
             Session::flush(); //clears out all the exisiting sessions
             Auth::logout();
             $request->session()->invalidate();     
-            $request->session()->regenerateToken();  
-
- //header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
- //header("Pragma: no-cache"); // HTTP 1.0.
- //header("Expires: 0"); // Proxies.
-          
-            //Auth::logout();
+            $request->session()->regenerateToken();   
             //Session::flushId($sessionId);
            // Session::remove(auth()->user()->id);
-            //$request->session()->flush();
-    //Artisan::call('cache:clear');  
+           //$request->session()->flush();
              
         //return redirect()->rotue('products.index');
-        //return redirect('products.index');
+        return redirect('/');
     }
 
     public function home()
