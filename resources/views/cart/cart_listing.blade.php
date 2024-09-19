@@ -11,6 +11,12 @@ Cart
 	<div class="alert alert-success" id="success" style="position: absolute;top:60px;left:300;width:85%;">
         <!--{{ session('success') }}-->
     </div>
+	
+	@if(session()->has('success'))
+		<div class="alert alert-success">
+			{{ session()->get('success') }}
+		</div>
+	@endif
 
 	<main class="page">  
 	 	<section class="shopping-cart dark">
@@ -241,6 +247,8 @@ Cart
 
 <script>
 	$(function(){
+
+		$('.alert').css({'width':'450px','position':'absolute'}).fadeOut(4000)
 
  		let qty = document.querySelectorAll('.qty')
 		let price = document.querySelectorAll('.prc')

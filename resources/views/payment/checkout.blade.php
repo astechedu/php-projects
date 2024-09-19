@@ -1,6 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
+
     <h1>Payment Page</h1>
     <h6>Your Order</h6>
     Name: {{ $payment['auth_name'] }}

@@ -7,6 +7,12 @@ use App\Http\Requests\UserLoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 //use Illuminate\Support\Facades\Cache;
+use App\Event\LoginUserEvent;
+
+use App\Mail\UserRegisteredEmail;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\LoggedInUserEmail;
 
 use Hash;
 use App\Models\User;
@@ -14,9 +20,12 @@ use App\Models\User;
 class AuthController extends Controller
 {
     
-    public function showLoginForm()
-    {        
-        return view('auth.popup-login');
+    public function showLoginForm(Request $request)
+    {       
+        if($request->ajax()){
+            return view('auth.popup-login');
+        }        
+        return redirect()->route('products.index');
     }
 
     public function login(UserLoginRequest $request)
@@ -25,8 +34,9 @@ class AuthController extends Controller
        
         if (Auth::attempt($credentials)) {
           
+            Mail::to(auth()->user()->email)->send( new LoggedInUserEmail(auth()->user()));
            // return redirect()->intended('/');
-           return redirect()->route('cart.index');
+           return redirect()->route('products.index');
         }
        //echo "Not logged in";
         //return redirect('login')->with('error', 'Invalid credentials. Please try again.');
@@ -34,6 +44,7 @@ class AuthController extends Controller
             //'email' => 'The provided credentials do not match our records.',
         //])->onlyInput('email');
         return redirect()->route('/');
+        //event(new LoginUserEvent($user));
 
     }   
 
@@ -50,17 +61,21 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
  
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
         ]);
- 
+        if($user->id){
+           //event(new UserRegisteredEvent($user));
+           Mail::to($user->email)->send(new UserRegisteredEmail($user));
+        } 
+
         return redirect('/')->with('success', 'Registration successful! Please log in.');
     }
 
     public function logout(UserLoginRequest $request){  
-           
+
           //$value = Cache::get('key', 'default');
             //Cache::flush();
             Session::flush(); //clears out all the exisiting sessions
@@ -79,7 +94,7 @@ class AuthController extends Controller
     //Artisan::call('cache:clear');  
              
         //return redirect()->rotue('products.index');
-            return redirect()->route('/');
+        //return redirect('products.index');
     }
 
     public function home()

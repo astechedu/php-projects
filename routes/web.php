@@ -15,7 +15,7 @@ use App\Http\Controllers\UserController;
 
 Route::post('store', [UserController::class, 'store'])->name('user.store');
 
-Route::get('/', [ProductController::class, 'index']);
+Route::get('/', [ProductController::class, 'index'])->name('product.index');
 
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
 Route::get('products/create', [ProductController::class, 'create'])->name('products.create');

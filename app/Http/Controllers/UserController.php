@@ -29,6 +29,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         if($request->ajax()){
+ 
             $user = new User;
             $user->name = $request->name;
             $user->email = $request->email;
