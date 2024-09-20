@@ -28,18 +28,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        Event::listen(            
+        Event::listen(
             PostEventNotification::class,
             UserNotify::class,
             AdminNotify::class,
-            LoginUserEventListener::class,
-        );        
-
+            LoginUserEventListener::class
+        );
     }
 }
 
 //protected $listen = [
 //'App\Event\UserCreated' => [
-      //'App\Listener\SendEmail',
-    //],
+//'App\Listener\SendEmail',
+//],
 //];

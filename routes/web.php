@@ -10,19 +10,32 @@ use App\Http\Controllers\UserController;
 //use Illuminate\Support\Facades\Mail;
 
 //Route::get('/', function () {
-    //return view('welcome');
+//return view('welcome');
 //});
 
-Route::post('store', [UserController::class, 'store'])->name('user.store');
+Route::post("store", [UserController::class, "store"])->name("user.store");
 
-Route::get('/', [ProductController::class, 'index'])->name('product.index');
+Route::get("/", [ProductController::class, "index"])->name("product.index");
 
-Route::get('products', [ProductController::class, 'index'])->name('products.index');
-Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
-Route::post('products', [ProductController::class, 'store'])->name('products.store');
-Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-Route::patch('products/{product}', [ProductController::class, 'update'])->name('products.update');
-Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::get("products", [ProductController::class, "index"])->name(
+    "products.index"
+);
+Route::get("products/create", [ProductController::class, "create"])->name(
+    "products.create"
+);
+Route::post("products", [ProductController::class, "store"])->name(
+    "products.store"
+);
+Route::get("products/{product}/edit", [ProductController::class, "edit"])->name(
+    "products.edit"
+);
+Route::patch("products/{product}", [ProductController::class, "update"])->name(
+    "products.update"
+);
+Route::delete("products/{product}", [
+    ProductController::class,
+    "destroy",
+])->name("products.destroy");
 //OR
 /*
 Route::controller(ProductCotroller::class)->group(function(){
@@ -38,51 +51,48 @@ Route::controller(ProductCotroller::class)->group(function(){
 //});
 //Cart
 //Route::group(['middleware'=>'auth'], function() {
-	//Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+//Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 //});
-Route::get('cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('addtocart', [CartController::class, 'addToCart'])->name('cart.addtocart');
+Route::get("cart", [CartController::class, "index"])->name("cart.index");
+Route::post("addtocart", [CartController::class, "addToCart"])->name(
+    "cart.addtocart"
+);
 
-Route::get('cartitems', [CartController::class, 'cartItemCount'])->name('cart.counter');
+Route::get("cartitems", [CartController::class, "cartItemCount"])->name(
+    "cart.counter"
+);
 
-Route::delete('remove', [CartController::class, 'cartItemRemove'])->name('cart.remove');
+Route::delete("remove", [CartController::class, "cartItemRemove"])->name(
+    "cart.remove"
+);
 
 //Sending mail to user
 
-Route::get('sendmail', [CartController::class, 'sendmail'])->name('cart.sendmail');
-
-//OR
-//Sending Email Testing
-/*
-Route::get('/testroute', function() {
-    $mailData['name'] = "Funny Coder";
-    $mailData['title'] = "Testing Mail";
-    //The email sending is done using the to method on the Mail facade
-    Mail::to('ajaysisaudiya@gmail.com')->send(new MyTestEmail($mailData));
-    return 'Email sent!';
-});
-*/
-/// End of sending mail
-
+Route::get("sendmail", [CartController::class, "sendmail"])->name(
+    "cart.sendmail"
+);
+//
 //Event and listener testing
-Route::get('usernotify', [CartController::class, 'userNotify']);
-Route::get('adminnotify', [CartController::class, 'AdminNotify']);
-Route::get('eventlistener', [CartController::class, 'eventlistener']);
+Route::get("usernotify", [CartController::class, "userNotify"]);
+Route::get("adminnotify", [CartController::class, "AdminNotify"]);
+Route::get("eventlistener", [CartController::class, "eventlistener"]);
 
 //Payment
-Route::resource('payment', PaymentController::class);
+Route::resource("payment", PaymentController::class);
 //Route::resource('checkout', PaymentController::class);
 
 //Auth
-Route::get('register', [AuthController::class, 'showRegistrationForm']);
-Route::post('register', [AuthController::class, 'register'])->name('register'); 
+Route::get("register", [AuthController::class, "showRegistrationForm"]);
+Route::post("register", [AuthController::class, "register"])->name("register");
 //
-Route::get('login', [AuthController::class, 'showLoginForm']);
-Route::post('login', [AuthController::class, 'login'])->name('login');
+
+Route::get("login", [AuthController::class, "showLoginForm"]);
+Route::post("login", [AuthController::class, "login"])->name("login");
+
 //
-Route::group(['middleware'=>'auth'], function(){
-	//Route::get('home', [AuthController::class, 'home'])->name('home');
-	Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::group(["middleware" => "auth"], function () {
+    //Route::get('home', [AuthController::class, 'home'])->name('home');
+    Route::get("logout", [AuthController::class, "logout"])->name("logout");
 });
 
 //Route::prefix('cart')->group(['middleware'=>'auth'], function(){
@@ -99,8 +109,6 @@ $response->headers->set('Pragma','no-cache');
 $response->headers->set('Expires','Sat, 01 Jan 2000 00:00:00 GMT');
 return $response;
 */
-
-
 
 //Route Groups
 /*
@@ -155,3 +163,16 @@ Route::prefix('product')->group(function(){
 
 //Testing
 //Route::get('testlogin', [AuthController::class, 'testLogin']);
+
+//OR
+//Sending Email Testing
+/*
+Route::get('/testroute', function() {
+    $mailData['name'] = "Funny Coder";
+    $mailData['title'] = "Testing Mail";
+    //The email sending is done using the to method on the Mail facade
+    Mail::to('ajaysisaudiya@gmail.com')->send(new MyTestEmail($mailData));
+    return 'Email sent!';
+});
+*/
+/// End of sending mail

@@ -29,19 +29,17 @@ class AuthController extends Controller
     }
 //User Login
     public function login(UserLoginRequest $request)
-    {  
+    {          
         $credentials = $request->only('email','password');
        
-        if (Auth::attempt($credentials)) {
-          
-           //Mail::to(auth()->user()->email)->send( new LoggedInUserEmail(auth()->user()));
-           
-           event(new LoginUserEvent(auth()->user()));
-           //return redirect()->intended('/');
-           //return redirect()->route('products.index');
-        }
- 
-        return redirect()->route('product.index');
+            if (Auth::attempt($credentials)) {
+            
+            //Mail::to(auth()->user()->email)->send( new LoggedInUserEmail(auth()->user()));
+            event(new LoginUserEvent(auth()->user()));
+            //return redirect()->intended('/');
+            return redirect()->route('products.index');
+            }
+        //return redirect()->route('product.index');
         //event(new LoginUserEvent($user));
 
     }   

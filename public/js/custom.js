@@ -239,17 +239,29 @@ $('#registerForm').on('click', function(){
 
 //Login Form
 $('#loginForm').on('click', function(){
+  	
 	//$('.form-popup-test').css('display','block');	
 	$.ajax({
 		url: 'http://localhost/login',
 		type: 'GET',
-		dataType: 'html',
+		dataType: 'html',	
+		cache: false,
+		contentType: false,
+		processData: false,
 		success: function(data){
 			console.log(data);
 			//$('#form-group-test').css('display','block')
 			$('#tlogin').html(data)
-		}
+		},
+		error: function (error,jqXHR, textStatus, errorThrown) {               
+			console.log(data.error);  		  
+		}		
 	});
 });
+
+
+//cache: false,
+//contentType: false,
+//processData: false,
 
 })  //Ready function ends

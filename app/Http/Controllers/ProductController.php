@@ -13,44 +13,45 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-
-	public function index(): View
-	{
+    public function index(): View
+    {
         //dd(session());
-        //dd(Hash::make('ajay123'));exit; 
+        //dd(Hash::make('ajay123'));exit;
         //dd(auth()->user()->email);
-    	$products = Product::all();
-		return view('products/product_listing', compact('products'));
-	}
+        $products = Product::all();
+        return view("products/product_listing", compact("products"));
+    }
 
     public function create(): View
     {
-        return view('products.create');
+        return view("products.create");
     }
 
     public function store(StoreProductRequest $request): RedirectResponse
     {
         Product::create($request->validated());
 
-        return redirect()->route('products.index');
+        return redirect()->route("products.index");
     }
 
     public function edit(Product $product): View
     {
-        return view('products.edit', compact('product'));
+        return view("products.edit", compact("product"));
     }
 
-    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
-    {
+    public function update(
+        UpdateProductRequest $request,
+        Product $product
+    ): RedirectResponse {
         $product->update($request->validated());
 
-        return redirect()->route('products.index');
+        return redirect()->route("products.index");
     }
 
     public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
 
-        return redirect()->route('products.index');
-    }   
+        return redirect()->route("products.index");
+    }
 }
