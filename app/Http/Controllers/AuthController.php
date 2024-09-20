@@ -27,7 +27,7 @@ class AuthController extends Controller
         }        
         return redirect()->route('products.index');
     }
-
+//User Login
     public function login(UserLoginRequest $request)
     {  
         $credentials = $request->only('email','password');
@@ -37,11 +37,11 @@ class AuthController extends Controller
            //Mail::to(auth()->user()->email)->send( new LoggedInUserEmail(auth()->user()));
            
            event(new LoginUserEvent(auth()->user()));
-           // return redirect()->intended('/');
-           return redirect()->route('products.index');
+           //return redirect()->intended('/');
+           //return redirect()->route('products.index');
         }
  
-        return redirect()->route('/');
+        return redirect()->route('product.index');
         //event(new LoginUserEvent($user));
 
     }   
@@ -50,7 +50,7 @@ class AuthController extends Controller
     {
         return view('auth.popup-register');
     }
- 
+ //User Register
     public function register(Request $request)
     {
         $request->validate([
