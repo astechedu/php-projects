@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Auth;
+
+use App\Services\PaymentServiceFacade;
 use App\Services\PaymentService;
+
 use App\Facades\PaymentFacade;
 
 class PaymentController extends Controller
@@ -20,6 +23,8 @@ class PaymentController extends Controller
 
         //Payment Facade App\Facades\PaymentFacade;
         PaymentFacade::processPayment(900, 'Credit Card');
+
+        PaymentServiceFacade::processPayment(1000,'net banking');
 
     }
 
