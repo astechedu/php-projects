@@ -46,8 +46,7 @@
           <a class="nav-link" href="#" id="registerForm">Register</a>
         </li>         
           <a class="nav-link" href="#" id="loginForm">Login</a>    
-        @endif  
-                          
+        @endif                            
       </ul>  
     </div>  
 

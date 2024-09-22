@@ -7,6 +7,7 @@ use App\Listeners\PostEventNotification;
 use App\Listeners\UserNotify;
 use App\Listeners\AdminNotify;
 use App\Listeners\LoginUserEventListener;
+use App\Services\PaymentService;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -20,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        $this->app->bind('PaymentService', function ($app) {
+            return new PaymentService();
+        });        
     }
 
     /**

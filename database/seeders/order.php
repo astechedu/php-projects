@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Order;
+//use App\Models\Order;
 
-class Order extends Seeder
+class order extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,14 +15,15 @@ class Order extends Seeder
     {
       
       Order::factory(5)->create();
-/*
+
         Product::factory()->create(
         [
             //'name' => 'laptop',
             //'description' => 'This is good in condition.',
             //'price' => 200,
         ],
+    );
   
     }
-    }
+    
 }

@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Auth;
+use App\Services\PaymentService;
 
 class PaymentController extends Controller
 {
+    private $paymentService;
+
+    public function __construct(PaymentService $paymentService)
+    {
+        $this->paymentService = $paymentService;
+        
+        $this->paymentService->processPayment(100, 'debit card');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -50,7 +60,7 @@ class PaymentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(fr $fr)
+    public function show()
     {
         //
     }
@@ -58,7 +68,7 @@ class PaymentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(fr $fr)
+    public function edit()
     {
         //
     }
@@ -66,7 +76,7 @@ class PaymentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, fr $fr)
+    public function update(Request $request)
     {
         //
     }
@@ -74,7 +84,7 @@ class PaymentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(fr $fr)
+    public function destroy()
     {
         //
     }

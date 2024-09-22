@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Orderitems;
+//use App\Models\Orderitems;
 
 class orderitems extends Seeder
 {

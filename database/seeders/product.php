@@ -14,14 +14,14 @@ class product extends Seeder
     public function run(): void
     {
       
-      User::factory(5)->create();
+      //User::factory(5)->create();
 /*
         Product::factory()->create(
         [
             //'name' => 'laptop',
             //'description' => 'This is good in condition.',
             //'price' => 200,
-        ],
-  
+        ],)
+  */
     }
 }

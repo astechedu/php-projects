@@ -692,3 +692,28 @@ CREATE TABLE Cart (
 );
 
 ------------------------------------------------------------------------
+
+Laravel blade error showing:
+
+In View: 
+
+<input @error('name') is-invalide @enderror />
+@error('name')
+    <div class="invalid-feedback">{{ $message}}</div>
+@enderror
+
+<input value="{{ old('email') }}" @error('email') is-invalide @enderror />
+@error('email')
+    <div class="invalid-feedback">{{ $message}}</div>
+@enderror
+
+Controller:
+  return redirect()->route()
+          ->withInput()
+          ->withErrors($validator)
+
+
+<input name="password_confirmation" />
+
+
+-------------------------------------------------------------------------

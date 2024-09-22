@@ -44,6 +44,7 @@ class CartController extends Controller
             $ifCartNull->description = (string) $request->description;
             $ifCartNull->qty = (int) $request->qty;
             $ifCartNull->pid = (int) $request->pid;
+            $ifCartNull->user_id = (int)1;
             $ifCartNull->save();
 
             //return response()->json( ['success' => 'Add to cart successfylly! Null','data'=>$ifCartNull] );
