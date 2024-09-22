@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Routing\Route;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
