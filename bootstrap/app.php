@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Route;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
-            Route::namespace('Admin')
+            Route:: namespace('Admin')
                 ->prefix('admin')
                 ->group(base_path('routes/admin.php'));
         },       
