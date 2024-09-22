@@ -24,7 +24,7 @@ class PaymentServiceProvider extends ServiceProvider
             return new Payment();
         }); 
         
-       //Services ; App\Services
+       //Services in Container; App\Services
         $this->app->bind('PaymentService', function ($app) {
             return new PaymentService();
         });        

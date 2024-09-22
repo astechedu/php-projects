@@ -6,10 +6,8 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use Auth;
 
-use App\Services\PaymentServiceFacade;
 use App\Services\PaymentService;
-
-use App\Facades\PaymentFacade;
+use App\Services\PaymentServiceFacade;
 
 class PaymentController extends Controller
 {
@@ -17,13 +15,12 @@ class PaymentController extends Controller
 
     public function __construct(PaymentService $paymentService)
     {
+        //Calling Service
         $this->paymentService = $paymentService;        
         $this->paymentService->processPayment(100, 'debit card');
 
-
-        //Payment Facade App\Facades\PaymentFacade;
-        PaymentFacade::processPayment(900, 'Credit Card');
-
+        
+        //Calling Service by Facade 
         PaymentServiceFacade::processPayment(1000,'net banking');
 
     }

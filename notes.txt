@@ -718,5 +718,113 @@ Controller:
 
 -------------------------------------------------------------------------
 
-22 
-c9567d54520889dee61fc6b077d64318f19baceb
+Laravel 11: 
+
+               1. Service Config:              
+               2. Custom Facade Config: 
+
+1. Create directory 
+   App\Services
+
+2. Create two files in this directory 
+
+   i) PaymentService.php   ii) PaymentServiceFacade.php
+
+3. Create PaymentServiceProvider
+
+4. bootstrap/provider.php
+
+5. Call in PaymentController
+
+Steps: 
+
+
+1. App\Services
+
+2.
+
+//i) PaymentService.php  
+
+    <?php
+
+    namespace App\Services;
+
+    class PaymentService
+    {
+        // method to process payment
+        public function processPayment($amount, $paymentMethod)
+        {
+            // implementation of payment processing logic
+            // ...
+            echo 'Payment Service: <br> ( <br> Amount: '.$amount, '<br> Payment Mode: '.$paymentMethod. "<br>)";
+        }
+    }
+   
+   
+//ii) PaymentServiceFacade.php
+
+    <?php
+
+    namespace App\Services;
+
+    use Illuminate\Support\Facades\Facade;
+
+    class PaymentServiceFacade extends Facade
+    {
+
+        protected static function getFacadeAccessor(){
+            return 'PaymentService';
+        }
+    }
+
+
+3. Create PaymentServiceProvider.php
+
+    <?php
+
+    namespace App\Providers;
+
+    use Illuminate\Support\ServiceProvider;
+    use Illuminate\Support\Facades\Facade;
+
+    use App\Services\PaymentService;
+
+    class PaymentServiceProvider extends ServiceProvider
+    {
+        /**
+        * Register services.
+        */
+        public function register(): void
+        {
+
+        //Services in Container; App\Services
+            $this->app->bind('PaymentService', function ($app) {
+                return new PaymentService();
+            });        
+        }       
+
+        /**
+        * Bootstrap services.
+        */
+        public function boot(): void
+        {
+            //
+        }
+    }
+
+
+4. bootstrap/provider.php
+
+<?php
+
+return [
+    App\Providers\AppServiceProvider::class,
+    App\Providers\PaymentServiceProvider::class,
+];
+
+
+5. Call in PaymentController
+
+
+
+--------------------------------------------------------------------------
