@@ -16,12 +16,12 @@ class PaymentController extends Controller
     public function __construct(PaymentService $paymentService)
     {
         //Calling Service
-        $this->paymentService = $paymentService;        
-        $this->paymentService->processPayment(100, 'debit card');
+        // $this->paymentService = $paymentService;        
+        // $this->paymentService->processPayment(100, 'debit card');
 
         
         //Calling Service by Facade 
-        PaymentServiceFacade::processPayment(1000,'net banking');
+        // PaymentServiceFacade::processPayment(1000,'net banking');
 
     }
 
