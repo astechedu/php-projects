@@ -36,6 +36,11 @@ Route::delete("products/{product}", [
     ProductController::class,
     "destroy",
 ])->name("products.destroy");
+
+Route::get("productdetail", [ProductController::class, "productdetail"])->name(
+    "product.detail"
+);
+
 //OR
 /*
 Route::controller(ProductCotroller::class)->group(function(){

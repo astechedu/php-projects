@@ -54,4 +54,15 @@ class ProductController extends Controller
 
         return redirect()->route("products.index");
     }
+
+    public function productdetail(Request $request)
+    {
+        $product['id'] = $request->id;
+        $product['name'] = $request->name;
+        $product['price'] = $request->price;
+        $product['description'] = $request->desc;
+     // dd($product);
+        return view('products/productdetail',['product' => $product]);
+    }
+
 }

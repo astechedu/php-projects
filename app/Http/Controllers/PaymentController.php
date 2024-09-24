@@ -28,15 +28,16 @@ class PaymentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        //dd($request->subtotal);
         if (auth()->user() != null) {
             $auth_name = Auth::user()->name;
             $payment = [
-                "subtotal" => 200,
-                "discount" => 10,
-                "shipping" => 40,
-                "total" => 1000,
+                "subtotal" => $request->subtotal,
+                "discount" => $request->discount,
+                "shipping" => $request->shipping,
+                "total" => $request->total,
                 "auth_name" => $auth_name,
             ];
             return view("payment.checkout", ["payment" => $payment]);

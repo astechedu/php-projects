@@ -9,4 +9,8 @@
     <div><strong>Discount:</strong> {{ $payment['discount'] }}</div>
     <div><strong>Shipping:</strong> {{ $payment['shipping'] }}</div>
     <div><strong>Total:</strong> {{ $payment['total'] }}</div>   
-@endsection
+
+    <script>
+        document.getElementById('carouselExampleIndicators').style.display = "none";
+    </script>
+@endsection  

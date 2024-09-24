@@ -40,14 +40,22 @@ Cart
 				 				<div class="product" pid="{{$cart['pid']}}">
 				 					<div class="row">
 					 					<div class="col-md-1">
+										 <a href="{{ route('product.detail') }}?id=<?= $cart['id'] ?>&name=<?= $cart['name'] ?>&price=<?= $cart['price'] ?>
+ &desc=<?= $cart['description'] ?>
+                            "  target="_blank" class="productdetail"> 
 					 						<img class="img-fluid mx-auto d-block image" src="{{asset('images/shop3.png')}}">
-					 					</div>
+										</a>
+										</div>
 					 					<div class="col-md-8">
 					 						<div class="info">
 						 						<div class="row">
 							 						<div class="col-md-5 product-name">
 							 							<div class="product-name">
-								 							<a href="#">{{$cart['name']}}</a>
+										 <a href="{{ route('product.detail') }}?id=<?= $cart['id'] ?>&name=<?= $cart['name'] ?>&price=<?= $cart['price'] ?>
+ &desc=<?= $cart['description'] ?>
+                            "  target="_blank" class="productdetail"> 
+																{{$cart['name']}}
+															</a>
 								 							<div class="product-info">
 									 							<div>Display: <span class="value">5 inch</span></div>
 									 							<div>RAM: <span class="value">4GB</span></div>
@@ -85,11 +93,11 @@ Cart
 			 			<div class="col-md-12 col-lg-4">
 			 				<div class="summary">
 			 					<h3>Summary</h3>
-			 					<div class="summary-item"><span class="text">Subtotal</span><span class="price">$<span id="subtotal"><?= $subtotal ?></span></div>
-			 					<div class="summary-item"><span class="text">Discount</span><span class="price" id="discount">$<?= $discount ?></span></div>
-			 					<div class="summary-item"><span class="text">Shipping</span><span class="price" id="shipping">$<?= $shipping ?></span></div>
-			 					<div class="summary-item"><span class="text">Total</span><span class="price" id="total">$<?= $total ?></span></div>
-			 					<button type="button" class="btn btn-primary btn-lg btn-block" id="checkout">Checkout</button>
+			 					<div class="summary-item"><span class="text">Subtotal</span><span class="price">$<span id="subtotal"><?= $subtotal ?></span></span></div>
+			 					<div class="summary-item"><span class="text">Discount</span><span class="price">$<span id="discount"><?= $discount ?></span></span></div>
+			 					<div class="summary-item"><span class="text">Shipping</span><span class="price">$<span id="shipping"><?= $shipping ?></span></span></div>
+			 					<div class="summary-item"><span class="text">Total</span><span class="price">$<span id="total"><?= $total ?></span></span></div>			 			
+								<button type="button" class="btn btn-primary btn-lg btn-block" id="checkout">Checkout</button>						
 				 			</div>
 			 			</div>
 

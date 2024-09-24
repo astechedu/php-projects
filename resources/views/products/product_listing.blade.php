@@ -20,16 +20,21 @@ Poroducts
                 <div class="col-md-3">
                     <div class="product-card">
                         <div class="product-card-img">
-                            <label class="stock bg-success">In Stock</label>
-                            
-                            <img src="http://localhost/images/<?= $product['src'] ?>.webp" alt="Laptop">
+                            <label class="stock bg-success">In Stock</label>  
+                            <a href="{{ route('product.detail') }}?id=<?= $product['id'] ?>&name=<?= $product['name'] ?>&price=<?= $product['price'] ?>
+ &desc=<?= $product['description'] ?>
+                            "  target="_blank" class="productdetail">                          
+                                <img src="http://localhost/images/<?= $product['src'] ?>.webp" alt="Laptop">
+                            </a>    
                         </div>
                         <div class="product-card-body">
                             <p class="product-brand">HP</p>
                             <h5 class="product-name">
-                               <a href="">                                  
+                            <a href="{{ route('product.detail') }}?id=<?= $product['id'] ?>&name=<?= $product['name'] ?>&price=<?= $product['price'] ?>
+ &desc=<?= $product['description'] ?>
+                            "  target="_blank" class="productdetail">                             
                                     <?= $product['name'] ?>
-                               </a>
+                            </a>
                             </h5>
                             <div>
                                 <span class="selling-price">$<span ><?= $product['price'] ?></span></span>
@@ -154,5 +159,16 @@ Poroducts
 /* Product Card End */    
 </style>
 
+<script>
+    // let product_details = document.querySelectorAll('.productdetail');
+    // product_details.forEach((element) => {
+    //     element.addEventListener('click', (e)=>{
+    //        //e.preventDefault();
+    //         window.location.href = element.getAttribute('href')       
+    //         //console.log()   
+    //     })
+    // })
 
+
+</script>
 @endsection

@@ -210,14 +210,7 @@ axios({
 
 */
 //
-//Payment pages
-//Checkout Page
-$('button#checkout').on('click', function(e) {
-    //e.preventDefault();
-	window.location.href='payment'
-
-});
-
+//
 //Register Form 
 $('#registerForm').on('click', function(){
 	$.ajax({
@@ -260,4 +253,28 @@ $('#loginForm').on('click', function(){
 //contentType: false,
 //processData: false,
 
+//Payment pages
+//Checkout Page
+$('button#checkout').on('click', function(e) {
+    //e.preventDefault();
+	//window.location.href = window.location.href + "&param1=value1&param2=value2";
+	const subtotal = $('#subtotal').text()
+	const discount = $('#discount').text()
+	const shipping = $('#shipping').text()
+	const total = $('#total').text()
+
+	const url = new URL('http://localhost/payment');
+	url.searchParams.set("subtotal", subtotal);
+	url.searchParams.set("discount", discount);
+	url.searchParams.set("shipping", shipping);
+	url.searchParams.set("total", total);
+
+	window.location.href = url.toString();
+
+	//console.log(window.location.href)
+});
+
+
 })  //Ready function ends
+
+//JavaScript Code
